@@ -1,0 +1,9 @@
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\振华物流工具箱.exe.config
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\振华物流工具箱.exe
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\振华物流工具箱.pdb
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.Form1.resources
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.Properties.Resources.resources
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.csproj.GenerateResource.Cache
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\振华物流工具箱.exe
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\振华物流工具箱.pdb
