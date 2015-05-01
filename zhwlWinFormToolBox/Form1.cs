@@ -180,5 +180,102 @@ namespace zhwlWinFormToolBox
             outputTB.Clear();
             outputTB.Text = printList(outputList, CompanyComboBox.Text);
         }
+        private void numberInputOnly_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 0x20) e.KeyChar = (char)0;  //禁止空格键
+            if ((e.KeyChar == 0x2D) && (((TextBox)sender).Text.Length >= 0)) return;   //处理负数
+            if (e.KeyChar > 0x20)
+            {
+                try
+                {
+                    double.Parse(((TextBox)sender).Text + e.KeyChar.ToString());
+                }
+                catch
+                {
+                    e.KeyChar = (char)0;   //处理非法字符
+                }
+            }
+        }
+
+        private void printPreviewBT_Click(object sender, EventArgs e)
+        {
+            if (dzNumberTB.Text.Trim().Equals(""))
+            {
+                MessageBox.Show("请输入需要打印的运单数量", "提示");
+            }
+            else
+            {
+                SetPrintPreview();
+            }
+        }
+
+        private void SetPrintPreview()
+        {
+            //this.printDocument1.DefaultPageSettings.PaperSize = new System.Drawing.Printing.PaperSize("custom", this.printDocument1.DefaultPageSettings.PaperSize.Width, pageHeight);
+            //pageHeight = this.printDocument1.DefaultPageSettings.PaperSize.Height;
+
+            //注意指定其Document(获取或设置要预览的文档)属性
+            this.printPreviewDialog1.Document = this.printDocument1;
+            //ShowDialog方法：将窗体显示为模式对话框，并将当前活动窗口设置为它的所有者
+            //this.printPreviewDialog1.WindowState = FormWindowState.Maximized;
+            this.printPreviewDialog1.ClientSize = new Size(600,800);
+            this.printPreviewDialog1.ShowDialog();
+        }
+
+        int pageCount = 0;
+        int maxCountPerPage; 
+        private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+            pageCount = 0;
+            maxCountPerPage = int.Parse(maxCountPerPageTB.Text);
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            int DzCount = int.Parse(dzNumberTB.Text.Trim());
+            int pageWidth = this.printDocument1.DefaultPageSettings.PaperSize.Width;
+            int pageHeight = this.printDocument1.DefaultPageSettings.PaperSize.Height;
+
+            int tableX = int.Parse(tableXTB.Text);
+            int tableY = int.Parse(tableYTB.Text);
+            int internalX = int.Parse(internalXTB.Text); // 内部
+            int internalY = int.Parse(internalYTB.Text); ;
+            int inlineDistenceY = int.Parse(inlineDistenceYTB.Text); // 内部行距
+            int fontSizeDiff = int.Parse(fontSizeDiffTB.Text); // 字体大小
+
+            for (int i = 0; i < (DzCount - pageCount * maxCountPerPage); i++)
+            {
+                if (i % 2 == 0)
+                {
+                    //SizeF fontSize;
+                    //fontSize = e.Graphics.MeasureString(nameTB.Text, nameTB.Font);//桐 乡 市 瑞 递 曼 尔 工 贸 有 限 公 司
+                    e.Graphics.DrawString(nameTB.Text, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + 0);
+                    e.Graphics.DrawString(phoneTB.Text, new Font(phoneTB.Font.Name, phoneTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4, internalY * i + tableY + 0);
+                    e.Graphics.DrawString(addressTB.Text, new Font(addressTB.Font.Name, addressTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(numberTB.Text, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + inlineDistenceY * 2);
+                }
+                else
+                {
+                    e.Graphics.DrawString(nameTB.Text, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + 0);
+                    e.Graphics.DrawString(phoneTB.Text, new Font(phoneTB.Font.Name, phoneTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3, internalY * (i - 1) + tableY + 0);
+                    e.Graphics.DrawString(addressTB.Text, new Font(addressTB.Font.Name, addressTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(numberTB.Text, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + inlineDistenceY * 2);
+                }
+            }
+
+            pageCount++;
+            if (pageCount < (((int)(DzCount / maxCountPerPage)) + 1))
+            {
+                e.HasMorePages = true;
+            }
+            else
+            {
+                e.HasMorePages = false;
+            }
+        }
+
+
+
+
     }
 }
