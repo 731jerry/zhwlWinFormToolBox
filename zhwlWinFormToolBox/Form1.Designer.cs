@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupbox1 = new System.Windows.Forms.GroupBox();
             this.inputInfoLabel = new System.Windows.Forms.Label();
             this.clearBtn1 = new System.Windows.Forms.Button();
@@ -40,9 +42,40 @@
             this.infoLabel = new System.Windows.Forms.Label();
             this.CopyClipboardBtn = new System.Windows.Forms.Button();
             this.outputTB = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.groupbox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(5, 15);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(6, 8);
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(991, 593);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupbox1);
+            this.tabPage1.Controls.Add(this.groupBox2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 32);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage1.Size = new System.Drawing.Size(983, 557);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "数据筛选";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // groupbox1
             // 
@@ -51,10 +84,12 @@
             this.groupbox1.Controls.Add(this.confirmBtn);
             this.groupbox1.Controls.Add(this.inputTB);
             this.groupbox1.Controls.Add(this.OptionComboBox);
-            this.groupbox1.Location = new System.Drawing.Point(12, 12);
+            this.groupbox1.Location = new System.Drawing.Point(8, 7);
+            this.groupbox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupbox1.Name = "groupbox1";
+            this.groupbox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupbox1.Size = new System.Drawing.Size(968, 276);
-            this.groupbox1.TabIndex = 0;
+            this.groupbox1.TabIndex = 2;
             this.groupbox1.TabStop = false;
             this.groupbox1.Text = "输入";
             // 
@@ -63,6 +98,7 @@
             this.inputInfoLabel.AutoSize = true;
             this.inputInfoLabel.ForeColor = System.Drawing.Color.Red;
             this.inputInfoLabel.Location = new System.Drawing.Point(155, 23);
+            this.inputInfoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.inputInfoLabel.Name = "inputInfoLabel";
             this.inputInfoLabel.Size = new System.Drawing.Size(35, 12);
             this.inputInfoLabel.TabIndex = 7;
@@ -70,9 +106,10 @@
             // 
             // clearBtn1
             // 
-            this.clearBtn1.Location = new System.Drawing.Point(887, 18);
+            this.clearBtn1.Location = new System.Drawing.Point(887, 19);
+            this.clearBtn1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.clearBtn1.Name = "clearBtn1";
-            this.clearBtn1.Size = new System.Drawing.Size(75, 23);
+            this.clearBtn1.Size = new System.Drawing.Size(76, 23);
             this.clearBtn1.TabIndex = 3;
             this.clearBtn1.Text = "清空";
             this.clearBtn1.UseVisualStyleBackColor = true;
@@ -80,9 +117,10 @@
             // 
             // confirmBtn
             // 
-            this.confirmBtn.Location = new System.Drawing.Point(756, 18);
+            this.confirmBtn.Location = new System.Drawing.Point(756, 19);
+            this.confirmBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.confirmBtn.Name = "confirmBtn";
-            this.confirmBtn.Size = new System.Drawing.Size(99, 23);
+            this.confirmBtn.Size = new System.Drawing.Size(100, 23);
             this.confirmBtn.TabIndex = 2;
             this.confirmBtn.Text = "确认";
             this.confirmBtn.UseVisualStyleBackColor = true;
@@ -91,6 +129,7 @@
             // inputTB
             // 
             this.inputTB.Location = new System.Drawing.Point(6, 58);
+            this.inputTB.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.inputTB.MaxLength = 327670000;
             this.inputTB.Multiline = true;
             this.inputTB.Name = "inputTB";
@@ -106,8 +145,9 @@
             "发货",
             "回货"});
             this.OptionComboBox.Location = new System.Drawing.Point(6, 20);
+            this.OptionComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.OptionComboBox.Name = "OptionComboBox";
-            this.OptionComboBox.Size = new System.Drawing.Size(121, 20);
+            this.OptionComboBox.Size = new System.Drawing.Size(120, 20);
             this.OptionComboBox.TabIndex = 0;
             this.OptionComboBox.SelectedIndexChanged += new System.EventHandler(this.OptionComboBox_SelectedIndexChanged);
             // 
@@ -117,10 +157,12 @@
             this.groupBox2.Controls.Add(this.infoLabel);
             this.groupBox2.Controls.Add(this.CopyClipboardBtn);
             this.groupBox2.Controls.Add(this.outputTB);
-            this.groupBox2.Location = new System.Drawing.Point(12, 294);
+            this.groupBox2.Location = new System.Drawing.Point(8, 288);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Size = new System.Drawing.Size(968, 262);
-            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "输出";
             // 
@@ -129,8 +171,9 @@
             this.CompanyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CompanyComboBox.FormattingEnabled = true;
             this.CompanyComboBox.Location = new System.Drawing.Point(710, 22);
+            this.CompanyComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.CompanyComboBox.Name = "CompanyComboBox";
-            this.CompanyComboBox.Size = new System.Drawing.Size(121, 20);
+            this.CompanyComboBox.Size = new System.Drawing.Size(120, 20);
             this.CompanyComboBox.TabIndex = 8;
             this.CompanyComboBox.SelectedIndexChanged += new System.EventHandler(this.CompanyComboBox_SelectedIndexChanged);
             // 
@@ -139,6 +182,7 @@
             this.infoLabel.AutoSize = true;
             this.infoLabel.ForeColor = System.Drawing.Color.Red;
             this.infoLabel.Location = new System.Drawing.Point(6, 25);
+            this.infoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.infoLabel.Name = "infoLabel";
             this.infoLabel.Size = new System.Drawing.Size(35, 12);
             this.infoLabel.TabIndex = 6;
@@ -147,8 +191,9 @@
             // CopyClipboardBtn
             // 
             this.CopyClipboardBtn.Location = new System.Drawing.Point(863, 20);
+            this.CopyClipboardBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.CopyClipboardBtn.Name = "CopyClipboardBtn";
-            this.CopyClipboardBtn.Size = new System.Drawing.Size(99, 23);
+            this.CopyClipboardBtn.Size = new System.Drawing.Size(100, 23);
             this.CopyClipboardBtn.TabIndex = 4;
             this.CopyClipboardBtn.Text = "复制到粘贴板";
             this.CopyClipboardBtn.UseVisualStyleBackColor = true;
@@ -157,6 +202,7 @@
             // outputTB
             // 
             this.outputTB.Location = new System.Drawing.Point(6, 56);
+            this.outputTB.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.outputTB.MaxLength = 327670000;
             this.outputTB.Multiline = true;
             this.outputTB.Name = "outputTB";
@@ -165,40 +211,70 @@
             this.outputTB.Size = new System.Drawing.Size(956, 200);
             this.outputTB.TabIndex = 2;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 32);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tabPage2.Size = new System.Drawing.Size(983, 557);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "运单打印";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tabControl1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(5, 15, 5, 5);
+            this.panel1.Size = new System.Drawing.Size(1001, 613);
+            this.panel1.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(992, 568);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupbox1);
+            this.ClientSize = new System.Drawing.Size(1001, 613);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "振华物流工具箱";
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.groupbox1.ResumeLayout(false);
             this.groupbox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupbox1;
+        private System.Windows.Forms.Label inputInfoLabel;
         private System.Windows.Forms.Button clearBtn1;
         private System.Windows.Forms.Button confirmBtn;
         private System.Windows.Forms.TextBox inputTB;
         private System.Windows.Forms.ComboBox OptionComboBox;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ComboBox CompanyComboBox;
+        private System.Windows.Forms.Label infoLabel;
         private System.Windows.Forms.Button CopyClipboardBtn;
         private System.Windows.Forms.TextBox outputTB;
-        private System.Windows.Forms.Label infoLabel;
-        private System.Windows.Forms.Label inputInfoLabel;
-        private System.Windows.Forms.ComboBox CompanyComboBox;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Panel panel1;
+
     }
 }
 
