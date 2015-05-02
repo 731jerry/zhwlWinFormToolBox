@@ -240,6 +240,7 @@ namespace zhwlWinFormToolBox
             int tableY = int.Parse(tableYTB.Text);
             int internalX = int.Parse(internalXTB.Text); // 内部
             int internalY = int.Parse(internalYTB.Text); ;
+            int inlineDistenceX = int.Parse(inlineDistenceXTB.Text); // 内部列距
             int inlineDistenceY = int.Parse(inlineDistenceYTB.Text); // 内部行距
             int fontSizeDiff = int.Parse(fontSizeDiffTB.Text); // 字体大小
 
@@ -250,16 +251,16 @@ namespace zhwlWinFormToolBox
                     //SizeF fontSize;
                     //fontSize = e.Graphics.MeasureString(nameTB.Text, nameTB.Font);//桐 乡 市 瑞 递 曼 尔 工 贸 有 限 公 司
                     e.Graphics.DrawString(DestinationTB.Text, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + 0);
-                    e.Graphics.DrawString(nameTB.Text, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4, internalY * i + tableY + 0);
+                    e.Graphics.DrawString(nameTB.Text, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4 + inlineDistenceX, internalY * i + tableY + 0);
                     e.Graphics.DrawString(countTB.Text, new Font(countTB.Font.Name, countTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + inlineDistenceY);
-                    e.Graphics.DrawString(numberTB.Text, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4, internalY * i + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(numberTB.Text, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4 + inlineDistenceX, internalY * i + tableY + inlineDistenceY);
                 }
                 else
                 {
                     e.Graphics.DrawString(DestinationTB.Text, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + 0);
-                    e.Graphics.DrawString(nameTB.Text, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3, internalY * (i - 1) + tableY + 0);
+                    e.Graphics.DrawString(nameTB.Text, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3 + inlineDistenceX, internalY * (i - 1) + tableY + 0);
                     e.Graphics.DrawString(countTB.Text, new Font(countTB.Font.Name, countTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + inlineDistenceY);
-                    e.Graphics.DrawString(numberTB.Text, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3, internalY * (i - 1) + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(numberTB.Text, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3 + inlineDistenceX, internalY * (i - 1) + tableY + inlineDistenceY);
                 }
             }
 

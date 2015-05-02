@@ -73,6 +73,8 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.inlineDistenceXTB = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupbox1.SuspendLayout();
@@ -291,6 +293,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.inlineDistenceXTB);
+            this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.fontSizeDiffTB);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.inlineDistenceYTB);
@@ -313,7 +317,7 @@
             // 
             // fontSizeDiffTB
             // 
-            this.fontSizeDiffTB.Location = new System.Drawing.Point(705, 107);
+            this.fontSizeDiffTB.Location = new System.Drawing.Point(710, 123);
             this.fontSizeDiffTB.Name = "fontSizeDiffTB";
             this.fontSizeDiffTB.Size = new System.Drawing.Size(72, 27);
             this.fontSizeDiffTB.TabIndex = 26;
@@ -324,7 +328,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(596, 110);
+            this.label10.Location = new System.Drawing.Point(601, 126);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(103, 20);
             this.label10.TabIndex = 25;
@@ -332,7 +336,7 @@
             // 
             // inlineDistenceYTB
             // 
-            this.inlineDistenceYTB.Location = new System.Drawing.Point(705, 49);
+            this.inlineDistenceYTB.Location = new System.Drawing.Point(710, 78);
             this.inlineDistenceYTB.Name = "inlineDistenceYTB";
             this.inlineDistenceYTB.Size = new System.Drawing.Size(72, 27);
             this.inlineDistenceYTB.TabIndex = 24;
@@ -343,7 +347,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(626, 52);
+            this.label11.Location = new System.Drawing.Point(631, 81);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(73, 20);
             this.label11.TabIndex = 23;
@@ -548,6 +552,24 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
+            // inlineDistenceXTB
+            // 
+            this.inlineDistenceXTB.Location = new System.Drawing.Point(710, 31);
+            this.inlineDistenceXTB.Name = "inlineDistenceXTB";
+            this.inlineDistenceXTB.Size = new System.Drawing.Size(72, 27);
+            this.inlineDistenceXTB.TabIndex = 28;
+            this.inlineDistenceXTB.Text = "10";
+            this.inlineDistenceXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(631, 34);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(73, 20);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "内部列距:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -622,6 +644,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox maxCountPerPageTB;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox inlineDistenceXTB;
+        private System.Windows.Forms.Label label13;
 
     }
 }
