@@ -46,6 +46,8 @@
             this.maxCountPerPageTB = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.inlineDistenceXTB = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.fontSizeDiffTB = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.inlineDistenceYTB = new System.Windows.Forms.TextBox();
@@ -73,8 +75,6 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.inlineDistenceXTB = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupbox1.SuspendLayout();
@@ -315,6 +315,25 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "打印位置调整";
             // 
+            // inlineDistenceXTB
+            // 
+            this.inlineDistenceXTB.Location = new System.Drawing.Point(710, 31);
+            this.inlineDistenceXTB.Name = "inlineDistenceXTB";
+            this.inlineDistenceXTB.Size = new System.Drawing.Size(72, 27);
+            this.inlineDistenceXTB.TabIndex = 28;
+            this.inlineDistenceXTB.Text = "-50";
+            this.inlineDistenceXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.inlineDistenceXTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(631, 34);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(73, 20);
+            this.label13.TabIndex = 27;
+            this.label13.Text = "内部列距:";
+            // 
             // fontSizeDiffTB
             // 
             this.fontSizeDiffTB.Location = new System.Drawing.Point(710, 123);
@@ -416,7 +435,7 @@
             this.tableXTB.Name = "tableXTB";
             this.tableXTB.Size = new System.Drawing.Size(72, 27);
             this.tableXTB.TabIndex = 16;
-            this.tableXTB.Text = "50";
+            this.tableXTB.Text = "20";
             this.tableXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tableXTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
@@ -551,24 +570,6 @@
             // printDialog1
             // 
             this.printDialog1.UseEXDialog = true;
-            // 
-            // inlineDistenceXTB
-            // 
-            this.inlineDistenceXTB.Location = new System.Drawing.Point(710, 31);
-            this.inlineDistenceXTB.Name = "inlineDistenceXTB";
-            this.inlineDistenceXTB.Size = new System.Drawing.Size(72, 27);
-            this.inlineDistenceXTB.TabIndex = 28;
-            this.inlineDistenceXTB.Text = "10";
-            this.inlineDistenceXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(631, 34);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(73, 20);
-            this.label13.TabIndex = 27;
-            this.label13.Text = "内部列距:";
             // 
             // Form1
             // 
