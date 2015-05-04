@@ -43,6 +43,7 @@
             this.CopyClipboardBtn = new System.Windows.Forms.Button();
             this.outputTB = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.clearButton = new System.Windows.Forms.Button();
             this.maxCountPerPageTB = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -75,7 +76,8 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.clearButton = new System.Windows.Forms.Button();
+            this.fromCount = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupbox1.SuspendLayout();
@@ -247,6 +249,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.fromCount);
+            this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.clearButton);
             this.tabPage2.Controls.Add(this.maxCountPerPageTB);
             this.tabPage2.Controls.Add(this.label12);
@@ -272,10 +276,23 @@
             this.tabPage2.Text = "运单打印";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // clearButton
+            // 
+            this.clearButton.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.clearButton.Location = new System.Drawing.Point(845, 28);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(98, 31);
+            this.clearButton.TabIndex = 17;
+            this.clearButton.Text = "清空";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // maxCountPerPageTB
             // 
             this.maxCountPerPageTB.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.maxCountPerPageTB.Location = new System.Drawing.Point(423, 501);
+            this.maxCountPerPageTB.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.maxCountPerPageTB.Location = new System.Drawing.Point(242, 503);
             this.maxCountPerPageTB.Name = "maxCountPerPageTB";
             this.maxCountPerPageTB.Size = new System.Drawing.Size(59, 27);
             this.maxCountPerPageTB.TabIndex = 16;
@@ -287,7 +304,8 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.label12.Location = new System.Drawing.Point(284, 504);
+            this.label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label12.Location = new System.Drawing.Point(105, 506);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(133, 20);
             this.label12.TabIndex = 15;
@@ -310,6 +328,7 @@
             this.groupBox3.Controls.Add(this.tableXTB);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.groupBox3.Location = new System.Drawing.Point(75, 274);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(822, 168);
@@ -452,7 +471,8 @@
             // 
             // dzNumberTB
             // 
-            this.dzNumberTB.Location = new System.Drawing.Point(629, 498);
+            this.dzNumberTB.ForeColor = System.Drawing.Color.Red;
+            this.dzNumberTB.Location = new System.Drawing.Point(629, 500);
             this.dzNumberTB.Name = "dzNumberTB";
             this.dzNumberTB.Size = new System.Drawing.Size(90, 33);
             this.dzNumberTB.TabIndex = 5;
@@ -462,14 +482,16 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(532, 502);
+            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.Location = new System.Drawing.Point(545, 504);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 25);
+            this.label5.Size = new System.Drawing.Size(83, 25);
             this.label5.TabIndex = 12;
-            this.label5.Text = "运单数:";
+            this.label5.Text = "*运单数:";
             // 
             // numberTB
             // 
+            this.numberTB.ForeColor = System.Drawing.Color.Red;
             this.numberTB.Location = new System.Drawing.Point(607, 135);
             this.numberTB.Name = "numberTB";
             this.numberTB.Size = new System.Drawing.Size(290, 33);
@@ -478,14 +500,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(546, 135);
+            this.label4.ForeColor = System.Drawing.Color.Red;
+            this.label4.Location = new System.Drawing.Point(541, 139);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 25);
+            this.label4.Size = new System.Drawing.Size(64, 25);
             this.label4.TabIndex = 10;
-            this.label4.Text = "货号:";
+            this.label4.Text = "*货号:";
             // 
             // countTB
             // 
+            this.countTB.ForeColor = System.Drawing.Color.Red;
             this.countTB.Location = new System.Drawing.Point(182, 135);
             this.countTB.Name = "countTB";
             this.countTB.Size = new System.Drawing.Size(264, 33);
@@ -496,14 +520,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(120, 138);
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(116, 139);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 25);
+            this.label3.Size = new System.Drawing.Size(64, 25);
             this.label3.TabIndex = 8;
-            this.label3.Text = "件数:";
+            this.label3.Text = "*件数:";
             // 
             // DestinationTB
             // 
+            this.DestinationTB.ForeColor = System.Drawing.Color.Red;
             this.DestinationTB.Location = new System.Drawing.Point(182, 77);
             this.DestinationTB.Name = "DestinationTB";
             this.DestinationTB.Size = new System.Drawing.Size(264, 33);
@@ -512,14 +538,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(121, 80);
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(117, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 25);
+            this.label2.Size = new System.Drawing.Size(64, 25);
             this.label2.TabIndex = 6;
-            this.label2.Text = "到站:";
+            this.label2.Text = "*到站:";
             // 
             // nameTB
             // 
+            this.nameTB.ForeColor = System.Drawing.Color.Red;
             this.nameTB.Location = new System.Drawing.Point(607, 77);
             this.nameTB.Name = "nameTB";
             this.nameTB.Size = new System.Drawing.Size(290, 33);
@@ -528,15 +556,16 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(527, 80);
+            this.label1.ForeColor = System.Drawing.Color.Red;
+            this.label1.Location = new System.Drawing.Point(522, 81);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 25);
+            this.label1.Size = new System.Drawing.Size(83, 25);
             this.label1.TabIndex = 4;
-            this.label1.Text = "收货人:";
+            this.label1.Text = "*收货人:";
             // 
             // printPreviewBT
             // 
-            this.printPreviewBT.Location = new System.Drawing.Point(819, 493);
+            this.printPreviewBT.Location = new System.Drawing.Point(819, 495);
             this.printPreviewBT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.printPreviewBT.Name = "printPreviewBT";
             this.printPreviewBT.Size = new System.Drawing.Size(124, 42);
@@ -575,17 +604,28 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
-            // clearButton
+            // fromCount
             // 
-            this.clearButton.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.clearButton.Location = new System.Drawing.Point(845, 28);
-            this.clearButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(98, 31);
-            this.clearButton.TabIndex = 17;
-            this.clearButton.Text = "清空";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            this.fromCount.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.fromCount.ForeColor = System.Drawing.Color.Red;
+            this.fromCount.Location = new System.Drawing.Point(482, 503);
+            this.fromCount.Name = "fromCount";
+            this.fromCount.Size = new System.Drawing.Size(31, 27);
+            this.fromCount.TabIndex = 19;
+            this.fromCount.Text = "1";
+            this.fromCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.fromCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(370, 506);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(110, 20);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "*从第几个开始:";
             // 
             // Form1
             // 
@@ -664,6 +704,8 @@
         private System.Windows.Forms.TextBox inlineDistenceXTB;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.TextBox fromCount;
+        private System.Windows.Forms.Label label14;
 
     }
 }

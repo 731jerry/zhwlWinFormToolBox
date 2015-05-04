@@ -225,17 +225,27 @@ namespace zhwlWinFormToolBox
 
         int pageCount;
         int maxCountPerPage;
+        String DestinationTBString;
+        String nameTBString;
+        String countTBString;
+        String numberTBString;
         private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             pageCount = 0;
             maxCountPerPage = int.Parse(maxCountPerPageTB.Text);
+            DestinationTBString = DestinationTB.Text;
+            nameTBString = nameTB.Text;
+            countTBString = countTB.Text;
+            numberTBString = numberTB.Text;
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            int DzCount = int.Parse(dzNumberTB.Text.Trim());
+            int from = int.Parse(fromCount.Text.Trim()) - 1;
+            int DzCount = int.Parse(dzNumberTB.Text.Trim()) + from;
             int pageWidth = this.printDocument1.DefaultPageSettings.PaperSize.Width;
             int pageHeight = this.printDocument1.DefaultPageSettings.PaperSize.Height;
+
 
             int tableX = int.Parse(tableXTB.Text);
             int tableY = int.Parse(tableYTB.Text);
@@ -247,28 +257,42 @@ namespace zhwlWinFormToolBox
 
             for (int i = 0; i < (DzCount - pageCount * maxCountPerPage); i++)
             {
+                if ((i < from) && pageCount < 1)
+                {
+                    DestinationTBString = "";
+                    nameTBString = "";
+                    countTBString = "";
+                    numberTBString = "";
+                }
+                else
+                {
+                    DestinationTBString = DestinationTB.Text;
+                    nameTBString = nameTB.Text;
+                    countTBString = countTB.Text;
+                    numberTBString = numberTB.Text;
+                }
+
                 if (i % 2 == 0)
                 {
                     //SizeF fontSize;
                     //fontSize = e.Graphics.MeasureString(nameTB.Text, nameTB.Font);//桐 乡 市 瑞 递 曼 尔 工 贸 有 限 公 司
-                    e.Graphics.DrawString(DestinationTB.Text, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + 0);
-                    e.Graphics.DrawString(nameTB.Text, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4 + inlineDistenceX, internalY * i + tableY + 0);
-                    e.Graphics.DrawString(countTB.Text, new Font(countTB.Font.Name, countTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + inlineDistenceY);
-                    e.Graphics.DrawString(numberTB.Text, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4 + inlineDistenceX, internalY * i + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + 0);
+                    e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4 + inlineDistenceX, internalY * i + tableY + 0);
+                    e.Graphics.DrawString(countTBString, new Font(countTB.Font.Name, countTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4 + inlineDistenceX, internalY * i + tableY + inlineDistenceY);
                 }
                 else
                 {
-                    e.Graphics.DrawString(DestinationTB.Text, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + 0);
-                    e.Graphics.DrawString(nameTB.Text, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3 + inlineDistenceX, internalY * (i - 1) + tableY + 0);
-                    e.Graphics.DrawString(countTB.Text, new Font(countTB.Font.Name, countTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + inlineDistenceY);
-                    e.Graphics.DrawString(numberTB.Text, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3 + inlineDistenceX, internalY * (i - 1) + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + 0);
+                    e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3 + inlineDistenceX, internalY * (i - 1) + tableY + 0);
+                    e.Graphics.DrawString(countTBString, new Font(countTB.Font.Name, countTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3 + inlineDistenceX, internalY * (i - 1) + tableY + inlineDistenceY);
                 }
             }
 
             pageCount++;
             float countFloat = (float)DzCount / (float)maxCountPerPage;
             if (pageCount < ((IsIntegerByRegex(countFloat.ToString()) ? countFloat : (int)(DzCount / maxCountPerPage) + 1)))
-            //if (pageCount < ((int)(DzCount / maxCountPerPage) + 1))
             {
                 e.HasMorePages = true;
             }
