@@ -266,9 +266,9 @@ namespace zhwlWinFormToolBox
             }
 
             pageCount++;
-            //double countFloat = DzCount / maxCountPerPage;
-            //if (pageCount < ((IsIntegerByRegex(countFloat.ToString()) ? countFloat : (int)(DzCount / maxCountPerPage) + 1)))
-            if (pageCount < ((int)(DzCount / maxCountPerPage) + 1))
+            float countFloat = (float)DzCount / (float)maxCountPerPage;
+            if (pageCount < ((IsIntegerByRegex(countFloat.ToString()) ? countFloat : (int)(DzCount / maxCountPerPage) + 1)))
+            //if (pageCount < ((int)(DzCount / maxCountPerPage) + 1))
             {
                 e.HasMorePages = true;
             }
@@ -295,6 +295,19 @@ namespace zhwlWinFormToolBox
             {
                 return false;
             }
+        }
+
+        private void countTB_TextChanged(object sender, EventArgs e)
+        {
+            dzNumberTB.Text = countTB.Text;
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            DestinationTB.Clear();
+            nameTB.Clear();
+            countTB.Clear();
+            numberTB.Clear();
         }
 
 

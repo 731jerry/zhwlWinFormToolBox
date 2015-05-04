@@ -75,6 +75,7 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.clearButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupbox1.SuspendLayout();
@@ -246,6 +247,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.clearButton);
             this.tabPage2.Controls.Add(this.maxCountPerPageTB);
             this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.groupBox3);
@@ -488,6 +490,8 @@
             this.countTB.Name = "countTB";
             this.countTB.Size = new System.Drawing.Size(264, 33);
             this.countTB.TabIndex = 3;
+            this.countTB.TextChanged += new System.EventHandler(this.countTB_TextChanged);
+            this.countTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
             // label3
             // 
@@ -571,6 +575,18 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
+            // clearButton
+            // 
+            this.clearButton.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.clearButton.Location = new System.Drawing.Point(845, 28);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(98, 31);
+            this.clearButton.TabIndex = 17;
+            this.clearButton.Text = "清空";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -647,6 +663,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox inlineDistenceXTB;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button clearButton;
 
     }
 }
