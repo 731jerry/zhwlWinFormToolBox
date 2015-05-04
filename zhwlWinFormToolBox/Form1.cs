@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace zhwlWinFormToolBox
 {
@@ -222,7 +223,7 @@ namespace zhwlWinFormToolBox
             this.printPreviewDialog1.ShowDialog();
         }
 
-        int pageCount = 0;
+        int pageCount;
         int maxCountPerPage;
         private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
@@ -265,7 +266,9 @@ namespace zhwlWinFormToolBox
             }
 
             pageCount++;
-            if (pageCount < (((int)(DzCount / maxCountPerPage)) + 1))
+            //double countFloat = DzCount / maxCountPerPage;
+            //if (pageCount < ((IsIntegerByRegex(countFloat.ToString()) ? countFloat : (int)(DzCount / maxCountPerPage) + 1)))
+            if (pageCount < ((int)(DzCount / maxCountPerPage) + 1))
             {
                 e.HasMorePages = true;
             }
@@ -275,7 +278,24 @@ namespace zhwlWinFormToolBox
             }
         }
 
+        public bool IsIntegerByRegex(string s)
+        {
+            string pattern = @"^\d*$";
+            return Regex.IsMatch(s, pattern);
+        }
 
+        public bool isInteger(String number)
+        {
+            try
+            {
+                double b = Convert.ToDouble(number);
+                return b % 10 == 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
 
     }

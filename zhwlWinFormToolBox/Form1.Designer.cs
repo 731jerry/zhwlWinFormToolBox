@@ -359,7 +359,7 @@
             this.inlineDistenceYTB.Name = "inlineDistenceYTB";
             this.inlineDistenceYTB.Size = new System.Drawing.Size(72, 27);
             this.inlineDistenceYTB.TabIndex = 24;
-            this.inlineDistenceYTB.Text = "50";
+            this.inlineDistenceYTB.Text = "60";
             this.inlineDistenceYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.inlineDistenceYTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
@@ -378,7 +378,7 @@
             this.internalYTB.Name = "internalYTB";
             this.internalYTB.Size = new System.Drawing.Size(72, 27);
             this.internalYTB.TabIndex = 22;
-            this.internalYTB.Text = "110";
+            this.internalYTB.Text = "115";
             this.internalYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.internalYTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
@@ -397,7 +397,7 @@
             this.internalXTB.Name = "internalXTB";
             this.internalXTB.Size = new System.Drawing.Size(72, 27);
             this.internalXTB.TabIndex = 20;
-            this.internalXTB.Text = "30";
+            this.internalXTB.Text = "5";
             this.internalXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.internalXTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
@@ -416,7 +416,7 @@
             this.tableYTB.Name = "tableYTB";
             this.tableYTB.Size = new System.Drawing.Size(72, 27);
             this.tableYTB.TabIndex = 18;
-            this.tableYTB.Text = "80";
+            this.tableYTB.Text = "68";
             this.tableYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tableYTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
@@ -435,7 +435,7 @@
             this.tableXTB.Name = "tableXTB";
             this.tableXTB.Size = new System.Drawing.Size(72, 27);
             this.tableXTB.TabIndex = 16;
-            this.tableXTB.Text = "20";
+            this.tableXTB.Text = "30";
             this.tableXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tableXTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
@@ -453,7 +453,7 @@
             this.dzNumberTB.Location = new System.Drawing.Point(629, 498);
             this.dzNumberTB.Name = "dzNumberTB";
             this.dzNumberTB.Size = new System.Drawing.Size(90, 33);
-            this.dzNumberTB.TabIndex = 13;
+            this.dzNumberTB.TabIndex = 5;
             this.dzNumberTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.dzNumberTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
@@ -536,7 +536,7 @@
             this.printPreviewBT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.printPreviewBT.Name = "printPreviewBT";
             this.printPreviewBT.Size = new System.Drawing.Size(124, 42);
-            this.printPreviewBT.TabIndex = 3;
+            this.printPreviewBT.TabIndex = 6;
             this.printPreviewBT.Text = "打印预览";
             this.printPreviewBT.UseVisualStyleBackColor = true;
             this.printPreviewBT.Click += new System.EventHandler(this.printPreviewBT_Click);
