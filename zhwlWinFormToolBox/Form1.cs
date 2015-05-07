@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Net;
+using System.IO;
 
 namespace zhwlWinFormToolBox
 {
@@ -332,6 +334,47 @@ namespace zhwlWinFormToolBox
             nameTB.Clear();
             countTB.Clear();
             numberTB.Clear();
+        }
+
+        String uid  = "GxDPNEIGtn9C";
+        String  pas = "5pggh3c5";
+
+        private void sendMsgButton_Click(object sender, EventArgs e)
+        {
+            string mobile = "15658101852",//15024345993
+            con = "【test】您的验证码是：231313。",
+            url = "http://api.weimi.cc/2/sms/send.html";
+            byte[] byteArray = Encoding.UTF8.GetBytes("mob=" + mobile + "&con=" + con + "&uid=" + uid + "&pas=" + pas + "&type=json");
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(new Uri(url));
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/x-www-form-urlencoded";
+            webRequest.ContentLength = byteArray.Length;
+            Stream newStream = webRequest.GetRequestStream();
+            newStream.Write(byteArray, 0, byteArray.Length);
+            newStream.Close();
+            HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
+            StreamReader php = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            string Message = php.ReadToEnd();
+            System.Console.Write(Message);
+        }
+
+        private void refreshAccountButton_Click(object sender, EventArgs e)
+        {
+            string url = "http://api.weimi.cc/2/account/balance.html";
+            byte[] byteArray = Encoding.UTF8.GetBytes("uid=" + uid + "&pas=" + pas + "&type=json");
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(new Uri(url));
+            webRequest.Method = "POST";
+            webRequest.ContentType = "application/x-www-form-urlencoded";
+            webRequest.ContentLength = byteArray.Length;
+            Stream newStream = webRequest.GetRequestStream();
+            newStream.Write(byteArray, 0, byteArray.Length);
+            newStream.Close();
+            HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
+            StreamReader php = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+            string Message = php.ReadToEnd();
+            System.Console.Write(Message);
+            JSONObject json = JSONConvert.DeserializeObject(Message);//执行反序列化
+            accountInfo.Text = "账户余额(短信): " + (json["sms-left"]).ToString() +"/" + (json["sms-total"]).ToString();
         }
 
 
