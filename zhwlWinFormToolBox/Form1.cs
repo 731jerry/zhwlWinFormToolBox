@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.IO;
+using System.Threading;
 
 namespace zhwlWinFormToolBox
 {
@@ -19,6 +20,21 @@ namespace zhwlWinFormToolBox
             InitializeComponent();
             OptionComboBox.SelectedIndex = 0;
         }
+
+        Dictionary<String, String> DriversDic = new Dictionary<string, string>();
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            sendSMSComboBox.SelectedIndex = 0;
+            DriversDic.Add("杨金宝", "13900000000");
+            DriversDic.Add("张三", "13900012121");
+            driverComboBox.Items.AddRange(DriversDic.Keys.ToArray());
+            driverComboBox.SelectedIndex = 0;
+            Thread t = new Thread(new ParameterizedThreadStart(getSMSAccountInfoThreading));
+            t.Start();
+            t.DisableComObjectEagerCleanup();
+        }
+
+        #region 数据筛选
 
         List<List<String>> inputList = new List<List<String>>();
         List<List<String>> outputList = new List<List<String>>();
@@ -199,6 +215,9 @@ namespace zhwlWinFormToolBox
                 }
             }
         }
+        #endregion
+
+        #region 运单打印
 
         private void printPreviewBT_Click(object sender, EventArgs e)
         {
@@ -336,15 +355,16 @@ namespace zhwlWinFormToolBox
             numberTB.Clear();
         }
 
-        String uid  = "GxDPNEIGtn9C";
-        String  pas = "5pggh3c5";
+        #endregion
 
-        private void sendMsgButton_Click(object sender, EventArgs e)
+        #region 发送短信
+
+        String uid = "GxDPNEIGtn9C";
+        String pas = "5pggh3c5";
+
+        private String getStringBySMSAPI(String url, String byteString)
         {
-            string mobile = "15658101852",//15024345993
-            con = "【test】您的验证码是：231313。",
-            url = "http://api.weimi.cc/2/sms/send.html";
-            byte[] byteArray = Encoding.UTF8.GetBytes("mob=" + mobile + "&con=" + con + "&uid=" + uid + "&pas=" + pas + "&type=json");
+            byte[] byteArray = Encoding.UTF8.GetBytes(byteString);
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(new Uri(url));
             webRequest.Method = "POST";
             webRequest.ContentType = "application/x-www-form-urlencoded";
@@ -354,27 +374,130 @@ namespace zhwlWinFormToolBox
             newStream.Close();
             HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
             StreamReader php = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            string Message = php.ReadToEnd();
-            System.Console.Write(Message);
+            return php.ReadToEnd();
         }
 
-        private void refreshAccountButton_Click(object sender, EventArgs e)
+        private void getSMSAccountInfoThreading(Object obj)
         {
-            string url = "http://api.weimi.cc/2/account/balance.html";
-            byte[] byteArray = Encoding.UTF8.GetBytes("uid=" + uid + "&pas=" + pas + "&type=json");
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(new Uri(url));
-            webRequest.Method = "POST";
-            webRequest.ContentType = "application/x-www-form-urlencoded";
-            webRequest.ContentLength = byteArray.Length;
-            Stream newStream = webRequest.GetRequestStream();
-            newStream.Write(byteArray, 0, byteArray.Length);
-            newStream.Close();
-            HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
-            StreamReader php = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-            string Message = php.ReadToEnd();
-            System.Console.Write(Message);
-            JSONObject json = JSONConvert.DeserializeObject(Message);//执行反序列化
-            accountInfo.Text = "账户余额(短信): " + (json["sms-left"]).ToString() +"/" + (json["sms-total"]).ToString();
+            getSMSAccountInfo();
+        }
+
+        delegate void setAccountInfoThreadDelegate();
+        private void getSMSAccountInfo()
+        {
+            try
+            {
+                JSONObject json = JSONConvert.DeserializeObject(getStringBySMSAPI(
+                    "http://api.weimi.cc/2/account/balance.html",
+                    "uid=" + uid + "&pas=" + pas + "&type=json"));
+                if (accountInfo.InvokeRequired)
+                {
+                    setAccountInfoThreadDelegate saitd = new setAccountInfoThreadDelegate(getSMSAccountInfo);
+                    this.Invoke(saitd, new object[] { });
+                }
+                else
+                {
+                    accountInfo.Text = "账户余额(短信): " + (json["sms-left"]).ToString() + "/" + (json["sms-total"]).ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "获取SMS账户信息错误!");
+            }
+        }
+
+        String mobileNumbers = "";
+        String cidNumber = "";
+        private void sendMsgButton_Click(object sender, EventArgs e)
+        {
+            //"15658101852",//15024345993
+            mobileNumbers = "15658101852,15024345993";
+            Thread t = new Thread(new ParameterizedThreadStart(sendSMSThreading));
+            t.Start();
+            t.DisableComObjectEagerCleanup();
+        }
+
+        private void sendSMSThreading(Object obj)
+        {
+            sendSMS();
+        }
+
+        private void sendSMS()
+        {
+            try
+            {
+                mobileNumbers = ReciptTextBox.Text;
+                mobileNumbers = mobileNumbers.Replace(" ", "");
+                mobileNumbers = mobileNumbers.Replace("，", ",");
+                mobileNumbers = mobileNumbers.Replace("\r\n", ",");
+                mobileNumbers = mobileNumbers.Replace(",,", ",");
+                char[] charsToTrim = { '，', ',', ' ' };
+                mobileNumbers = mobileNumbers.TrimEnd(charsToTrim);
+                String apiString = "mob=" + mobileNumbers.Trim() + "&cid=" + cidNumber + "&uid=" + uid + "&pas=" + pas + "&type=json";
+                if (setTimeCheckBox.Checked)
+                {
+                    apiString += "&timing=" + setTimeDateTimePicker.Value.ToLongTimeString();
+                }
+                if (driverComboBox.Enabled && driverComboBox.SelectedIndex > -1)
+                {
+                    apiString += "&p1=" + driverComboBox.Text + "&p2=" + driverTextBox.Text;
+                }
+                JSONObject json = JSONConvert.DeserializeObject(getStringBySMSAPI(
+                    "http://api.weimi.cc/2/sms/send.html",
+                    apiString));
+
+                if (int.Parse((json["code"]).ToString()) == 0)
+                {
+                    MessageBox.Show("短信发送成功!", "提示");
+                }
+                else
+                {
+                    MessageBox.Show("短信发送失败:" + (json["msg"]).ToString(), "提示");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "发送SMS错误!");
+            }
+        }
+
+        private void sendSMSComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (sendSMSComboBox.SelectedIndex)
+            {
+                default:
+                    break;
+                case 0: // 提货
+                    cidNumber = "ZZCFFVQGk6HA";
+                    driverComboBox.Enabled = false;
+                    ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+                    break;
+                case 1: // 派送
+                    cidNumber = "y7tuKJIFMV66";
+                    driverComboBox.Enabled = true;
+                    ContentTextBox.Text = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+                    break;
+            }
+        }
+
+        #endregion
+
+        private void setTimeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            setTimeDateTimePicker.Enabled = setTimeCheckBox.Checked;
+        }
+
+        private void fillAccountLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.fillAccountLinkLabel.LinkVisited = true;
+            System.Diagnostics.Process.Start("http://www.weimi.cc/sms.html");
+        }
+
+        private void driverComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            String outValue;
+            DriversDic.TryGetValue(driverComboBox.Text, out outValue);
+            driverTextBox.Text = outValue;
         }
 
 
