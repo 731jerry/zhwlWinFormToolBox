@@ -22,16 +22,48 @@ namespace zhwlWinFormToolBox
         }
 
         Dictionary<String, String> DriversDic = new Dictionary<string, string>();
+        String OptionA, OptionB;
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            OptionA = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+            OptionB = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+
             sendSMSComboBox.SelectedIndex = 0;
             DriversDic.Add("杨金宝", "13900000000");
             DriversDic.Add("张三", "13900012121");
             driverComboBox.Items.AddRange(DriversDic.Keys.ToArray());
-            driverComboBox.SelectedIndex = 0;
-            Thread t = new Thread(new ParameterizedThreadStart(getSMSAccountInfoThreading));
-            t.Start();
-            t.DisableComObjectEagerCleanup();
+            driverComboBox.SelectedIndex = -1;
+            ContentTextBox.Text = OptionA;
+            setTimeDateTimePicker.Value = DateTime.Now.AddHours(1);
+            getSMSAccountInfo();
+        }
+
+        // 判断是否是数字
+        public bool IsNumeric(String str)
+        {
+            String pattern = @"^[-]?\d+[.]?\d*$";
+            return Regex.IsMatch(str, pattern);
+        }
+
+        // 判断是否是整数
+        public bool IsIntegerByRegex(String str)
+        {
+            String pattern = @"^\d*$";
+            return Regex.IsMatch(str, pattern);
+        }
+
+        public bool isInteger(String number)
+        {
+            try
+            {
+                double b = Convert.ToDouble(number);
+                return b % 10 == 0;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         #region 数据筛选
@@ -323,24 +355,6 @@ namespace zhwlWinFormToolBox
             }
         }
 
-        public bool IsIntegerByRegex(string s)
-        {
-            string pattern = @"^\d*$";
-            return Regex.IsMatch(s, pattern);
-        }
-
-        public bool isInteger(String number)
-        {
-            try
-            {
-                double b = Convert.ToDouble(number);
-                return b % 10 == 0;
-            }
-            catch
-            {
-                return false;
-            }
-        }
 
         private void countTB_TextChanged(object sender, EventArgs e)
         {
@@ -377,13 +391,20 @@ namespace zhwlWinFormToolBox
             return php.ReadToEnd();
         }
 
+        private void getSMSAccountInfo()
+        {
+            Thread t = new Thread(new ParameterizedThreadStart(getSMSAccountInfoThreading));
+            t.Start();
+            t.DisableComObjectEagerCleanup();
+        }
+
         private void getSMSAccountInfoThreading(Object obj)
         {
-            getSMSAccountInfo();
+            setSMSAccountInfo();
         }
 
         delegate void setAccountInfoThreadDelegate();
-        private void getSMSAccountInfo()
+        private void setSMSAccountInfo()
         {
             try
             {
@@ -392,7 +413,7 @@ namespace zhwlWinFormToolBox
                     "uid=" + uid + "&pas=" + pas + "&type=json"));
                 if (accountInfo.InvokeRequired)
                 {
-                    setAccountInfoThreadDelegate saitd = new setAccountInfoThreadDelegate(getSMSAccountInfo);
+                    setAccountInfoThreadDelegate saitd = new setAccountInfoThreadDelegate(setSMSAccountInfo);
                     this.Invoke(saitd, new object[] { });
                 }
                 else
@@ -406,12 +427,32 @@ namespace zhwlWinFormToolBox
             }
         }
 
+        delegate void setReciptNumberThreadDelegate();
+        private void clearReciptNumer()
+        {
+            if (ReciptTextBox.InvokeRequired)
+            {
+                setReciptNumberThreadDelegate srnt = new setReciptNumberThreadDelegate(clearReciptNumer);
+                this.Invoke(srnt, new object[] { });
+            }
+            else
+            {
+                ReciptTextBox.Clear();
+            }
+        }
+
         String mobileNumbers = "";
         String cidNumber = "";
+        Boolean isEnabledDrivers = false;
+        String DriverName, DriverNumer;
         private void sendMsgButton_Click(object sender, EventArgs e)
         {
-            //"15658101852",//15024345993
-            mobileNumbers = "15658101852,15024345993";
+            if (driverComboBox.Enabled && driverComboBox.SelectedIndex > -1)
+            {
+                isEnabledDrivers = true;
+                DriverName = driverComboBox.Text;
+                DriverNumer = driverTextBox.Text;
+            }
             Thread t = new Thread(new ParameterizedThreadStart(sendSMSThreading));
             t.Start();
             t.DisableComObjectEagerCleanup();
@@ -426,39 +467,70 @@ namespace zhwlWinFormToolBox
         {
             try
             {
-                mobileNumbers = ReciptTextBox.Text;
-                mobileNumbers = mobileNumbers.Replace(" ", "");
-                mobileNumbers = mobileNumbers.Replace("，", ",");
-                mobileNumbers = mobileNumbers.Replace("\r\n", ",");
-                mobileNumbers = mobileNumbers.Replace(",,", ",");
-                char[] charsToTrim = { '，', ',', ' ' };
-                mobileNumbers = mobileNumbers.TrimEnd(charsToTrim);
-                String apiString = "mob=" + mobileNumbers.Trim() + "&cid=" + cidNumber + "&uid=" + uid + "&pas=" + pas + "&type=json";
-                if (setTimeCheckBox.Checked)
+                if (!verifyMobileNumbers())
                 {
-                    apiString += "&timing=" + setTimeDateTimePicker.Value.ToLongTimeString();
-                }
-                if (driverComboBox.Enabled && driverComboBox.SelectedIndex > -1)
-                {
-                    apiString += "&p1=" + driverComboBox.Text + "&p2=" + driverTextBox.Text;
-                }
-                JSONObject json = JSONConvert.DeserializeObject(getStringBySMSAPI(
-                    "http://api.weimi.cc/2/sms/send.html",
-                    apiString));
-
-                if (int.Parse((json["code"]).ToString()) == 0)
-                {
-                    MessageBox.Show("短信发送成功!", "提示");
+                    MessageBox.Show("输入的短信号码错误，请重新验证！", "提示");
                 }
                 else
                 {
-                    MessageBox.Show("短信发送失败:" + (json["msg"]).ToString(), "提示");
+                    String addtionInfo = "";
+                    String apiString = "mob=" + mobileNumbers + "&cid=" + cidNumber + "&uid=" + uid + "&pas=" + pas + "&type=json";
+                    if (setTimeCheckBox.Checked)
+                    {
+                        //yyyy-MM-dd HH:mm:ss
+                        apiString += "&timing=" + setTimeDateTimePicker.Value.ToString(setTimeDateTimePicker.CustomFormat);
+                        addtionInfo = "定时(将于" + setTimeDateTimePicker.Value.ToString(setTimeDateTimePicker.CustomFormat) + "发送)";
+                    }
+                    if (isEnabledDrivers)
+                    {
+                        apiString += "&p1=" + DriverName + "&p2=" + DriverNumer;
+                    }
+                    JSONObject json = JSONConvert.DeserializeObject(getStringBySMSAPI(
+                        "http://api.weimi.cc/2/sms/send.html",
+                        apiString));
+
+                    if (int.Parse((json["code"]).ToString()) == 0)
+                    {
+                        clearReciptNumer();
+                        MessageBox.Show(addtionInfo + "短信" + mobileNumbers + "发送成功!", "提示");
+                    }
+                    else
+                    {
+                        MessageBox.Show("短信" + mobileNumbers + "发送失败:(code:" + (json["code"]).ToString() + ")" + (json["msg"]).ToString(), "提示");
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "发送SMS错误!");
             }
+        }
+
+        private Boolean verifyMobileNumbers()
+        {
+            mobileNumbers = ReciptTextBox.Text;
+            mobileNumbers = mobileNumbers.Replace(" ", "");
+            mobileNumbers = mobileNumbers.Replace("，", ",");
+            mobileNumbers = mobileNumbers.Replace("\r\n", ",");
+            mobileNumbers = mobileNumbers.Replace(",,", ",");
+            char[] charsToTrim = { '，', ',', ' ' };
+            mobileNumbers = mobileNumbers.TrimEnd(charsToTrim);
+            String[] mobileArray = mobileNumbers.Split(',');
+            List<String> mobileNewList = new List<String>();
+            foreach (String mobile in mobileArray)
+            {
+                if ((mobile.Length == 11) && IsNumeric(mobile))
+                {
+                    mobileNewList.Add(mobile);
+                }
+            }
+            if (mobileNewList.Count > 0)
+            {
+                mobileNumbers = String.Join(",", mobileNewList);
+                mobileNumbers = mobileNumbers.Trim();
+                return true;
+            }
+            else { return false; }
         }
 
         private void sendSMSComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -469,18 +541,20 @@ namespace zhwlWinFormToolBox
                     break;
                 case 0: // 提货
                     cidNumber = "ZZCFFVQGk6HA";
+                    driverComboBox.SelectedIndex = -1;
                     driverComboBox.Enabled = false;
-                    ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+                    driverTextBox.Enabled = false;
+                    // ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
                     break;
                 case 1: // 派送
-                    cidNumber = "y7tuKJIFMV66";
+                    cidNumber = "TfYUSrxp5Qkp";
+                    driverComboBox.SelectedIndex = 0;
                     driverComboBox.Enabled = true;
-                    ContentTextBox.Text = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+                    driverTextBox.Enabled = true;
+                    // ContentTextBox.Text = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
                     break;
             }
         }
-
-        #endregion
 
         private void setTimeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -493,12 +567,29 @@ namespace zhwlWinFormToolBox
             System.Diagnostics.Process.Start("http://www.weimi.cc/sms.html");
         }
 
+        private void checkSentLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.checkSentLinkLabel.LinkVisited = true;
+            System.Diagnostics.Process.Start("http://www.weimi.cc/admin/");
+        }
+
         private void driverComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            String outValue;
-            DriversDic.TryGetValue(driverComboBox.Text, out outValue);
-            driverTextBox.Text = outValue;
+            if (driverComboBox.SelectedIndex >= 0)
+            {
+                String outValue;
+                DriversDic.TryGetValue(driverComboBox.Text, out outValue);
+                driverTextBox.Text = outValue;
+                ContentTextBox.Text = OptionA;
+            }
+            else
+            {
+                driverTextBox.Text = "";
+                ContentTextBox.Text = OptionB;
+            }
         }
+        #endregion
+
 
 
     }
