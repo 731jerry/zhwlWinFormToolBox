@@ -481,7 +481,7 @@
             this.tableYTB.Name = "tableYTB";
             this.tableYTB.Size = new System.Drawing.Size(72, 27);
             this.tableYTB.TabIndex = 18;
-            this.tableYTB.Text = "68";
+            this.tableYTB.Text = "95";
             this.tableYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tableYTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
@@ -500,7 +500,7 @@
             this.tableXTB.Name = "tableXTB";
             this.tableXTB.Size = new System.Drawing.Size(72, 27);
             this.tableXTB.TabIndex = 16;
-            this.tableXTB.Text = "30";
+            this.tableXTB.Text = "45";
             this.tableXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tableXTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 

@@ -32,7 +32,7 @@ namespace zhwlWinFormToolBox
             driverComboBox.Items.AddRange(DriversDic.Keys.ToArray());
             driverComboBox.SelectedIndex = -1;
 
-            SetContentTextOptionA();
+            //SetContentTextOptionA();
 
             setTimeDateTimePicker.Value = DateTime.Now.AddHours(1);
             getSMSAccountInfo();
@@ -540,16 +540,18 @@ namespace zhwlWinFormToolBox
                     break;
                 case 0: // 提货
                     cidNumber = "ZZCFFVQGk6HA";
+                    driverTextBox.Enabled = false;
                     driverComboBox.SelectedIndex = -1;
                     driverComboBox.Enabled = false;
-                    driverTextBox.Enabled = false;
+                    SetContentTextOptionA();
                     // ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
                     break;
                 case 1: // 派送
                     cidNumber = "TfYUSrxp5Qkp";
+                    driverTextBox.Enabled = true;
                     driverComboBox.SelectedIndex = 0;
                     driverComboBox.Enabled = true;
-                    driverTextBox.Enabled = true;
+                    SetContentTextOptionB();
                     // ContentTextBox.Text = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
                     break;
             }
@@ -557,16 +559,16 @@ namespace zhwlWinFormToolBox
 
         private void SetContentTextOptionA()
         {
-            ContentTextBox.Text = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+            ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
         }
 
         private void SetContentTextOptionB()
         {
-            ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+            ContentTextBox.Text = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
         }
         private void driverTextBox_TextChanged(object sender, EventArgs e)
         {
-            SetContentTextOptionA();
+            SetContentTextOptionB();
         }
 
         private void setTimeCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -588,17 +590,17 @@ namespace zhwlWinFormToolBox
 
         private void driverComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (driverComboBox.SelectedIndex >= 0)
+            if (driverComboBox.SelectedIndex == -1)
+            {
+                driverTextBox.Text = "";
+                //SetContentTextOptionB();
+            }
+            else
             {
                 String outValue;
                 DriversDic.TryGetValue(driverComboBox.Text, out outValue);
                 driverTextBox.Text = outValue;
                 SetContentTextOptionA();
-            }
-            else
-            {
-                driverTextBox.Text = "";
-                SetContentTextOptionB();
             }
         }
         #endregion
