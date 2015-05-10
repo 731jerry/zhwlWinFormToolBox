@@ -22,19 +22,18 @@ namespace zhwlWinFormToolBox
         }
 
         Dictionary<String, String> DriversDic = new Dictionary<string, string>();
-        String OptionA, OptionB;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            OptionA = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
-            OptionB = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
-
             sendSMSComboBox.SelectedIndex = 0;
-            DriversDic.Add("杨金宝", "13900000000");
-            DriversDic.Add("张三", "13900012121");
+            DriversDic.Add("杨金宝", "15905833881");
+            DriversDic.Add("张自锋", "18637531188");
+            DriversDic.Add("杨进强", "13693752496");
             driverComboBox.Items.AddRange(DriversDic.Keys.ToArray());
             driverComboBox.SelectedIndex = -1;
-            ContentTextBox.Text = OptionA;
+
+            SetContentTextOptionA();
+
             setTimeDateTimePicker.Value = DateTime.Now.AddHours(1);
             getSMSAccountInfo();
         }
@@ -447,7 +446,7 @@ namespace zhwlWinFormToolBox
         String DriverName, DriverNumer;
         private void sendMsgButton_Click(object sender, EventArgs e)
         {
-            if (driverComboBox.Enabled && driverComboBox.SelectedIndex > -1)
+            if (driverComboBox.Enabled)
             {
                 isEnabledDrivers = true;
                 DriverName = driverComboBox.Text;
@@ -556,6 +555,20 @@ namespace zhwlWinFormToolBox
             }
         }
 
+        private void SetContentTextOptionA()
+        {
+            ContentTextBox.Text = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+        }
+
+        private void SetContentTextOptionB()
+        {
+            ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+        }
+        private void driverTextBox_TextChanged(object sender, EventArgs e)
+        {
+            SetContentTextOptionA();
+        }
+
         private void setTimeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             setTimeDateTimePicker.Enabled = setTimeCheckBox.Checked;
@@ -580,15 +593,16 @@ namespace zhwlWinFormToolBox
                 String outValue;
                 DriversDic.TryGetValue(driverComboBox.Text, out outValue);
                 driverTextBox.Text = outValue;
-                ContentTextBox.Text = OptionA;
+                SetContentTextOptionA();
             }
             else
             {
                 driverTextBox.Text = "";
-                ContentTextBox.Text = OptionB;
+                SetContentTextOptionB();
             }
         }
         #endregion
+
 
 
 
