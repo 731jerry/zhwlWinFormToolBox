@@ -1,6 +1,6 @@
 ﻿namespace zhwlWinFormToolBox
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.contactTextbox = new System.Windows.Forms.TextBox();
             this.checkSentLinkLabel = new System.Windows.Forms.LinkLabel();
             this.driverTextBox = new System.Windows.Forms.TextBox();
             this.driverComboBox = new System.Windows.Forms.ComboBox();
@@ -117,6 +118,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.contactTextbox);
             this.tabPage3.Controls.Add(this.checkSentLinkLabel);
             this.tabPage3.Controls.Add(this.driverTextBox);
             this.tabPage3.Controls.Add(this.driverComboBox);
@@ -138,6 +140,14 @@
             this.tabPage3.Text = "发送短信";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // contactTextbox
+            // 
+            this.contactTextbox.Location = new System.Drawing.Point(394, 161);
+            this.contactTextbox.Name = "contactTextbox";
+            this.contactTextbox.Size = new System.Drawing.Size(478, 33);
+            this.contactTextbox.TabIndex = 22;
+            this.contactTextbox.TextChanged += new System.EventHandler(this.contactTextbox_TextChanged);
+            // 
             // checkSentLinkLabel
             // 
             this.checkSentLinkLabel.AutoSize = true;
@@ -152,20 +162,22 @@
             // driverTextBox
             // 
             this.driverTextBox.Enabled = false;
-            this.driverTextBox.Location = new System.Drawing.Point(666, 161);
+            this.driverTextBox.Location = new System.Drawing.Point(755, 19);
             this.driverTextBox.Name = "driverTextBox";
             this.driverTextBox.Size = new System.Drawing.Size(206, 33);
             this.driverTextBox.TabIndex = 20;
+            this.driverTextBox.Visible = false;
             this.driverTextBox.TextChanged += new System.EventHandler(this.driverTextBox_TextChanged);
             // 
             // driverComboBox
             // 
             this.driverComboBox.Enabled = false;
             this.driverComboBox.FormattingEnabled = true;
-            this.driverComboBox.Location = new System.Drawing.Point(394, 161);
+            this.driverComboBox.Location = new System.Drawing.Point(483, 19);
             this.driverComboBox.Name = "driverComboBox";
             this.driverComboBox.Size = new System.Drawing.Size(194, 33);
             this.driverComboBox.TabIndex = 19;
+            this.driverComboBox.Visible = false;
             this.driverComboBox.SelectedIndexChanged += new System.EventHandler(this.driverComboBox_SelectedIndexChanged);
             // 
             // label15
@@ -219,8 +231,8 @@
             this.sendSMSComboBox.Font = new System.Drawing.Font("微软雅黑", 13.5F);
             this.sendSMSComboBox.FormattingEnabled = true;
             this.sendSMSComboBox.Items.AddRange(new object[] {
-            "通知提货提醒",
-            "货物派送提醒"});
+            "催客户来提货",
+            "货物已到派货点"});
             this.sendSMSComboBox.Location = new System.Drawing.Point(162, 64);
             this.sendSMSComboBox.Name = "sendSMSComboBox";
             this.sendSMSComboBox.Size = new System.Drawing.Size(158, 32);
@@ -795,7 +807,7 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
-            // Form1
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -805,10 +817,10 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "振华物流工具箱";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
@@ -890,6 +902,7 @@
         private System.Windows.Forms.ComboBox driverComboBox;
         private System.Windows.Forms.TextBox driverTextBox;
         private System.Windows.Forms.LinkLabel checkSentLinkLabel;
+        private System.Windows.Forms.TextBox contactTextbox;
 
     }
 }

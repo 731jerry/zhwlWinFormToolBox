@@ -13,7 +13,6 @@
 \\psf\Home\Documents\JerryZhu\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\振华物流工具箱.exe
 \\psf\Home\Documents\JerryZhu\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\振华物流工具箱.pdb
 \\psf\Home\Documents\JerryZhu\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.csprojResolveAssemblyReference.cache
-\\psf\Home\Documents\JerryZhu\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.Form1.resources
 \\psf\Home\Documents\JerryZhu\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.Properties.Resources.resources
 \\psf\Home\Documents\JerryZhu\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.csproj.GenerateResource.Cache
 D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\振华物流工具箱.exe.config
@@ -25,3 +24,4 @@ D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.
 D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.Form1.resources
 D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.Properties.Resources.resources
 D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.csproj.GenerateResource.Cache
+\\psf\Home\Documents\JerryZhu\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.MainWindow.resources
