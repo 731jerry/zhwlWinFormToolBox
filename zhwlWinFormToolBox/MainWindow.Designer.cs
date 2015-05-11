@@ -1,6 +1,6 @@
 ﻿namespace zhwlWinFormToolBox
 {
-    partial class Form1
+    partial class MainWindow
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,17 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.checkSentLinkLabel = new System.Windows.Forms.LinkLabel();
             this.driverTextBox = new System.Windows.Forms.TextBox();
             this.driverComboBox = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.fillAccountLinkLabel = new System.Windows.Forms.LinkLabel();
             this.setTimeDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.setTimeCheckBox = new System.Windows.Forms.CheckBox();
-            this.sendSMSComboBox = new System.Windows.Forms.ComboBox();
             this.ContentTextBox = new System.Windows.Forms.TextBox();
             this.ReciptTextBox = new System.Windows.Forms.TextBox();
             this.accountInfo = new System.Windows.Forms.Label();
@@ -91,6 +89,11 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.SMSTabControl = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -99,6 +102,8 @@
             this.groupbox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.SMSTabControl.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -117,14 +122,11 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.SMSTabControl);
             this.tabPage3.Controls.Add(this.checkSentLinkLabel);
-            this.tabPage3.Controls.Add(this.driverTextBox);
-            this.tabPage3.Controls.Add(this.driverComboBox);
-            this.tabPage3.Controls.Add(this.label15);
             this.tabPage3.Controls.Add(this.fillAccountLinkLabel);
             this.tabPage3.Controls.Add(this.setTimeDateTimePicker);
             this.tabPage3.Controls.Add(this.setTimeCheckBox);
-            this.tabPage3.Controls.Add(this.sendSMSComboBox);
             this.tabPage3.Controls.Add(this.ContentTextBox);
             this.tabPage3.Controls.Add(this.ReciptTextBox);
             this.tabPage3.Controls.Add(this.accountInfo);
@@ -141,7 +143,7 @@
             // checkSentLinkLabel
             // 
             this.checkSentLinkLabel.AutoSize = true;
-            this.checkSentLinkLabel.Location = new System.Drawing.Point(712, 66);
+            this.checkSentLinkLabel.Location = new System.Drawing.Point(774, 21);
             this.checkSentLinkLabel.Name = "checkSentLinkLabel";
             this.checkSentLinkLabel.Size = new System.Drawing.Size(69, 25);
             this.checkSentLinkLabel.TabIndex = 21;
@@ -152,9 +154,9 @@
             // driverTextBox
             // 
             this.driverTextBox.Enabled = false;
-            this.driverTextBox.Location = new System.Drawing.Point(666, 161);
+            this.driverTextBox.Location = new System.Drawing.Point(334, 37);
             this.driverTextBox.Name = "driverTextBox";
-            this.driverTextBox.Size = new System.Drawing.Size(206, 33);
+            this.driverTextBox.Size = new System.Drawing.Size(206, 25);
             this.driverTextBox.TabIndex = 20;
             this.driverTextBox.TextChanged += new System.EventHandler(this.driverTextBox_TextChanged);
             // 
@@ -162,27 +164,16 @@
             // 
             this.driverComboBox.Enabled = false;
             this.driverComboBox.FormattingEnabled = true;
-            this.driverComboBox.Location = new System.Drawing.Point(394, 161);
+            this.driverComboBox.Location = new System.Drawing.Point(62, 37);
             this.driverComboBox.Name = "driverComboBox";
-            this.driverComboBox.Size = new System.Drawing.Size(194, 33);
+            this.driverComboBox.Size = new System.Drawing.Size(194, 27);
             this.driverComboBox.TabIndex = 19;
             this.driverComboBox.SelectedIndexChanged += new System.EventHandler(this.driverComboBox_SelectedIndexChanged);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(158, 117);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(392, 20);
-            this.label15.TabIndex = 18;
-            this.label15.Text = "*接收号码请用\",\"分开 例如: 15034345554,123456059...";
             // 
             // fillAccountLinkLabel
             // 
             this.fillAccountLinkLabel.AutoSize = true;
-            this.fillAccountLinkLabel.Location = new System.Drawing.Point(815, 66);
+            this.fillAccountLinkLabel.Location = new System.Drawing.Point(877, 21);
             this.fillAccountLinkLabel.Name = "fillAccountLinkLabel";
             this.fillAccountLinkLabel.Size = new System.Drawing.Size(50, 25);
             this.fillAccountLinkLabel.TabIndex = 17;
@@ -196,7 +187,7 @@
             this.setTimeDateTimePicker.Enabled = false;
             this.setTimeDateTimePicker.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.setTimeDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.setTimeDateTimePicker.Location = new System.Drawing.Point(449, 472);
+            this.setTimeDateTimePicker.Location = new System.Drawing.Point(449, 502);
             this.setTimeDateTimePicker.Name = "setTimeDateTimePicker";
             this.setTimeDateTimePicker.Size = new System.Drawing.Size(207, 30);
             this.setTimeDateTimePicker.TabIndex = 15;
@@ -205,7 +196,7 @@
             // 
             this.setTimeCheckBox.AutoSize = true;
             this.setTimeCheckBox.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.setTimeCheckBox.Location = new System.Drawing.Point(271, 473);
+            this.setTimeCheckBox.Location = new System.Drawing.Point(271, 503);
             this.setTimeCheckBox.Name = "setTimeCheckBox";
             this.setTimeCheckBox.Size = new System.Drawing.Size(101, 28);
             this.setTimeCheckBox.TabIndex = 14;
@@ -213,44 +204,30 @@
             this.setTimeCheckBox.UseVisualStyleBackColor = true;
             this.setTimeCheckBox.CheckedChanged += new System.EventHandler(this.setTimeCheckBox_CheckedChanged);
             // 
-            // sendSMSComboBox
-            // 
-            this.sendSMSComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.sendSMSComboBox.Font = new System.Drawing.Font("微软雅黑", 13.5F);
-            this.sendSMSComboBox.FormattingEnabled = true;
-            this.sendSMSComboBox.Items.AddRange(new object[] {
-            "通知提货提醒",
-            "货物派送提醒"});
-            this.sendSMSComboBox.Location = new System.Drawing.Point(162, 64);
-            this.sendSMSComboBox.Name = "sendSMSComboBox";
-            this.sendSMSComboBox.Size = new System.Drawing.Size(158, 32);
-            this.sendSMSComboBox.TabIndex = 13;
-            this.sendSMSComboBox.SelectedIndexChanged += new System.EventHandler(this.sendSMSComboBox_SelectedIndexChanged);
-            // 
             // ContentTextBox
             // 
-            this.ContentTextBox.Location = new System.Drawing.Point(394, 229);
+            this.ContentTextBox.Location = new System.Drawing.Point(307, 291);
             this.ContentTextBox.Multiline = true;
             this.ContentTextBox.Name = "ContentTextBox";
             this.ContentTextBox.ReadOnly = true;
             this.ContentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ContentTextBox.Size = new System.Drawing.Size(478, 207);
+            this.ContentTextBox.Size = new System.Drawing.Size(620, 174);
             this.ContentTextBox.TabIndex = 12;
             // 
             // ReciptTextBox
             // 
-            this.ReciptTextBox.Location = new System.Drawing.Point(162, 161);
+            this.ReciptTextBox.Location = new System.Drawing.Point(83, 81);
             this.ReciptTextBox.Multiline = true;
             this.ReciptTextBox.Name = "ReciptTextBox";
             this.ReciptTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ReciptTextBox.Size = new System.Drawing.Size(158, 275);
+            this.ReciptTextBox.Size = new System.Drawing.Size(158, 401);
             this.ReciptTextBox.TabIndex = 11;
             // 
             // accountInfo
             // 
             this.accountInfo.AutoSize = true;
             this.accountInfo.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.accountInfo.Location = new System.Drawing.Point(390, 67);
+            this.accountInfo.Location = new System.Drawing.Point(79, 21);
             this.accountInfo.Name = "accountInfo";
             this.accountInfo.Size = new System.Drawing.Size(166, 24);
             this.accountInfo.TabIndex = 8;
@@ -259,7 +236,7 @@
             // sendMsgButton
             // 
             this.sendMsgButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.sendMsgButton.Location = new System.Drawing.Point(820, 470);
+            this.sendMsgButton.Location = new System.Drawing.Point(817, 499);
             this.sendMsgButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.sendMsgButton.Name = "sendMsgButton";
             this.sendMsgButton.Size = new System.Drawing.Size(110, 35);
@@ -795,7 +772,63 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
-            // Form1
+            // SMSTabControl
+            // 
+            this.SMSTabControl.Controls.Add(this.tabPage4);
+            this.SMSTabControl.Controls.Add(this.tabPage5);
+            this.SMSTabControl.Controls.Add(this.tabPage6);
+            this.SMSTabControl.Controls.Add(this.tabPage7);
+            this.SMSTabControl.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.SMSTabControl.Location = new System.Drawing.Point(307, 81);
+            this.SMSTabControl.Name = "SMSTabControl";
+            this.SMSTabControl.SelectedIndex = 0;
+            this.SMSTabControl.Size = new System.Drawing.Size(620, 193);
+            this.SMSTabControl.TabIndex = 22;
+            this.SMSTabControl.SelectedIndexChanged += new System.EventHandler(this.SMSTabControl_SelectedIndexChanged);
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 28);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(612, 161);
+            this.tabPage4.TabIndex = 0;
+            this.tabPage4.Text = "催客户来提货";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 28);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(612, 161);
+            this.tabPage5.TabIndex = 1;
+            this.tabPage5.Text = "货物已到派货点";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.driverTextBox);
+            this.tabPage6.Controls.Add(this.driverComboBox);
+            this.tabPage6.Location = new System.Drawing.Point(4, 28);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(612, 161);
+            this.tabPage6.TabIndex = 2;
+            this.tabPage6.Text = "货物正在派送";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Location = new System.Drawing.Point(4, 28);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(612, 161);
+            this.tabPage7.TabIndex = 3;
+            this.tabPage7.Text = "货物已被签收";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -805,10 +838,10 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "振华物流工具箱";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
@@ -822,6 +855,9 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.SMSTabControl.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -880,16 +916,19 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button sendMsgButton;
         private System.Windows.Forms.Label accountInfo;
-        private System.Windows.Forms.ComboBox sendSMSComboBox;
         private System.Windows.Forms.TextBox ContentTextBox;
         private System.Windows.Forms.TextBox ReciptTextBox;
         private System.Windows.Forms.DateTimePicker setTimeDateTimePicker;
         private System.Windows.Forms.CheckBox setTimeCheckBox;
         private System.Windows.Forms.LinkLabel fillAccountLinkLabel;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox driverComboBox;
         private System.Windows.Forms.TextBox driverTextBox;
         private System.Windows.Forms.LinkLabel checkSentLinkLabel;
+        private System.Windows.Forms.TabControl SMSTabControl;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
 
     }
 }

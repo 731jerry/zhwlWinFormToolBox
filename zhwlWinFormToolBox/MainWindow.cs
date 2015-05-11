@@ -13,17 +13,16 @@ using System.Threading;
 
 namespace zhwlWinFormToolBox
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
             OptionComboBox.SelectedIndex = 0;
         }
 
         Dictionary<String, String> DriversDic = new Dictionary<string, string>();
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainWindow_Load(object sender, EventArgs e)
         {
             sendSMSComboBox.SelectedIndex = 0;
             DriversDic.Add("杨金宝", "15905833881");
@@ -375,6 +374,8 @@ namespace zhwlWinFormToolBox
         String uid = "GxDPNEIGtn9C";
         String pas = "5pggh3c5";
 
+        String argument = "";
+
         private String getStringBySMSAPI(String url, String byteString)
         {
             byte[] byteArray = Encoding.UTF8.GetBytes(byteString);
@@ -473,16 +474,12 @@ namespace zhwlWinFormToolBox
                 else
                 {
                     String addtionInfo = "";
-                    String apiString = "mob=" + mobileNumbers + "&cid=" + cidNumber + "&uid=" + uid + "&pas=" + pas + "&type=json";
+                    String apiString = "mob=" + mobileNumbers + "&cid=" + cidNumber + "&p1=" + argument + "&uid=" + uid + "&pas=" + pas + "&type=json";
                     if (setTimeCheckBox.Checked)
                     {
                         //yyyy-MM-dd HH:mm:ss
                         apiString += "&timing=" + setTimeDateTimePicker.Value.ToString(setTimeDateTimePicker.CustomFormat);
                         addtionInfo = "定时(将于" + setTimeDateTimePicker.Value.ToString(setTimeDateTimePicker.CustomFormat) + "发送)";
-                    }
-                    if (isEnabledDrivers)
-                    {
-                        apiString += "&p1=" + DriverName + "&p2=" + DriverNumer;
                     }
                     JSONObject json = JSONConvert.DeserializeObject(getStringBySMSAPI(
                         "http://api.weimi.cc/2/sms/send.html",
@@ -532,40 +529,64 @@ namespace zhwlWinFormToolBox
             else { return false; }
         }
 
-        private void sendSMSComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void SMSTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (sendSMSComboBox.SelectedIndex)
+            switch (SMSTabControl.SelectedIndex)
             {
                 default:
                     break;
-                case 0: // 提货
+                case 0: // 催客户来提货
                     cidNumber = "ZZCFFVQGk6HA";
                     driverTextBox.Enabled = false;
                     driverComboBox.SelectedIndex = -1;
                     driverComboBox.Enabled = false;
                     SetContentTextOptionA();
-                    // ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
                     break;
-                case 1: // 派送
+                case 1: // 货物已到派货点
+                    break;
+                case 2: // 货物正在派送
                     cidNumber = "TfYUSrxp5Qkp";
                     driverTextBox.Enabled = true;
                     driverComboBox.SelectedIndex = 0;
                     driverComboBox.Enabled = true;
                     SetContentTextOptionB();
-                    // ContentTextBox.Text = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+                    break;
+                case 3: // 货物已被签收
                     break;
             }
         }
-
+        /*
+         催客户来提货
+            【桐乡振华物流】您好，您的货物已经到达振华物流，您还未来领取，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/ 谢谢您的支持！
+         货物已到派货点
+            【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话%P%。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:0573-88131799。网址:http://www.zhhwl.com/ 谢谢您的支持！
+         货物正在派送
+            【桐乡振华物流】您好，您的货物已由振华物流发出，请保持电话畅通。司机%P%电话:%P%。详情请电话:0573-88131799。网址:http://www.zhhwl.com/ 谢谢您的支持！
+         货物已被签收
+            【桐乡振华物流】您好，您X月X日发往XX XXX的货，X月X日客户已签收，签收人是【XXX】。详情请电话:0573-88131799。网址:http://www.zhhwl.com/ 谢谢您的支持！
+         */
         private void SetContentTextOptionA()
         {
-            ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+            argument = "您的货物已经到达振华物流，您还未来领取，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。";
+            ContentTextBox.Text = "【桐乡振华物流】您好，您的货物已经到达振华物流，您还未来领取，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/ 谢谢您的支持！";
         }
 
         private void SetContentTextOptionB()
         {
-            ContentTextBox.Text = "【桐乡振华物流】您的货物已由振华物流发出，请保持电话畅通。司机" + driverComboBox.Text + "电话:" + driverTextBox.Text + "。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+            argument = "我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话%P%。请保持您的手机通话顺畅，方便工作人员联系。";
+            ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话%P%。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:0573-88131799。网址:http://www.zhhwl.com/ 谢谢您的支持！";
         }
+        private void SetContentTextOptionC()
+        {
+            argument = "您的货物已由振华物流发出，请保持电话畅通。司机%P%电话:%P%。";
+            ContentTextBox.Text = "【桐乡振华物流】您好，您的货物已由振华物流发出，请保持电话畅通。司机%P%电话:%P%。详情请电话:0573-88131799。网址:http://www.zhhwl.com/ 谢谢您的支持！";
+        }
+        private void SetContentTextOptionD()
+        {
+            argument = "您X月X日发往XX XXX的货，X月X日客户已签收，签收人是【XXX】。";
+            ContentTextBox.Text = "【桐乡振华物流】您好，您X月X日发往XX XXX的货，X月X日客户已签收，签收人是【XXX】。详情请电话:0573-88131799。网址:http://www.zhhwl.com/ 谢谢您的支持！";
+        }
+
         private void driverTextBox_TextChanged(object sender, EventArgs e)
         {
             SetContentTextOptionB();
@@ -605,7 +626,7 @@ namespace zhwlWinFormToolBox
         }
         #endregion
 
-
+       
 
 
     }
