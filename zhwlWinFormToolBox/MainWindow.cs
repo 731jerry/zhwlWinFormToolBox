@@ -446,7 +446,8 @@ namespace zhwlWinFormToolBox
         String DriverName, DriverNumer, ContactNumber;
         private void sendMsgButton_Click(object sender, EventArgs e)
         {
-            if (driverComboBox.Enabled)
+            //if (driverComboBox.Enabled)
+            if (sendSMSComboBox.SelectedIndex == 1)
             {
                 isEnabledDrivers = true;
                 //DriverName = driverComboBox.Text;
@@ -544,16 +545,16 @@ namespace zhwlWinFormToolBox
                     //driverTextBox.Enabled = false;
                     //driverComboBox.SelectedIndex = -1;
                     //driverComboBox.Enabled = false;
-                    //contactTextbox.Enabled= false;
+                    contactTextbox.Enabled = false;
                     contactTextbox.Text = "";
                     SetContentTextOptionA();
                     break;
                 case 1: // 派送
-                    cidNumber = "a1tjkbxp4xrr";
+                    cidNumber = "IvgDeQ7fXG8F";
                     //driverTextBox.Enabled = true;
                     //driverComboBox.SelectedIndex = 0;
                     //driverComboBox.Enabled = true;
-                    //contactTextbox.Enabled= true;
+                    contactTextbox.Enabled = true;
                     contactTextbox.Text = "0573-88131799";
                     SetContentTextOptionB();
                     break;
@@ -562,7 +563,7 @@ namespace zhwlWinFormToolBox
 
         private void SetContentTextOptionA()
         {
-            ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，您还未来领取，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/";
+            ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，您还未来领取，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:0573-88131799。网址:http://www.zhhwl.com/。谢谢您的支持！";
         }
 
         private void SetContentTextOptionB()
