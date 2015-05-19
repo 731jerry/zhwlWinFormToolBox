@@ -7,3 +7,6 @@
 \\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Debug\振华物流工具箱.exe
 \\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Debug\振华物流工具箱.pdb
 \\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Debug\zhwlWinFormToolBox.Form1.resources
+D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Debug\振华物流工具箱.exe.config
+D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Debug\振华物流工具箱.exe
+D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Debug\振华物流工具箱.pdb
