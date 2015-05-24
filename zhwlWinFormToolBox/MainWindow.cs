@@ -128,7 +128,7 @@ namespace zhwlWinFormToolBox
                         }
                         else
                         {
-                            outputList.Add(new List<String>() { itemList[1], itemList[2], itemList[3], itemList[10], itemList[11], itemList[7], (float.Parse(itemList[10].Equals("") ? "0" : itemList[10]) + float.Parse(itemList[11].Equals("") ? "0" : itemList[11]) + float.Parse(itemList[7].Equals("") ? "0" : itemList[7])).ToString() });
+                            outputList.Add(new List<String>() { itemList[1], itemList[2], itemList[3], itemList[10], itemList[11], itemList[7], (float.Parse(itemList[10].Trim().Equals("") ? "0" : itemList[10]) + float.Parse(itemList[11].Trim().Equals("") ? "0" : itemList[11]) + float.Parse(itemList[7].Trim().Equals("") ? "0" : itemList[7])).ToString() });
                             AddToCombBox(itemList[1], CompanyComboBox);
                         }
                     }
