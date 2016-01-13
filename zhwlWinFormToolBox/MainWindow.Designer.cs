@@ -89,6 +89,9 @@
             this.CopyClipboardBtn = new System.Windows.Forms.Button();
             this.outputTB = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.AddQueryButton = new System.Windows.Forms.Button();
+            this.QueryDataGridView = new System.Windows.Forms.DataGridView();
+            this.BarcodeImage = new System.Windows.Forms.PictureBox();
             this.QRcodeImage = new System.Windows.Forms.PictureBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
@@ -97,9 +100,7 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.BarcodeImage = new System.Windows.Forms.PictureBox();
-            this.QueryDataGridView = new System.Windows.Forms.DataGridView();
-            this.AddQueryButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -108,10 +109,10 @@
             this.groupbox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.QueryDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodeImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BarcodeImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.QueryDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -792,6 +793,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.AddQueryButton);
             this.tabPage4.Controls.Add(this.QueryDataGridView);
             this.tabPage4.Controls.Add(this.BarcodeImage);
@@ -806,6 +808,47 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "运单跟踪";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // AddQueryButton
+            // 
+            this.AddQueryButton.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.AddQueryButton.Location = new System.Drawing.Point(556, 106);
+            this.AddQueryButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.AddQueryButton.Name = "AddQueryButton";
+            this.AddQueryButton.Size = new System.Drawing.Size(110, 35);
+            this.AddQueryButton.TabIndex = 29;
+            this.AddQueryButton.Text = "添加记录";
+            this.AddQueryButton.UseVisualStyleBackColor = true;
+            this.AddQueryButton.Click += new System.EventHandler(this.AddQueryButton_Click);
+            // 
+            // QueryDataGridView
+            // 
+            this.QueryDataGridView.AllowUserToAddRows = false;
+            this.QueryDataGridView.AllowUserToDeleteRows = false;
+            this.QueryDataGridView.AllowUserToResizeRows = false;
+            this.QueryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.QueryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.QueryDataGridView.Location = new System.Drawing.Point(20, 80);
+            this.QueryDataGridView.Name = "QueryDataGridView";
+            this.QueryDataGridView.ReadOnly = true;
+            this.QueryDataGridView.RowHeadersVisible = false;
+            this.QueryDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.QueryDataGridView.RowTemplate.Height = 23;
+            this.QueryDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.QueryDataGridView.Size = new System.Drawing.Size(351, 445);
+            this.QueryDataGridView.TabIndex = 28;
+            // 
+            // BarcodeImage
+            // 
+            this.BarcodeImage.BackColor = System.Drawing.Color.White;
+            this.BarcodeImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BarcodeImage.Location = new System.Drawing.Point(710, 420);
+            this.BarcodeImage.Name = "BarcodeImage";
+            this.BarcodeImage.Size = new System.Drawing.Size(256, 105);
+            this.BarcodeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.BarcodeImage.TabIndex = 27;
+            this.BarcodeImage.TabStop = false;
+            this.BarcodeImage.Visible = false;
             // 
             // QRcodeImage
             // 
@@ -877,46 +920,17 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
-            // BarcodeImage
+            // button1
             // 
-            this.BarcodeImage.BackColor = System.Drawing.Color.White;
-            this.BarcodeImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BarcodeImage.Location = new System.Drawing.Point(710, 420);
-            this.BarcodeImage.Name = "BarcodeImage";
-            this.BarcodeImage.Size = new System.Drawing.Size(256, 105);
-            this.BarcodeImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.BarcodeImage.TabIndex = 27;
-            this.BarcodeImage.TabStop = false;
-            this.BarcodeImage.Visible = false;
-            // 
-            // QueryDataGridView
-            // 
-            this.QueryDataGridView.AllowUserToAddRows = false;
-            this.QueryDataGridView.AllowUserToDeleteRows = false;
-            this.QueryDataGridView.AllowUserToResizeRows = false;
-            this.QueryDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.QueryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.QueryDataGridView.Location = new System.Drawing.Point(20, 80);
-            this.QueryDataGridView.Name = "QueryDataGridView";
-            this.QueryDataGridView.ReadOnly = true;
-            this.QueryDataGridView.RowHeadersVisible = false;
-            this.QueryDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.QueryDataGridView.RowTemplate.Height = 23;
-            this.QueryDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.QueryDataGridView.Size = new System.Drawing.Size(351, 445);
-            this.QueryDataGridView.TabIndex = 28;
-            // 
-            // AddQueryButton
-            // 
-            this.AddQueryButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.AddQueryButton.Location = new System.Drawing.Point(556, 106);
-            this.AddQueryButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.AddQueryButton.Name = "AddQueryButton";
-            this.AddQueryButton.Size = new System.Drawing.Size(110, 35);
-            this.AddQueryButton.TabIndex = 29;
-            this.AddQueryButton.Text = "添加记录";
-            this.AddQueryButton.UseVisualStyleBackColor = true;
-            this.AddQueryButton.Click += new System.EventHandler(this.AddQueryButton_Click);
+            this.button1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.button1.Location = new System.Drawing.Point(436, 261);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 35);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "添加记录";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainWindow
             // 
@@ -946,10 +960,10 @@
             this.groupBox2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.QueryDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BarcodeImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).EndInit();
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.BarcodeImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.QueryDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1027,6 +1041,7 @@
         private System.Windows.Forms.PictureBox BarcodeImage;
         private System.Windows.Forms.DataGridView QueryDataGridView;
         private System.Windows.Forms.Button AddQueryButton;
+        private System.Windows.Forms.Button button1;
 
     }
 }
