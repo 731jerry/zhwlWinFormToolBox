@@ -563,11 +563,13 @@ namespace zhwlWinFormToolBox
 
         private void SetContentTextOptionA()
         {
-            ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，您还未来领取，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
+            //ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，您还未来领取，请尽快携带您的身份证或者驾驶证前来领取。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
+            ContentTextBox.Text = "【桐乡振华物流】您的货物已经到达振华物流，您还未来领取，请尽快携带您的身份证或者驾驶证前来领取。从接到通知当日起，至次日12点前没有来取货者，我们将收取相应的仓储费，每日叠加。地址:环城东路183号(振东物流园区右转第一家)。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
         }
 
         private void SetContentTextOptionB()
         {
+           // ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话:" + contactTextbox.Text + "。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
             ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话:" + contactTextbox.Text + "。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
         }
         private void driverTextBox_TextChanged(object sender, EventArgs e)

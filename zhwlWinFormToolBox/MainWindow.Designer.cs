@@ -92,6 +92,7 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -107,6 +108,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(5, 15);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -807,6 +809,16 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 32);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(983, 557);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "运单跟踪";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -903,6 +915,7 @@
         private System.Windows.Forms.TextBox driverTextBox;
         private System.Windows.Forms.LinkLabel checkSentLinkLabel;
         private System.Windows.Forms.TextBox contactTextbox;
+        private System.Windows.Forms.TabPage tabPage4;
 
     }
 }
