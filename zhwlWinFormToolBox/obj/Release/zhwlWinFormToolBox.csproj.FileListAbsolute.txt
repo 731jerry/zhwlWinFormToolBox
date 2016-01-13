@@ -25,3 +25,5 @@ D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.
 \\psf\Home\Documents\JerryZhu\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.MainWindow.resources
 D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.MainWindow.resources
 \\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.MainWindow.resources
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\zxing.dll
+\\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\MySql.Data.dll

@@ -10,6 +10,14 @@ using System.Text.RegularExpressions;
 using System.Net;
 using System.IO;
 using System.Threading;
+using System.Collections;
+
+using com.google.zxing;
+using ByteMatrix = com.google.zxing.common.ByteMatrix;
+
+using MySql.Data.MySqlClient;
+using System.Xml;
+using MySql.Data;
 
 namespace zhwlWinFormToolBox
 {
@@ -569,7 +577,7 @@ namespace zhwlWinFormToolBox
 
         private void SetContentTextOptionB()
         {
-           // ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话:" + contactTextbox.Text + "。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
+            // ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话:" + contactTextbox.Text + "。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
             ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话:" + contactTextbox.Text + "。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
         }
         private void driverTextBox_TextChanged(object sender, EventArgs e)
@@ -616,5 +624,196 @@ namespace zhwlWinFormToolBox
 
         #endregion
 
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            if (IsNumeric(TrackingNumber.Text))
+            {
+                generate_qrcode(TrackingNumber.Text, Properties.Resources.logo.ToBitmap(), 300, QRcodeImage);
+                //generate_barcode(TrackingNumber.Text, 363, 150, BarcodeImage);//363,150
+
+                // 查询
+                DataTable result = ExcuteDataTable("SELECT time AS '时间', status AS '当前状态' FROM TN_"+TrackingNumber.Text, null);
+                QueryDataGridView.DataSource = result;
+            }
+            else
+            {
+                MessageBox.Show("单号输入错误，需要输入11位数字");
+            }
+        }
+
+        #region 二维码生成
+        private void generate_qrcode(String queryString, Image logoImage, int size, PictureBox targetPictureBox)
+        {
+            try
+            {
+                //构造二维码写码器
+                MultiFormatWriter mutiWriter = new com.google.zxing.MultiFormatWriter();
+                Hashtable hint = new Hashtable();
+                hint.Add(EncodeHintType.CHARACTER_SET, "UTF-8");
+                hint.Add(EncodeHintType.ERROR_CORRECTION, com.google.zxing.qrcode.decoder.ErrorCorrectionLevel.H);
+                //生成二维码
+                ByteMatrix bm = mutiWriter.encode(queryString, com.google.zxing.BarcodeFormat.QR_CODE, size, size, hint);
+                Bitmap img = bm.ToBitmap();
+
+                //要插入到二维码中的图片
+                Image middlImg = logoImage;
+                //获取二维码实际尺寸（去掉二维码两边空白后的实际尺寸）
+                System.Drawing.Size realSize = mutiWriter.GetEncodeSize(TrackingNumber.Text, com.google.zxing.BarcodeFormat.QR_CODE, 300, 300);
+                //计算插入图片的大小和位置
+                int middleImgW = Math.Min((int)(realSize.Width / 3.5), middlImg.Width);
+                int middleImgH = Math.Min((int)(realSize.Height / 3.5), middlImg.Height);
+                int middleImgL = (img.Width - middleImgW) / 2;
+                int middleImgT = (img.Height - middleImgH) / 2;
+
+                //将img转换成bmp格式，否则后面无法创建 Graphics对象
+                Bitmap bmpimg = new Bitmap(img.Width, img.Height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                using (Graphics g = Graphics.FromImage(bmpimg))
+                {
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                    g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    g.DrawImage(img, 0, 0);
+                }
+
+                //在二维码中插入图片
+                System.Drawing.Graphics MyGraphic = System.Drawing.Graphics.FromImage(bmpimg);
+                //白底
+                MyGraphic.FillRectangle(Brushes.White, middleImgL, middleImgT, middleImgW, middleImgH);
+                MyGraphic.DrawImage(middlImg, middleImgL, middleImgT, middleImgW, middleImgH);
+
+                targetPictureBox.Image = bmpimg;
+
+                //自动保存图片到当前目录
+                //string filename = System.Environment.CurrentDirectory + "\\QR" + DateTime.Now.Ticks.ToString() + ".jpg";
+                //bmpimg.Save(filename, System.Drawing.Imaging.ImageFormat.Jpeg);
+                //lbshow.Text = "图片已保存到：" + filename;
+            }
+            catch (Exception ee)
+            { MessageBox.Show(ee.Message); }
+        }
+        private void generate_barcode(String queryString, int width, int height, PictureBox targetPictureBox)
+        {
+            Regex rg = new Regex("^[0-9]{11}$");
+            if (!rg.IsMatch(queryString))
+            {
+                // MessageBox.Show("本例子采用EAN_13编码，需要输入13位数字");
+                MessageBox.Show("本例子采用EAN_11编码，需要输入11位数字");
+                return;
+            }
+
+            try
+            {
+                MultiFormatWriter mutiWriter = new com.google.zxing.MultiFormatWriter();
+                ByteMatrix bm = mutiWriter.encode(queryString, com.google.zxing.BarcodeFormat.EAN_13, 363, 150);
+                Bitmap img = bm.ToBitmap();
+                targetPictureBox.Image = img;
+
+                //自动保存图片到当前目录
+                //string filename = System.Environment.CurrentDirectory + "\\EAN_13" + DateTime.Now.Ticks.ToString() + ".jpg";
+                //img.Save(filename, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+            catch (Exception ee)
+            { MessageBox.Show(ee.Message); }
+        }
+        #endregion
+
+        private void AddQueryButton_Click(object sender, EventArgs e)
+        {
+            String query = "TN_" + TrackingNumber.Text;
+            int returnId = ExecuteNonquery("DROP TABLE IF EXISTS `" + query + "`;"
+                                         + @"CREATE TABLE `" + query + "` ("
+                                         + @"`id` int(10) NOT NULL AUTO_INCREMENT,"
+                                         + @" `time` datetime DEFAULT NULL,"
+                                         + @"`status` varchar(255) DEFAULT NULL,"
+                                         + @" PRIMARY KEY (`id`)"
+                                         + @") ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+             , null);
+            if (returnId == 0)
+            {
+                ExecuteNonquery("insert into " + query + "(time, status) values('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','桐乡振华物流');", null);
+            }
+
+        }
+
+        public static String ConnStr = @"server=121.42.154.95; user id=zhhwl; password=zhhwl; database=zhhwl.com;Charset=utf8;";
+
+        /// <summary>     
+        /// 执行一条计算查询结果语句，返回查询结果（object）。     
+        /// </summary>     
+        /// <param name="SQLString">计算查询结果语句</param>     
+        /// <returns>查询结果（object）</returns>     
+        public object ExecuteScalar(string SQLString, params MySqlParameter[] paras)
+        {
+            using (MySqlConnection connection = new MySqlConnection(ConnStr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(SQLString, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        if (paras != null)
+                        {
+                            cmd.Parameters.AddRange(paras);
+                        }
+                        object obj = cmd.ExecuteScalar();
+                        if ((Object.Equals(obj, null)) || (Object.Equals(obj, System.DBNull.Value)))
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return obj;
+                        }
+                    }
+                    catch (MySql.Data.MySqlClient.MySqlException e)
+                    {
+                        connection.Close();
+                        throw e;
+                    }
+                }
+            }
+        }
+
+        /// <summary>  
+        /// 执行Update,Delete,Insert操作  
+        /// </summary>  
+        /// <param name="sql"></param>  
+        /// <returns></returns>  
+        public int ExecuteNonquery(string sql, params MySqlParameter[] paras)
+        {
+            using (MySqlConnection con = new MySqlConnection(ConnStr))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, con))
+                {
+                    if (paras != null)
+                    {
+                        cmd.Parameters.AddRange(paras);
+                    }
+                    con.Open();
+                    return cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        /// <summary>  
+        /// 获得单个结果集时使用该方法，返回DataTable对象。  
+        /// </summary>  
+        /// <param name="sql"></param>  
+        /// <returns></returns>  
+
+        public DataTable ExcuteDataTable(string sql, params MySqlParameter[] paras)
+        {
+            using (MySqlConnection con = new MySqlConnection(ConnStr))
+            {
+                MySqlDataAdapter sqlda = new MySqlDataAdapter(sql, con);
+                if (paras != null)
+                {
+                    sqlda.SelectCommand.Parameters.AddRange(paras);
+                }
+                DataTable dt = new DataTable();
+                sqlda.Fill(dt);
+                return dt;
+            }
+        }
     }
 }
