@@ -624,13 +624,40 @@ namespace zhwlWinFormToolBox
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            if (IsNumeric(TrackingNumber.Text))
+            String query = TrackingNumber.Text;
+            String queryTable = pre_Tracking_Number + TrackingNumber.Text;
+            if (IsNumeric(query))
             {
-                generate_qrcode(Tracking_Link+TrackingNumber.Text, Properties.Resources.logo.ToBitmap(), 300, QRcodeImage);
+                if (checkIfExistsTN(queryTable) < 1) // table不存在
+                {
+                    // 创建新表
+                    int returnId = Connection.Ins.ExecuteNonquery(
+                                                 "CREATE TABLE IF NOT EXISTS `" + queryTable + "` ("
+                                                 + @"`id` int(10) NOT NULL AUTO_INCREMENT,"
+                                                 + @" `time` datetime DEFAULT NULL,"
+                                                 + @"`status` varchar(255) DEFAULT NULL,"
+                                                 + @"`destination` varchar(255) DEFAULT NULL,"
+                                                 + @"`senderinfo` varchar(255) DEFAULT NULL,"
+                                                 + @" PRIMARY KEY (`id`)"
+                                                 + @") ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+                                                 , null);
+
+                    if (returnId == 0) //新建表成功
+                    {
+                        // 激活新单号
+                        TrackingRecord tr = new TrackingRecord();
+                        tr.isNewRecord = true;
+                        tr.trackingNumber = query;
+                        tr.Text = "激活单号:" + query;
+                        tr.ShowDialog();
+                    }
+                }
+
+                generate_qrcode(Tracking_Link + TrackingNumber.Text, Properties.Resources.logo.ToBitmap(), 300, QRcodeImage);
                 //generate_barcode(TrackingNumber.Text, 363, 150, BarcodeImage);//363,150
 
                 // 查询
-                DataTable result = Connection.Ins.ExcuteDataTable("SELECT time AS '时间', status AS '当前状态' FROM " + pre_Tracking_Number + TrackingNumber.Text+" ORDER BY id DESC", null);
+                DataTable result = Connection.Ins.ExcuteDataTable("SELECT time AS '时间', status AS '当前状态' FROM " + queryTable + " ORDER BY id DESC", null);
                 QueryDataGridView.DataSource = result;
             }
             else
@@ -717,32 +744,14 @@ namespace zhwlWinFormToolBox
 
         private void AddQueryButton_Click(object sender, EventArgs e)
         {
-            String query = pre_Tracking_Number + TrackingNumber.Text;
-            int returnId = Connection.Ins.ExecuteNonquery(
-                                         "CREATE TABLE IF NOT EXISTS `" + query + "` ("
-                                         + @"`id` int(10) NOT NULL AUTO_INCREMENT,"
-                                         + @" `time` datetime DEFAULT NULL,"
-                                         + @"`status` varchar(255) DEFAULT NULL,"
-                                         + @"`info` varchar(255) DEFAULT NULL,"
-                                         + @" PRIMARY KEY (`id`)"
-                                         + @") ENGINE=InnoDB DEFAULT CHARSET=utf8;"
-                                         , null);
-
-            if (returnId == 0) //新建表成功
-            {
-                TrackingRecord tr = new TrackingRecord();
-                tr.isNewRecord = true;
-                tr.trackingNumber = TrackingNumber.Text;
-                tr.Text = "激活单号:" + TrackingNumber.Text;
-                tr.ShowDialog();
-            }
 
         }
 
         private int checkIfExistsTN(String table)
         {
-            int result = Connection.Ins.ExecuteNonquery("SHOW TABLES LIKE '" + table + "'", null);
-            return result;
+            //SELECT COUNT( * ) FROM information_schema.TABLES WHERE table_name = 'tn_99999'
+            DataTable result = Connection.Ins.ExcuteDataTable("SELECT COUNT( * ) FROM information_schema.TABLES WHERE table_name = '" + table + "'", null);
+            return Convert.ToInt32(result.Rows[0][0]);
         }
 
         public static String ConnStr = @"server=121.42.154.95; user id=zhhwl; password=zhhwl; database=zhhwl.com;Charset=utf8;";
@@ -750,7 +759,7 @@ namespace zhwlWinFormToolBox
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(checkIfExistsTN("TN_" + TrackingNumber.Text).ToString());
+            MessageBox.Show(checkIfExistsTN(pre_Tracking_Number + TrackingNumber.Text).ToString());
         }
 
         private void clearQuery_Click(object sender, EventArgs e)

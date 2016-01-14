@@ -20,7 +20,16 @@ namespace zhwlWinFormToolBox
 
         private void submit_Click(object sender, EventArgs e)
         {
-            Connection.Ins.ExecuteNonquery("insert into " +MainWindow.pre_Tracking_Number+ trackingNumber + "(time, status) values('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','振华物流（桐乡）');", null);
+            int result = Connection.Ins.ExecuteNonquery("insert into " + MainWindow.pre_Tracking_Number + trackingNumber 
+                + "(time, status, destination, senderinfo) values('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','振华物流（桐乡）'" + ",'" + endLoc.Text + "','" + senderInfo.Text+ "');", null);
+            if (result == 1)
+            {
+                MessageBox.Show("成功！");
+                this.Close();
+            }
+            else {
+                MessageBox.Show("失败，请重试！");
+            }
         }
 
         private void isRecevied_CheckedChanged(object sender, EventArgs e)
