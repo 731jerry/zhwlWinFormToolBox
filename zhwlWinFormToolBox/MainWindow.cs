@@ -20,6 +20,7 @@ namespace zhwlWinFormToolBox
     public partial class MainWindow : Form
     {
         public static String pre_Tracking_Number = "TN_";
+        public static String Tracking_Link = "http://www.zhhwl.com/query/tracking.php?tn=";
         public MainWindow()
         {
             InitializeComponent();
@@ -625,11 +626,11 @@ namespace zhwlWinFormToolBox
         {
             if (IsNumeric(TrackingNumber.Text))
             {
-                generate_qrcode(TrackingNumber.Text, Properties.Resources.logo.ToBitmap(), 300, QRcodeImage);
+                generate_qrcode(Tracking_Link+TrackingNumber.Text, Properties.Resources.logo.ToBitmap(), 300, QRcodeImage);
                 //generate_barcode(TrackingNumber.Text, 363, 150, BarcodeImage);//363,150
 
                 // 查询
-                DataTable result = Connection.Ins.ExcuteDataTable("SELECT time AS '时间', status AS '当前状态' FROM " + pre_Tracking_Number + TrackingNumber.Text, null);
+                DataTable result = Connection.Ins.ExcuteDataTable("SELECT time AS '时间', status AS '当前状态' FROM " + pre_Tracking_Number + TrackingNumber.Text+" ORDER BY id DESC", null);
                 QueryDataGridView.DataSource = result;
             }
             else
@@ -750,6 +751,22 @@ namespace zhwlWinFormToolBox
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(checkIfExistsTN("TN_" + TrackingNumber.Text).ToString());
+        }
+
+        private void clearQuery_Click(object sender, EventArgs e)
+        {
+            TrackingNumber.Clear();
+            QRcodeImage.Image = null;
+            QueryDataGridView.DataSource = null;
+            TrackingNumber.Focus();
+        }
+
+        private void TrackingNumber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                searchButton.PerformClick();
+            }
         }
     }
 }

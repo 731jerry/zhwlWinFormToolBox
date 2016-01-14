@@ -89,6 +89,7 @@
             this.CopyClipboardBtn = new System.Windows.Forms.Button();
             this.outputTB = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.AddQueryButton = new System.Windows.Forms.Button();
             this.QueryDataGridView = new System.Windows.Forms.DataGridView();
             this.BarcodeImage = new System.Windows.Forms.PictureBox();
@@ -100,7 +101,7 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.clearQuery = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -793,6 +794,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.clearQuery);
             this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.AddQueryButton);
             this.tabPage4.Controls.Add(this.QueryDataGridView);
@@ -808,6 +810,18 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "运单跟踪";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.button1.Location = new System.Drawing.Point(436, 261);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 35);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "测试";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // AddQueryButton
             // 
@@ -885,10 +899,12 @@
             // 
             // TrackingNumber
             // 
-            this.TrackingNumber.Location = new System.Drawing.Point(209, 31);
+            this.TrackingNumber.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.TrackingNumber.Location = new System.Drawing.Point(200, 29);
             this.TrackingNumber.Name = "TrackingNumber";
-            this.TrackingNumber.Size = new System.Drawing.Size(478, 21);
+            this.TrackingNumber.Size = new System.Drawing.Size(442, 30);
             this.TrackingNumber.TabIndex = 23;
+            this.TrackingNumber.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TrackingNumber_KeyDown);
             // 
             // panel1
             // 
@@ -920,17 +936,17 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
-            // button1
+            // clearQuery
             // 
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.button1.Location = new System.Drawing.Point(436, 261);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 35);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "添加记录";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.clearQuery.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.clearQuery.Location = new System.Drawing.Point(844, 26);
+            this.clearQuery.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.clearQuery.Name = "clearQuery";
+            this.clearQuery.Size = new System.Drawing.Size(110, 35);
+            this.clearQuery.TabIndex = 31;
+            this.clearQuery.Text = "清空";
+            this.clearQuery.UseVisualStyleBackColor = true;
+            this.clearQuery.Click += new System.EventHandler(this.clearQuery_Click);
             // 
             // MainWindow
             // 
@@ -1042,6 +1058,7 @@
         private System.Windows.Forms.DataGridView QueryDataGridView;
         private System.Windows.Forms.Button AddQueryButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button clearQuery;
 
     }
 }
