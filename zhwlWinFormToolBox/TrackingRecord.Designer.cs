@@ -31,9 +31,9 @@
             this.currentStatus = new System.Windows.Forms.TextBox();
             this.startLoc = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.startLocLabel = new System.Windows.Forms.Label();
+            this.endLocLabel = new System.Windows.Forms.Label();
+            this.senderInfoLabel = new System.Windows.Forms.Label();
             this.endLoc = new System.Windows.Forms.TextBox();
             this.senderInfo = new System.Windows.Forms.TextBox();
             this.isRecevied = new System.Windows.Forms.CheckBox();
@@ -43,63 +43,65 @@
             // currentStatus
             // 
             this.currentStatus.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.currentStatus.Location = new System.Drawing.Point(102, 12);
+            this.currentStatus.Location = new System.Drawing.Point(102, 16);
+            this.currentStatus.Multiline = true;
             this.currentStatus.Name = "currentStatus";
-            this.currentStatus.Size = new System.Drawing.Size(226, 27);
+            this.currentStatus.Size = new System.Drawing.Size(226, 55);
             this.currentStatus.TabIndex = 0;
             // 
             // startLoc
             // 
             this.startLoc.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.startLoc.Location = new System.Drawing.Point(102, 45);
+            this.startLoc.Location = new System.Drawing.Point(102, 77);
+            this.startLoc.Multiline = true;
             this.startLoc.Name = "startLoc";
-            this.startLoc.Size = new System.Drawing.Size(226, 27);
+            this.startLoc.Size = new System.Drawing.Size(226, 55);
             this.startLoc.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "当前状态";
             // 
-            // label2
+            // startLocLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(12, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 20);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "始发站";
+            this.startLocLabel.AutoSize = true;
+            this.startLocLabel.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.startLocLabel.Location = new System.Drawing.Point(12, 77);
+            this.startLocLabel.Name = "startLocLabel";
+            this.startLocLabel.Size = new System.Drawing.Size(54, 20);
+            this.startLocLabel.TabIndex = 3;
+            this.startLocLabel.Text = "始发站";
             // 
-            // label3
+            // endLocLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(12, 81);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 20);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "目的地";
+            this.endLocLabel.AutoSize = true;
+            this.endLocLabel.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.endLocLabel.Location = new System.Drawing.Point(12, 141);
+            this.endLocLabel.Name = "endLocLabel";
+            this.endLocLabel.Size = new System.Drawing.Size(54, 20);
+            this.endLocLabel.TabIndex = 4;
+            this.endLocLabel.Text = "目的地";
             // 
-            // label4
+            // senderInfoLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(12, 142);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(84, 20);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "发货人信息";
+            this.senderInfoLabel.AutoSize = true;
+            this.senderInfoLabel.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.senderInfoLabel.Location = new System.Drawing.Point(12, 202);
+            this.senderInfoLabel.Name = "senderInfoLabel";
+            this.senderInfoLabel.Size = new System.Drawing.Size(84, 20);
+            this.senderInfoLabel.TabIndex = 5;
+            this.senderInfoLabel.Text = "发货人信息";
             // 
             // endLoc
             // 
             this.endLoc.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.endLoc.Location = new System.Drawing.Point(102, 78);
+            this.endLoc.Location = new System.Drawing.Point(102, 138);
             this.endLoc.Multiline = true;
             this.endLoc.Name = "endLoc";
             this.endLoc.Size = new System.Drawing.Size(226, 55);
@@ -108,7 +110,7 @@
             // senderInfo
             // 
             this.senderInfo.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.senderInfo.Location = new System.Drawing.Point(102, 139);
+            this.senderInfo.Location = new System.Drawing.Point(102, 199);
             this.senderInfo.Multiline = true;
             this.senderInfo.Name = "senderInfo";
             this.senderInfo.Size = new System.Drawing.Size(226, 55);
@@ -118,7 +120,7 @@
             // 
             this.isRecevied.AutoSize = true;
             this.isRecevied.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.isRecevied.Location = new System.Drawing.Point(16, 219);
+            this.isRecevied.Location = new System.Drawing.Point(16, 276);
             this.isRecevied.Name = "isRecevied";
             this.isRecevied.Size = new System.Drawing.Size(75, 21);
             this.isRecevied.TabIndex = 8;
@@ -129,9 +131,9 @@
             // submit
             // 
             this.submit.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.submit.Location = new System.Drawing.Point(228, 217);
+            this.submit.Location = new System.Drawing.Point(228, 271);
             this.submit.Name = "submit";
-            this.submit.Size = new System.Drawing.Size(100, 23);
+            this.submit.Size = new System.Drawing.Size(100, 28);
             this.submit.TabIndex = 9;
             this.submit.Text = "提交";
             this.submit.UseVisualStyleBackColor = true;
@@ -141,14 +143,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 254);
+            this.ClientSize = new System.Drawing.Size(340, 313);
             this.Controls.Add(this.submit);
             this.Controls.Add(this.isRecevied);
             this.Controls.Add(this.senderInfo);
             this.Controls.Add(this.endLoc);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.senderInfoLabel);
+            this.Controls.Add(this.endLocLabel);
+            this.Controls.Add(this.startLocLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.startLoc);
             this.Controls.Add(this.currentStatus);
@@ -167,9 +169,9 @@
         private System.Windows.Forms.TextBox currentStatus;
         private System.Windows.Forms.TextBox startLoc;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label startLocLabel;
+        private System.Windows.Forms.Label endLocLabel;
+        private System.Windows.Forms.Label senderInfoLabel;
         private System.Windows.Forms.TextBox endLoc;
         private System.Windows.Forms.TextBox senderInfo;
         private System.Windows.Forms.CheckBox isRecevied;

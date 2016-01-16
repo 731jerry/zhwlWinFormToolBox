@@ -635,8 +635,9 @@ namespace zhwlWinFormToolBox
                                                  "CREATE TABLE IF NOT EXISTS `" + queryTable + "` ("
                                                  + @"`id` int(10) NOT NULL AUTO_INCREMENT,"
                                                  + @" `time` datetime DEFAULT NULL,"
-                                                 + @"`status` varchar(255) DEFAULT NULL,"
-                                                 + @"`destination` varchar(255) DEFAULT NULL,"
+                                                 + @"`currentstatus` varchar(255) DEFAULT NULL,"
+                                                 + @"`startLoc` varchar(255) DEFAULT NULL,"
+                                                 + @"`endLoc` varchar(255) DEFAULT NULL,"
                                                  + @"`senderinfo` varchar(255) DEFAULT NULL,"
                                                  + @" PRIMARY KEY (`id`)"
                                                  + @") ENGINE=InnoDB DEFAULT CHARSET=utf8;"
@@ -646,10 +647,12 @@ namespace zhwlWinFormToolBox
                     {
                         // 激活新单号
                         TrackingRecord tr = new TrackingRecord();
-                        tr.isNewRecord = true;
+                        tr.isNewTN = true;
                         tr.trackingNumber = query;
-                        tr.Text = "激活单号:" + query;
+                        tr.Text = "激活新单号:" + query;
                         tr.ShowDialog();
+
+                        searchButton.PerformClick();
                     }
                 }
 
@@ -657,8 +660,15 @@ namespace zhwlWinFormToolBox
                 //generate_barcode(TrackingNumber.Text, 363, 150, BarcodeImage);//363,150
 
                 // 查询
-                DataTable result = Connection.Ins.ExcuteDataTable("SELECT time AS '时间', status AS '当前状态' FROM " + queryTable + " ORDER BY id DESC", null);
+                DataTable result = Connection.Ins.ExcuteDataTable("SELECT id AS '序列', time AS '时间', currentstatus AS '当前状态' FROM " + queryTable + " ORDER BY id DESC", null);
                 QueryDataGridView.DataSource = result;
+
+                QueryDataGridView.Columns[0].Visible = false;
+                QueryDataGridView.Columns[1].Width = 100;
+
+                DataTable senderResult = Connection.Ins.ExcuteDataTable("SELECT endLoc, senderinfo FROM " + queryTable + " WHERE id = 1", null);
+                endLoc.Text = senderResult.Rows[0][0].ToString();
+                senderInfo.Text = senderResult.Rows[0][1].ToString();
             }
             else
             {
@@ -744,7 +754,15 @@ namespace zhwlWinFormToolBox
 
         private void AddQueryButton_Click(object sender, EventArgs e)
         {
+            String query = TrackingNumber.Text;
+            // 插入新纪录
+            TrackingRecord tr = new TrackingRecord();
+            tr.isNewTN = false;
+            tr.trackingNumber = query;
+            tr.Text = "为单号" + query + "添加新纪录";
+            tr.ShowDialog();
 
+            searchButton.PerformClick();
         }
 
         private int checkIfExistsTN(String table)
@@ -768,6 +786,8 @@ namespace zhwlWinFormToolBox
             QRcodeImage.Image = null;
             QueryDataGridView.DataSource = null;
             TrackingNumber.Focus();
+            endLoc.Clear();
+            senderInfo.Clear();
         }
 
         private void TrackingNumber_KeyDown(object sender, KeyEventArgs e)
@@ -775,6 +795,114 @@ namespace zhwlWinFormToolBox
             if (e.KeyCode == Keys.Enter)
             {
                 searchButton.PerformClick();
+            }
+        }
+
+        private void ModifyQueryButton_Click(object sender, EventArgs e)
+        {
+            String queryTable = pre_Tracking_Number + TrackingNumber.Text;
+            try
+            {
+                Connection.Ins.ExecuteNonquery("UPDATE " + queryTable + " SET endLoc = '" + endLoc.Text + "', senderinfo = '" + senderInfo.Text + "' WHERE id = 1;", null);
+                MessageBox.Show("更新发货人信息成功！");
+                isNeedModifySenderInfo.Checked = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "失败，请重试！");
+            }
+        }
+
+        private void isNeedModifySenderInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!TrackingNumber.Text.Trim().Equals("") && QRcodeImage.Image != null)
+            {
+                endLoc.ReadOnly = !isNeedModifySenderInfo.Checked;
+                senderInfo.ReadOnly = !isNeedModifySenderInfo.Checked;
+                ModifyQueryButton.Enabled = isNeedModifySenderInfo.Checked;
+            }
+            else
+            {
+                MessageBox.Show("请先查询单号！");
+            }
+        }
+
+        private void QueryDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void QueryDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    //若行已是选中状态就不再进行设置
+                    if (QueryDataGridView.Rows[e.RowIndex].Selected == false)
+                    {
+                        QueryDataGridView.ClearSelection();
+                        QueryDataGridView.Rows[e.RowIndex].Selected = true;
+                    }
+                    //只选中一行时设置活动单元格
+                    if (QueryDataGridView.SelectedRows.Count == 1)
+                    {
+                        QueryDataGridView.CurrentCell = QueryDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    }
+                    //弹出操作菜单
+                    QueryResultContextMenuStrip.Show(MousePosition.X, MousePosition.Y);
+                }
+            }
+        }
+
+
+        private void ToolStripMenuItemEdit_Click(object sender, EventArgs e)
+        { // 编辑记录
+            String query = TrackingNumber.Text;
+            // 插入新纪录
+            TrackingRecord tr = new TrackingRecord();
+            tr.isNewTN = false;
+            tr.isModify = true;
+            tr.trackingNumber = query;
+            tr.TN_id = QueryDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+            tr.Text = "修改单号为" + query + "的记录";
+
+            if (tr.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                searchButton.PerformClick();
+            }
+
+        }
+
+        private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetDataObject(QueryDataGridView.GetClipboardContent());
+            MessageBox.Show("已经成功复制到粘贴板", "成功！");
+        }
+
+        private void ToolStripMenuItemDelete_Click(object sender, EventArgs e)
+        {
+            String idString = QueryDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+            if (!idString.Trim().Equals("1"))
+            {
+                String queryTable = pre_Tracking_Number + TrackingNumber.Text;
+                if (MessageBox.Show("是否确认删除这条记录", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
+                {
+                    try
+                    {
+                        Connection.Ins.ExecuteNonquery("DELETE FROM " + queryTable + " WHERE id = " + idString, null);
+                        MessageBox.Show("删除记录成功！", "成功！");
+                        searchButton.PerformClick();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "错误！");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("第一条记录不能删除！", "提示");
             }
         }
     }

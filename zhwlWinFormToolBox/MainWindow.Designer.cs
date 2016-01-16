@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -89,6 +90,12 @@
             this.CopyClipboardBtn = new System.Windows.Forms.Button();
             this.outputTB = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.ModifyQueryButton = new System.Windows.Forms.Button();
+            this.senderInfo = new System.Windows.Forms.TextBox();
+            this.endLoc = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.clearQuery = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.AddQueryButton = new System.Windows.Forms.Button();
             this.QueryDataGridView = new System.Windows.Forms.DataGridView();
@@ -101,7 +108,12 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.clearQuery = new System.Windows.Forms.Button();
+            this.isNeedModifySenderInfo = new System.Windows.Forms.CheckBox();
+            this.QueryResultContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ToolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -114,6 +126,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.BarcodeImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).BeginInit();
             this.panel1.SuspendLayout();
+            this.QueryResultContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -794,6 +807,12 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.isNeedModifySenderInfo);
+            this.tabPage4.Controls.Add(this.ModifyQueryButton);
+            this.tabPage4.Controls.Add(this.senderInfo);
+            this.tabPage4.Controls.Add(this.endLoc);
+            this.tabPage4.Controls.Add(this.label17);
+            this.tabPage4.Controls.Add(this.label18);
             this.tabPage4.Controls.Add(this.clearQuery);
             this.tabPage4.Controls.Add(this.button1);
             this.tabPage4.Controls.Add(this.AddQueryButton);
@@ -811,10 +830,75 @@
             this.tabPage4.Text = "运单跟踪";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // ModifyQueryButton
+            // 
+            this.ModifyQueryButton.Enabled = false;
+            this.ModifyQueryButton.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.ModifyQueryButton.Location = new System.Drawing.Point(598, 212);
+            this.ModifyQueryButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.ModifyQueryButton.Name = "ModifyQueryButton";
+            this.ModifyQueryButton.Size = new System.Drawing.Size(96, 30);
+            this.ModifyQueryButton.TabIndex = 36;
+            this.ModifyQueryButton.Text = "修改";
+            this.ModifyQueryButton.UseVisualStyleBackColor = true;
+            this.ModifyQueryButton.Click += new System.EventHandler(this.ModifyQueryButton_Click);
+            // 
+            // senderInfo
+            // 
+            this.senderInfo.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.senderInfo.Location = new System.Drawing.Point(468, 141);
+            this.senderInfo.Multiline = true;
+            this.senderInfo.Name = "senderInfo";
+            this.senderInfo.ReadOnly = true;
+            this.senderInfo.Size = new System.Drawing.Size(226, 55);
+            this.senderInfo.TabIndex = 35;
+            // 
+            // endLoc
+            // 
+            this.endLoc.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.endLoc.Location = new System.Drawing.Point(468, 80);
+            this.endLoc.Multiline = true;
+            this.endLoc.Name = "endLoc";
+            this.endLoc.ReadOnly = true;
+            this.endLoc.Size = new System.Drawing.Size(226, 55);
+            this.endLoc.TabIndex = 34;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label17.Location = new System.Drawing.Point(378, 144);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(84, 20);
+            this.label17.TabIndex = 33;
+            this.label17.Text = "发货人信息";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label18.Location = new System.Drawing.Point(408, 83);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(54, 20);
+            this.label18.TabIndex = 32;
+            this.label18.Text = "目的地";
+            // 
+            // clearQuery
+            // 
+            this.clearQuery.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.clearQuery.Location = new System.Drawing.Point(844, 26);
+            this.clearQuery.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.clearQuery.Name = "clearQuery";
+            this.clearQuery.Size = new System.Drawing.Size(110, 35);
+            this.clearQuery.TabIndex = 31;
+            this.clearQuery.Text = "清空";
+            this.clearQuery.UseVisualStyleBackColor = true;
+            this.clearQuery.Click += new System.EventHandler(this.clearQuery_Click);
+            // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.button1.Location = new System.Drawing.Point(436, 261);
+            this.button1.Location = new System.Drawing.Point(514, 280);
             this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(110, 35);
@@ -826,7 +910,7 @@
             // AddQueryButton
             // 
             this.AddQueryButton.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.AddQueryButton.Location = new System.Drawing.Point(556, 106);
+            this.AddQueryButton.Location = new System.Drawing.Point(396, 280);
             this.AddQueryButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.AddQueryButton.Name = "AddQueryButton";
             this.AddQueryButton.Size = new System.Drawing.Size(110, 35);
@@ -851,6 +935,8 @@
             this.QueryDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.QueryDataGridView.Size = new System.Drawing.Size(351, 445);
             this.QueryDataGridView.TabIndex = 28;
+            this.QueryDataGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.QueryDataGridView_CellContentDoubleClick);
+            this.QueryDataGridView.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.QueryDataGridView_CellMouseDown);
             // 
             // BarcodeImage
             // 
@@ -936,17 +1022,53 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
-            // clearQuery
+            // isNeedModifySenderInfo
             // 
-            this.clearQuery.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.clearQuery.Location = new System.Drawing.Point(844, 26);
-            this.clearQuery.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.clearQuery.Name = "clearQuery";
-            this.clearQuery.Size = new System.Drawing.Size(110, 35);
-            this.clearQuery.TabIndex = 31;
-            this.clearQuery.Text = "清空";
-            this.clearQuery.UseVisualStyleBackColor = true;
-            this.clearQuery.Click += new System.EventHandler(this.clearQuery_Click);
+            this.isNeedModifySenderInfo.AutoSize = true;
+            this.isNeedModifySenderInfo.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.isNeedModifySenderInfo.Location = new System.Drawing.Point(468, 216);
+            this.isNeedModifySenderInfo.Name = "isNeedModifySenderInfo";
+            this.isNeedModifySenderInfo.Size = new System.Drawing.Size(126, 24);
+            this.isNeedModifySenderInfo.TabIndex = 37;
+            this.isNeedModifySenderInfo.Text = "修改发货信息？";
+            this.isNeedModifySenderInfo.UseVisualStyleBackColor = true;
+            this.isNeedModifySenderInfo.CheckedChanged += new System.EventHandler(this.isNeedModifySenderInfo_CheckedChanged);
+            // 
+            // QueryResultContextMenuStrip
+            // 
+            this.QueryResultContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ToolStripMenuItemEdit,
+            this.ToolStripMenuItemCopy,
+            this.toolStripSeparator1,
+            this.ToolStripMenuItemDelete});
+            this.QueryResultContextMenuStrip.Name = "QueryResultContextMenuStrip";
+            this.QueryResultContextMenuStrip.Size = new System.Drawing.Size(153, 98);
+            // 
+            // ToolStripMenuItemEdit
+            // 
+            this.ToolStripMenuItemEdit.Name = "ToolStripMenuItemEdit";
+            this.ToolStripMenuItemEdit.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemEdit.Text = "编辑";
+            this.ToolStripMenuItemEdit.Click += new System.EventHandler(this.ToolStripMenuItemEdit_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ToolStripMenuItemDelete
+            // 
+            this.ToolStripMenuItemDelete.Name = "ToolStripMenuItemDelete";
+            this.ToolStripMenuItemDelete.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemDelete.Text = "删除";
+            this.ToolStripMenuItemDelete.Click += new System.EventHandler(this.ToolStripMenuItemDelete_Click);
+            // 
+            // ToolStripMenuItemCopy
+            // 
+            this.ToolStripMenuItemCopy.Name = "ToolStripMenuItemCopy";
+            this.ToolStripMenuItemCopy.Size = new System.Drawing.Size(152, 22);
+            this.ToolStripMenuItemCopy.Text = "复制到粘贴板";
+            this.ToolStripMenuItemCopy.Click += new System.EventHandler(this.ToolStripMenuItemCopy_Click);
             // 
             // MainWindow
             // 
@@ -980,6 +1102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.BarcodeImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.QueryResultContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1059,6 +1182,17 @@
         private System.Windows.Forms.Button AddQueryButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button clearQuery;
+        private System.Windows.Forms.TextBox senderInfo;
+        private System.Windows.Forms.TextBox endLoc;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button ModifyQueryButton;
+        private System.Windows.Forms.CheckBox isNeedModifySenderInfo;
+        private System.Windows.Forms.ContextMenuStrip QueryResultContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemEdit;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelete;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCopy;
 
     }
 }
