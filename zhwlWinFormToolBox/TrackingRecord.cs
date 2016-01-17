@@ -16,6 +16,7 @@ namespace zhwlWinFormToolBox
 
         public Boolean isModify = false;
         public String TN_id = "";
+        public String currentStatusString = "";
 
         public TrackingRecord()
         {
@@ -24,25 +25,35 @@ namespace zhwlWinFormToolBox
 
         private void submit_Click(object sender, EventArgs e)
         {
-            int result = Connection.Ins.ExecuteNonquery("insert into " + MainWindow.pre_Tracking_Number + trackingNumber
-                + "(time, currentstatus, startLoc, endLoc, senderinfo) values('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','" + currentStatus.Text + "'" + ",'" + startLoc.Text + "','" + endLoc.Text + "','" + senderInfo.Text + "');", null);
-            if (result == 1)
+            if (!isModify)
             {
-                MessageBox.Show("成功！");
-                this.Close();
+                try
+                {
+                    Connection.Ins.ExecuteNonquery("INSERT INTO " + MainWindow.pre_Tracking_Number + trackingNumber
+                        + "(time, currentstatus, startLoc, endLoc, senderinfo) VALUES('" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "','" +currentStatus0.Text + currentStatus.Text + "'" + ",'" + startLoc.Text + "','" + endLoc.Text + "','" + senderInfo.Text + "');", null);
+
+                    MessageBox.Show("成功！");
+                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "失败，请重试！");
+                }
             }
             else
             {
-                MessageBox.Show("失败，请重试！");
+                try
+                {
+                    Connection.Ins.ExecuteNonquery("UPDATE " + MainWindow.pre_Tracking_Number + trackingNumber
+                        + " SET currentstatus = '" + currentStatus0.Text + currentStatus.Text + "', time = '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' WHERE id = " + TN_id + ";", null);
+                    MessageBox.Show("成功！");
+                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "失败，请重试！");
+                }
             }
-        }
-
-        private void isRecevied_CheckedChanged(object sender, EventArgs e)
-        {
-            currentStatus.Enabled = !isRecevied.Checked;
-            startLoc.Enabled = !isRecevied.Checked;
-            endLoc.Enabled = !isRecevied.Checked;
-            senderInfo.Enabled = !isRecevied.Checked;
         }
 
         private void TrackingRecord_Load(object sender, EventArgs e)
@@ -51,7 +62,6 @@ namespace zhwlWinFormToolBox
             {
                 startLoc.Text = "振华物流（桐乡）";
                 currentStatus.Text = "振华物流（桐乡）已收件";
-                isRecevied.Enabled = false;
             }
             else
             {
@@ -67,6 +77,7 @@ namespace zhwlWinFormToolBox
                 }
                 else
                 { // 修改记录
+                    currentStatus.Text = currentStatusString;
                     startLoc.Enabled = false;
                     startLocLabel.Enabled = false;
 
@@ -75,6 +86,14 @@ namespace zhwlWinFormToolBox
                     senderInfo.Enabled = false;
                     senderInfoLabel.Enabled = false;
                 }
+            }
+        }
+
+        private void TrackingRecord_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isNewTN)
+            {
+                submit.PerformClick();
             }
         }
     }

@@ -630,29 +630,35 @@ namespace zhwlWinFormToolBox
             {
                 if (checkIfExistsTN(queryTable) < 1) // table不存在
                 {
-                    // 创建新表
-                    int returnId = Connection.Ins.ExecuteNonquery(
-                                                 "CREATE TABLE IF NOT EXISTS `" + queryTable + "` ("
-                                                 + @"`id` int(10) NOT NULL AUTO_INCREMENT,"
-                                                 + @" `time` datetime DEFAULT NULL,"
-                                                 + @"`currentstatus` varchar(255) DEFAULT NULL,"
-                                                 + @"`startLoc` varchar(255) DEFAULT NULL,"
-                                                 + @"`endLoc` varchar(255) DEFAULT NULL,"
-                                                 + @"`senderinfo` varchar(255) DEFAULT NULL,"
-                                                 + @" PRIMARY KEY (`id`)"
-                                                 + @") ENGINE=InnoDB DEFAULT CHARSET=utf8;"
-                                                 , null);
-
-                    if (returnId == 0) //新建表成功
+                    if (MessageBox.Show("这个是新运单，是否需要激活新运单？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.OK)
                     {
-                        // 激活新单号
-                        TrackingRecord tr = new TrackingRecord();
-                        tr.isNewTN = true;
-                        tr.trackingNumber = query;
-                        tr.Text = "激活新单号:" + query;
-                        tr.ShowDialog();
+                        // 创建新表
+                        int returnId = Connection.Ins.ExecuteNonquery(
+                                                     "CREATE TABLE IF NOT EXISTS `" + queryTable + "` ("
+                                                     + @"`id` int(10) NOT NULL AUTO_INCREMENT,"
+                                                     + @" `time` datetime DEFAULT NULL,"
+                                                     + @"`currentstatus` varchar(255) DEFAULT NULL,"
+                                                     + @"`startLoc` varchar(255) DEFAULT NULL,"
+                                                     + @"`endLoc` varchar(255) DEFAULT NULL,"
+                                                     + @"`senderinfo` varchar(255) DEFAULT NULL,"
+                                                     + @" PRIMARY KEY (`id`)"
+                                                     + @") ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+                                                     , null);
 
-                        searchButton.PerformClick();
+                        if (returnId == 0) //新建表成功
+                        {
+                            // 激活新单号
+                            TrackingRecord tr = new TrackingRecord();
+                            tr.isNewTN = true;
+                            tr.trackingNumber = query;
+                            tr.Text = "激活新单号:" + query;
+                            tr.ShowDialog();
+
+                            searchButton.PerformClick();
+                        }
+                    }
+                    else {
+                        return;
                     }
                 }
 
@@ -660,11 +666,12 @@ namespace zhwlWinFormToolBox
                 //generate_barcode(TrackingNumber.Text, 363, 150, BarcodeImage);//363,150
 
                 // 查询
-                DataTable result = Connection.Ins.ExcuteDataTable("SELECT id AS '序列', time AS '时间', currentstatus AS '当前状态' FROM " + queryTable + " ORDER BY id DESC", null);
+               // DataTable result = Connection.Ins.ExcuteDataTable("SELECT id AS '序列', time AS '时间', currentstatus AS '当前状态' FROM " + queryTable + " ORDER BY id DESC", null);
+                DataTable result = Connection.Ins.ExcuteDataTable("SELECT id AS '序列', time AS '时间', currentstatus AS '当前状态' FROM " + queryTable + " ORDER BY time DESC", null);
                 QueryDataGridView.DataSource = result;
 
                 QueryDataGridView.Columns[0].Visible = false;
-                QueryDataGridView.Columns[1].Width = 100;
+                QueryDataGridView.Columns[1].Width = 110;
 
                 DataTable senderResult = Connection.Ins.ExcuteDataTable("SELECT endLoc, senderinfo FROM " + queryTable + " WHERE id = 1", null);
                 endLoc.Text = senderResult.Rows[0][0].ToString();
@@ -829,7 +836,7 @@ namespace zhwlWinFormToolBox
 
         private void QueryDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            EditRecord();
         }
 
         private void QueryDataGridView_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -855,23 +862,33 @@ namespace zhwlWinFormToolBox
             }
         }
 
+        // 编辑记录
+        private void EditRecord() {
+            String idString = QueryDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+            if (!idString.Trim().Equals("1"))
+            {
+                String query = TrackingNumber.Text;
+                // 插入新纪录
+                TrackingRecord tr = new TrackingRecord();
+                tr.isNewTN = false;
+                tr.isModify = true;
+                tr.trackingNumber = query;
+                tr.TN_id = idString;
+                tr.Text = "修改单号为" + query + "的记录";
+                tr.currentStatusString = QueryDataGridView.SelectedRows[0].Cells[2].Value.ToString();
+                if (tr.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    searchButton.PerformClick();
+                }
+            }
+            else {
+                MessageBox.Show("初始记录不能编辑！", "提示");
+            }
+        }
 
         private void ToolStripMenuItemEdit_Click(object sender, EventArgs e)
         { // 编辑记录
-            String query = TrackingNumber.Text;
-            // 插入新纪录
-            TrackingRecord tr = new TrackingRecord();
-            tr.isNewTN = false;
-            tr.isModify = true;
-            tr.trackingNumber = query;
-            tr.TN_id = QueryDataGridView.SelectedRows[0].Cells[0].Value.ToString();
-            tr.Text = "修改单号为" + query + "的记录";
-
-            if (tr.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                searchButton.PerformClick();
-            }
-
+            EditRecord();
         }
 
         private void ToolStripMenuItemCopy_Click(object sender, EventArgs e)
@@ -902,8 +919,14 @@ namespace zhwlWinFormToolBox
             }
             else
             {
-                MessageBox.Show("第一条记录不能删除！", "提示");
+                MessageBox.Show("初始记录不能删除！", "提示");
             }
+        }
+
+        // 双击事件
+        private void QueryDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            EditRecord();
         }
     }
 }
