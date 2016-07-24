@@ -46,6 +46,8 @@
             this.accountInfo = new System.Windows.Forms.Label();
             this.sendMsgButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.countNumTB = new System.Windows.Forms.NumericUpDown();
+            this.PrintOriOption = new System.Windows.Forms.ComboBox();
             this.fromCount = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.clearButton = new System.Windows.Forms.Button();
@@ -70,7 +72,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.numberTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.countTB = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.DestinationTB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -115,6 +116,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.countNumTB)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupbox1.SuspendLayout();
@@ -307,6 +309,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.countNumTB);
+            this.tabPage2.Controls.Add(this.PrintOriOption);
             this.tabPage2.Controls.Add(this.fromCount);
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.clearButton);
@@ -317,7 +321,6 @@
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.numberTB);
             this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.countTB);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.DestinationTB);
             this.tabPage2.Controls.Add(this.label2);
@@ -333,6 +336,32 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "运单打印";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // countNumTB
+            // 
+            this.countNumTB.Location = new System.Drawing.Point(180, 139);
+            this.countNumTB.Name = "countNumTB";
+            this.countNumTB.Size = new System.Drawing.Size(266, 33);
+            this.countNumTB.TabIndex = 21;
+            this.countNumTB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.countNumTB.TextChanged += new System.EventHandler(this.countNumTB_TextChanged);
+            this.countNumTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
+            // 
+            // PrintOriOption
+            // 
+            this.PrintOriOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.PrintOriOption.FormattingEnabled = true;
+            this.PrintOriOption.Items.AddRange(new object[] {
+            "横向打印",
+            "竖向打印"});
+            this.PrintOriOption.Location = new System.Drawing.Point(182, 27);
+            this.PrintOriOption.Name = "PrintOriOption";
+            this.PrintOriOption.Size = new System.Drawing.Size(194, 33);
+            this.PrintOriOption.TabIndex = 20;
             // 
             // fromCount
             // 
@@ -587,16 +616,6 @@
             this.label4.Size = new System.Drawing.Size(64, 25);
             this.label4.TabIndex = 10;
             this.label4.Text = "*货号:";
-            // 
-            // countTB
-            // 
-            this.countTB.ForeColor = System.Drawing.Color.Red;
-            this.countTB.Location = new System.Drawing.Point(182, 135);
-            this.countTB.Name = "countTB";
-            this.countTB.Size = new System.Drawing.Size(264, 33);
-            this.countTB.TabIndex = 3;
-            this.countTB.TextChanged += new System.EventHandler(this.countTB_TextChanged);
-            this.countTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
             // label3
             // 
@@ -1063,6 +1082,7 @@
             this.tabPage3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.countNumTB)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage1.ResumeLayout(false);
@@ -1103,7 +1123,6 @@
         private System.Windows.Forms.Button printPreviewBT;
         private System.Windows.Forms.TextBox numberTB;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox countTB;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox DestinationTB;
         private System.Windows.Forms.Label label2;
@@ -1164,6 +1183,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemDelete;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCopy;
+        private System.Windows.Forms.ComboBox PrintOriOption;
+        private System.Windows.Forms.NumericUpDown countNumTB;
 
     }
 }

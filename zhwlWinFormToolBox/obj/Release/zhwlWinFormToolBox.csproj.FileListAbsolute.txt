@@ -28,3 +28,15 @@ D:\Project\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.
 \\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\zxing.dll
 \\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\MySql.Data.dll
 \\psf\Home\Documents\Programs\Winform\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.TrackingRecord.resources
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\振华物流工具箱.exe.config
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\振华物流工具箱.exe
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\振华物流工具箱.pdb
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\振华物流工具箱.exe
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\振华物流工具箱.pdb
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\MySql.Data.dll
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\bin\Release\zxing.dll
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.csprojResolveAssemblyReference.cache
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.MainWindow.resources
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.Properties.Resources.resources
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.TrackingRecord.resources
+Z:\zhwlWinFormToolBox\zhwlWinFormToolBox\obj\Release\zhwlWinFormToolBox.csproj.GenerateResource.Cache

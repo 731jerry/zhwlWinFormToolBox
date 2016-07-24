@@ -25,6 +25,7 @@ namespace zhwlWinFormToolBox
         {
             InitializeComponent();
             OptionComboBox.SelectedIndex = 0;
+            PrintOriOption.SelectedIndex = 0; // 默认横向打印
         }
 
         Dictionary<String, String> DriversDic = new Dictionary<string, string>();
@@ -285,7 +286,7 @@ namespace zhwlWinFormToolBox
         int maxCountPerPage;
         String DestinationTBString;
         String nameTBString;
-        String countTBString;
+        String countNumTBString;
         String numberTBString;
         private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
@@ -293,7 +294,7 @@ namespace zhwlWinFormToolBox
             maxCountPerPage = int.Parse(maxCountPerPageTB.Text);
             DestinationTBString = DestinationTB.Text;
             nameTBString = nameTB.Text;
-            countTBString = countTB.Text;
+            countNumTBString = countNumTB.Text;
             numberTBString = numberTB.Text;
         }
 
@@ -319,14 +320,14 @@ namespace zhwlWinFormToolBox
                 {
                     DestinationTBString = "";
                     nameTBString = "";
-                    countTBString = "";
+                    countNumTBString = "";
                     numberTBString = "";
                 }
                 else
                 {
                     DestinationTBString = DestinationTB.Text;
                     nameTBString = nameTB.Text;
-                    countTBString = countTB.Text;
+                    countNumTBString = countNumTB.Text;
                     numberTBString = numberTB.Text;
                 }
 
@@ -336,14 +337,14 @@ namespace zhwlWinFormToolBox
                     //fontSize = e.Graphics.MeasureString(nameTB.Text, nameTB.Font);//桐 乡 市 瑞 递 曼 尔 工 贸 有 限 公 司
                     e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + 0);
                     e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4 + inlineDistenceX, internalY * i + tableY + 0);
-                    e.Graphics.DrawString(countTBString, new Font(countTB.Font.Name, countTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + inlineDistenceY);
                     e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4 + inlineDistenceX, internalY * i + tableY + inlineDistenceY);
                 }
                 else
                 {
                     e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + 0);
                     e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3 + inlineDistenceX, internalY * (i - 1) + tableY + 0);
-                    e.Graphics.DrawString(countTBString, new Font(countTB.Font.Name, countTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + inlineDistenceY);
+                    e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + inlineDistenceY);
                     e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3 + inlineDistenceX, internalY * (i - 1) + tableY + inlineDistenceY);
                 }
             }
@@ -361,16 +362,16 @@ namespace zhwlWinFormToolBox
         }
 
 
-        private void countTB_TextChanged(object sender, EventArgs e)
+        private void countNumTB_TextChanged(object sender, EventArgs e)
         {
-            dzNumberTB.Text = countTB.Text;
+            dzNumberTB.Text = countNumTB.Text;
         }
 
         private void clearButton_Click(object sender, EventArgs e)
         {
             DestinationTB.Clear();
             nameTB.Clear();
-            countTB.Clear();
+            countNumTB.Text = "1";
             numberTB.Clear();
         }
 
@@ -449,7 +450,7 @@ namespace zhwlWinFormToolBox
         String mobileNumbers = "";
         String cidNumber = "";
         Boolean isEnabledDrivers = false;
-        String DriverName, DriverNumer, ContactNumber;
+        String ContactNumber;
         private void sendMsgButton_Click(object sender, EventArgs e)
         {
             //if (driverComboBox.Enabled)
@@ -657,7 +658,8 @@ namespace zhwlWinFormToolBox
                             searchButton.PerformClick();
                         }
                     }
-                    else {
+                    else
+                    {
                         return;
                     }
                 }
@@ -666,7 +668,7 @@ namespace zhwlWinFormToolBox
                 //generate_barcode(TrackingNumber.Text, 363, 150, BarcodeImage);//363,150
 
                 // 查询
-               // DataTable result = Connection.Ins.ExcuteDataTable("SELECT id AS '序列', time AS '时间', currentstatus AS '当前状态' FROM " + queryTable + " ORDER BY id DESC", null);
+                // DataTable result = Connection.Ins.ExcuteDataTable("SELECT id AS '序列', time AS '时间', currentstatus AS '当前状态' FROM " + queryTable + " ORDER BY id DESC", null);
                 DataTable result = Connection.Ins.ExcuteDataTable("SELECT id AS '序列', time AS '时间', currentstatus AS '当前状态' FROM " + queryTable + " ORDER BY time DESC", null);
                 QueryDataGridView.DataSource = result;
 
@@ -863,7 +865,8 @@ namespace zhwlWinFormToolBox
         }
 
         // 编辑记录
-        private void EditRecord() {
+        private void EditRecord()
+        {
             String idString = QueryDataGridView.SelectedRows[0].Cells[0].Value.ToString();
             if (!idString.Trim().Equals("1"))
             {
@@ -881,7 +884,8 @@ namespace zhwlWinFormToolBox
                     searchButton.PerformClick();
                 }
             }
-            else {
+            else
+            {
                 MessageBox.Show("初始记录不能编辑！", "提示");
             }
         }
