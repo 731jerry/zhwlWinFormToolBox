@@ -358,7 +358,7 @@
             this.PrintOriOption.Items.AddRange(new object[] {
             "横向打印",
             "竖向打印"});
-            this.PrintOriOption.Location = new System.Drawing.Point(182, 27);
+            this.PrintOriOption.Location = new System.Drawing.Point(122, 27);
             this.PrintOriOption.Name = "PrintOriOption";
             this.PrintOriOption.Size = new System.Drawing.Size(194, 33);
             this.PrintOriOption.TabIndex = 20;
@@ -453,7 +453,7 @@
             this.inlineDistenceXTB.Name = "inlineDistenceXTB";
             this.inlineDistenceXTB.Size = new System.Drawing.Size(72, 27);
             this.inlineDistenceXTB.TabIndex = 28;
-            this.inlineDistenceXTB.Text = "-50";
+            this.inlineDistenceXTB.Text = "50";
             this.inlineDistenceXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.inlineDistenceXTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 

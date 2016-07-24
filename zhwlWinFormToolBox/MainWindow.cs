@@ -282,47 +282,50 @@ namespace zhwlWinFormToolBox
             if (PrintOriOption.SelectedIndex == 0)
             { //横向
                 this.printPreviewDialog1.Document.DefaultPageSettings.Landscape = true;
+                this.printPreviewDialog1.ClientSize = new Size(this.printDocument1.DefaultPageSettings.PaperSize.Width, this.printDocument1.DefaultPageSettings.PaperSize.Height);
             }
             else
             { //竖向
                 this.printPreviewDialog1.Document.DefaultPageSettings.Landscape = false;
+                this.printPreviewDialog1.ClientSize = new Size(this.printDocument1.DefaultPageSettings.PaperSize.Height, this.printDocument1.DefaultPageSettings.PaperSize.Width);
             }
-            
+
             //ShowDialog方法：将窗体显示为模式对话框，并将当前活动窗口设置为它的所有者
             //this.printPreviewDialog1.WindowState = FormWindowState.Maximized;
-            this.printPreviewDialog1.ClientSize = new Size(600, 800);
             this.printPreviewDialog1.ShowDialog();
         }
 
-        private int countPerList; // 每列个数
-        private int countPerRow; // 每行个数
+        private int listCount; // 列数
+        private int rowCount; // 行数
         private void PrintOriOption_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (PrintOriOption.SelectedIndex == 0)
             {
                 //横向
-                countPerList = 6;
-                countPerRow = 2;
-                tableXTB.Text = "0";
-                tableYTB.Text = "0";
-                internalXTB.Text = "0";
-                internalYTB.Text = "0";
-                inlineDistenceXTB.Text = "-50";
+                listCount = 4;
+                rowCount = 3;
+                tableXTB.Text = "45";
+                tableYTB.Text = "-55";
+                internalXTB.Text = "5";
+                internalYTB.Text = "15";
+                inlineDistenceXTB.Text = "190";
                 inlineDistenceYTB.Text = "60";
                 fontSizeDiffTB.Text = "0";
+                maxCountPerPageTB.Text = "12";
             }
             else
             {
                 //竖向
-                countPerList = 2;
-                countPerRow = 5;
+                listCount = 2;
+                rowCount = 5;
                 tableXTB.Text = "45";
-                tableYTB.Text = "95";
+                tableYTB.Text = "-55";
                 internalXTB.Text = "5";
                 internalYTB.Text = "115";
-                inlineDistenceXTB.Text = "-50";
+                inlineDistenceXTB.Text = "190";
                 inlineDistenceYTB.Text = "60";
                 fontSizeDiffTB.Text = "0";
+                maxCountPerPageTB.Text = "10";
             }
         }
 
@@ -335,22 +338,25 @@ namespace zhwlWinFormToolBox
         private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             pageCount = 0;
-            maxCountPerPage = int.Parse(maxCountPerPageTB.Text);
-            DestinationTBString = DestinationTB.Text;
-            nameTBString = nameTB.Text;
-            countNumTBString = countNumTB.Text;
-            numberTBString = numberTB.Text;
+            maxCountPerPage = int.Parse(maxCountPerPageTB.Text); //每页最大单子数
+            DestinationTBString = DestinationTB.Text; //到站
+            nameTBString = nameTB.Text; //收货人
+            countNumTBString = countNumTB.Text; //件数
+            numberTBString = numberTB.Text; //货号
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            int from = int.Parse(fromCount.Text.Trim()) - 1;
-            int DzCount = int.Parse(dzNumberTB.Text.Trim()) + from;
-            int pageWidth = this.printDocument1.DefaultPageSettings.PaperSize.Width;
-            int pageHeight = this.printDocument1.DefaultPageSettings.PaperSize.Height;
+            int from = int.Parse(fromCount.Text.Trim()) - 1; // 从第几页起
+            int DzCount = int.Parse(dzNumberTB.Text.Trim()) + from; //打印的运单数
+           
+            //int pageWidth = this.printDocument1.DefaultPageSettings.PaperSize.Width; //每页宽度
+            //int pageHeight = this.printDocument1.DefaultPageSettings.PaperSize.Height; //每页高度
 
+            int pageWidth = this.printPreviewDialog1.ClientSize.Width; //每页宽度
+            int pageHeight = this.printPreviewDialog1.ClientSize.Height; //每页高度
 
-            int tableX = int.Parse(tableXTB.Text);
+            int tableX = int.Parse(tableXTB.Text); //整体左平移
             int tableY = int.Parse(tableYTB.Text);
             int internalX = int.Parse(internalXTB.Text); // 内部
             int internalY = int.Parse(internalYTB.Text); ;
@@ -375,10 +381,29 @@ namespace zhwlWinFormToolBox
                     numberTBString = numberTB.Text;
                 }
 
-                if (i % countPerList == 0)
+                for (int n = 0; n < rowCount; n++)
+                {
+                    for (int m = 0; m < listCount; m++)
+                    {
+                        e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff),
+                            new SolidBrush(Color.Black), internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n);
+
+                        e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff),
+                            new SolidBrush(Color.Black), internalX + tableX + (pageWidth / listCount) * m + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * n);
+
+                        e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff),
+                            new SolidBrush(Color.Black), internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
+
+                        e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff),
+                            new SolidBrush(Color.Black), internalX + tableX + (pageWidth / listCount) * m + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
+                    }
+                }
+
+                /*
+                if (i % listCount == 0)
                 {
                     //SizeF fontSize;
-                    //fontSize = e.Graphics.MeasureString(nameTB.Text, nameTB.Font);//桐 乡 市 瑞 递 曼 尔 工 贸 有 限 公 司
+                    //fontSize = e.Graphics.MeasureString(nameTB.Text, nameTB.Font);
                     e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + 0);
                     e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 4 + inlineDistenceX, internalY * i + tableY + 0);
                     e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + 0, internalY * i + tableY + inlineDistenceY);
@@ -391,6 +416,7 @@ namespace zhwlWinFormToolBox
                     e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + pageWidth / 2, internalY * (i - 1) + tableY + inlineDistenceY);
                     e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black), internalX + tableX + (pageWidth / 4) * 3 + inlineDistenceX, internalY * (i - 1) + tableY + inlineDistenceY);
                 }
+                 */
             }
 
             pageCount++;
