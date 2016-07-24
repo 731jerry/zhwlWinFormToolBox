@@ -276,6 +276,17 @@ namespace zhwlWinFormToolBox
 
             //注意指定其Document(获取或设置要预览的文档)属性
             this.printPreviewDialog1.Document = this.printDocument1;
+
+            if (PrintOriOption.SelectedIndex == 0)
+            { //横向
+                this.printPreviewDialog1.Document.DefaultPageSettings.Landscape = true;
+            }
+            else
+            { //竖向
+
+                this.printPreviewDialog1.Document.DefaultPageSettings.Landscape = false;
+            }
+            
             //ShowDialog方法：将窗体显示为模式对话框，并将当前活动窗口设置为它的所有者
             //this.printPreviewDialog1.WindowState = FormWindowState.Maximized;
             this.printPreviewDialog1.ClientSize = new Size(600, 800);

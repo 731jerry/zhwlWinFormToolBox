@@ -342,7 +342,7 @@
             this.countNumTB.Location = new System.Drawing.Point(180, 139);
             this.countNumTB.Name = "countNumTB";
             this.countNumTB.Size = new System.Drawing.Size(266, 33);
-            this.countNumTB.TabIndex = 21;
+            this.countNumTB.TabIndex = 3;
             this.countNumTB.Value = new decimal(new int[] {
             1,
             0,
@@ -586,6 +586,7 @@
             this.dzNumberTB.Name = "dzNumberTB";
             this.dzNumberTB.Size = new System.Drawing.Size(90, 33);
             this.dzNumberTB.TabIndex = 5;
+            this.dzNumberTB.Text = "1";
             this.dzNumberTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.dzNumberTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
