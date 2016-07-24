@@ -362,6 +362,7 @@
             this.PrintOriOption.Name = "PrintOriOption";
             this.PrintOriOption.Size = new System.Drawing.Size(194, 33);
             this.PrintOriOption.TabIndex = 20;
+            this.PrintOriOption.SelectedIndexChanged += new System.EventHandler(this.PrintOriOption_SelectedIndexChanged);
             // 
             // fromCount
             // 

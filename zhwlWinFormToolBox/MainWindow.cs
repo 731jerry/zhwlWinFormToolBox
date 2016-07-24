@@ -239,6 +239,7 @@ namespace zhwlWinFormToolBox
         }
         private void numberInputOnly_KeyPress(object sender, KeyPressEventArgs e)
         {
+            /*
             if (e.KeyChar == 0x20) e.KeyChar = (char)0;  //禁止空格键
             if ((e.KeyChar == 0x2D) && (((TextBox)sender).Text.Length >= 0)) return;   //处理负数
             if (e.KeyChar > 0x20)
@@ -252,6 +253,7 @@ namespace zhwlWinFormToolBox
                     e.KeyChar = (char)0;   //处理非法字符
                 }
             }
+             */
         }
         #endregion
 
@@ -283,7 +285,6 @@ namespace zhwlWinFormToolBox
             }
             else
             { //竖向
-
                 this.printPreviewDialog1.Document.DefaultPageSettings.Landscape = false;
             }
             
@@ -291,6 +292,38 @@ namespace zhwlWinFormToolBox
             //this.printPreviewDialog1.WindowState = FormWindowState.Maximized;
             this.printPreviewDialog1.ClientSize = new Size(600, 800);
             this.printPreviewDialog1.ShowDialog();
+        }
+
+        private int countPerList; // 每列个数
+        private int countPerRow; // 每行个数
+        private void PrintOriOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PrintOriOption.SelectedIndex == 0)
+            {
+                //横向
+                countPerList = 6;
+                countPerRow = 2;
+                tableXTB.Text = "0";
+                tableYTB.Text = "0";
+                internalXTB.Text = "0";
+                internalYTB.Text = "0";
+                inlineDistenceXTB.Text = "-50";
+                inlineDistenceYTB.Text = "60";
+                fontSizeDiffTB.Text = "0";
+            }
+            else
+            {
+                //竖向
+                countPerList = 2;
+                countPerRow = 5;
+                tableXTB.Text = "45";
+                tableYTB.Text = "95";
+                internalXTB.Text = "5";
+                internalYTB.Text = "115";
+                inlineDistenceXTB.Text = "-50";
+                inlineDistenceYTB.Text = "60";
+                fontSizeDiffTB.Text = "0";
+            }
         }
 
         int pageCount;
@@ -342,7 +375,7 @@ namespace zhwlWinFormToolBox
                     numberTBString = numberTB.Text;
                 }
 
-                if (i % 2 == 0)
+                if (i % countPerList == 0)
                 {
                     //SizeF fontSize;
                     //fontSize = e.Graphics.MeasureString(nameTB.Text, nameTB.Font);//桐 乡 市 瑞 递 曼 尔 工 贸 有 限 公 司
