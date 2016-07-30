@@ -11,6 +11,7 @@ using System.Net;
 using System.IO;
 using System.Threading;
 using System.Collections;
+using System.Drawing.Printing;
 
 using com.google.zxing;
 using ByteMatrix = com.google.zxing.common.ByteMatrix;
@@ -282,12 +283,14 @@ namespace zhwlWinFormToolBox
             if (PrintOriOption.SelectedIndex == 0)
             { //横向
                 this.printPreviewDialog1.Document.DefaultPageSettings.Landscape = true;
-                this.printPreviewDialog1.ClientSize = new Size(this.printDocument1.DefaultPageSettings.PaperSize.Width, this.printDocument1.DefaultPageSettings.PaperSize.Height);
+                //this.printDocument1.DefaultPageSettings.PaperSize = new PaperSize("Custum", 500, 300);
+                //this.printPreviewDialog1.ClientSize = new Size(this.printDocument1.DefaultPageSettings.PaperSize.Width, this.printDocument1.DefaultPageSettings.PaperSize.Height);
             }
             else
             { //竖向
                 this.printPreviewDialog1.Document.DefaultPageSettings.Landscape = false;
-                this.printPreviewDialog1.ClientSize = new Size(this.printDocument1.DefaultPageSettings.PaperSize.Height, this.printDocument1.DefaultPageSettings.PaperSize.Width);
+                //this.printDocument1.DefaultPageSettings.PaperSize = new PaperSize("Custum", 300, 500);
+                //this.printPreviewDialog1.ClientSize = new Size(this.printDocument1.DefaultPageSettings.PaperSize.Height, this.printDocument1.DefaultPageSettings.PaperSize.Width);
             }
 
             //ShowDialog方法：将窗体显示为模式对话框，并将当前活动窗口设置为它的所有者
@@ -305,10 +308,10 @@ namespace zhwlWinFormToolBox
                 listCount = 4;
                 rowCount = 3;
                 tableXTB.Text = "45";
-                tableYTB.Text = "-55";
+                tableYTB.Text = "55";
                 internalXTB.Text = "5";
                 internalYTB.Text = "15";
-                inlineDistenceXTB.Text = "190";
+                inlineDistenceXTB.Text = "100";
                 inlineDistenceYTB.Text = "60";
                 fontSizeDiffTB.Text = "0";
                 maxCountPerPageTB.Text = "12";
@@ -349,13 +352,19 @@ namespace zhwlWinFormToolBox
         {
             int from = int.Parse(fromCount.Text.Trim()) - 1; // 从第几页起
             int DzCount = int.Parse(dzNumberTB.Text.Trim()) + from; //打印的运单数
-           
-            //int pageWidth = this.printDocument1.DefaultPageSettings.PaperSize.Width; //每页宽度
-            //int pageHeight = this.printDocument1.DefaultPageSettings.PaperSize.Height; //每页高度
 
-            int pageWidth = this.printPreviewDialog1.ClientSize.Width; //每页宽度
-            int pageHeight = this.printPreviewDialog1.ClientSize.Height; //每页高度
-
+            int pageWidth = 0; //每页宽度
+            int pageHeight = 0; //每页高度
+            if (PrintOriOption.SelectedIndex == 0)
+            { //横向
+                pageWidth = this.printDocument1.DefaultPageSettings.PaperSize.Height;
+                pageHeight = this.printDocument1.DefaultPageSettings.PaperSize.Width;
+            }
+            else
+            {
+                pageWidth = this.printDocument1.DefaultPageSettings.PaperSize.Width;
+                pageHeight = this.printDocument1.DefaultPageSettings.PaperSize.Height;
+            }
             int tableX = int.Parse(tableXTB.Text); //整体左平移
             int tableY = int.Parse(tableYTB.Text);
             int internalX = int.Parse(internalXTB.Text); // 内部
@@ -1001,6 +1010,14 @@ namespace zhwlWinFormToolBox
         private void QueryDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             EditRecord();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            DestinationTB.Text = "到站地址";
+            nameTB.Text = "收货人姓名";
+            countNumTB.Text = "13";
+            numberTB.Text = "123456";
         }
     }
 }

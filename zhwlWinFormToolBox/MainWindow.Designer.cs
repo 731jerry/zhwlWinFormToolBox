@@ -113,6 +113,7 @@
             this.ToolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -309,6 +310,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.countNumTB);
             this.tabPage2.Controls.Add(this.PrintOriOption);
             this.tabPage2.Controls.Add(this.fromCount);
@@ -1065,6 +1067,18 @@
             this.ToolStripMenuItemDelete.Text = "删除";
             this.ToolStripMenuItemDelete.Click += new System.EventHandler(this.ToolStripMenuItemDelete_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button1.Location = new System.Drawing.Point(710, 448);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(98, 31);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "测试";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1187,6 +1201,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCopy;
         private System.Windows.Forms.ComboBox PrintOriOption;
         private System.Windows.Forms.NumericUpDown countNumTB;
+        private System.Windows.Forms.Button button1;
 
     }
 }
