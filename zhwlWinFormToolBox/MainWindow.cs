@@ -312,7 +312,7 @@ namespace zhwlWinFormToolBox
                 internalXTB.Text = "5";
                 internalYTB.Text = "15";
                 inlineDistenceXTB.Text = "100";
-                inlineDistenceYTB.Text = "60";
+                inlineDistenceYTB.Text = "45";
                 fontSizeDiffTB.Text = "0";
                 maxCountPerPageTB.Text = "12";
             }
@@ -394,17 +394,34 @@ namespace zhwlWinFormToolBox
                 {
                     for (int m = 0; m < listCount; m++)
                     {
-                        e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff),
-                            new SolidBrush(Color.Black), internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n);
+                        if (PrintOriOption.SelectedIndex == 0)
+                        { //横向
+                            e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                               internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n);
 
-                        e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff),
-                            new SolidBrush(Color.Black), internalX + tableX + (pageWidth / listCount) * m + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * n);
+                            e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
 
-                        e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff),
-                            new SolidBrush(Color.Black), internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
+                            e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY * 2);
 
-                        e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff),
-                            new SolidBrush(Color.Black), internalX + tableX + (pageWidth / listCount) * m + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
+                            e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY * 3);
+                        }
+                        else
+                        {
+                            e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n);
+
+                            e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                                internalX + tableX + (pageWidth / listCount) * m + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * n);
+
+                            e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
+
+                            e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                                internalX + tableX + (pageWidth / listCount) * m + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
+                        }
                     }
                 }
 
