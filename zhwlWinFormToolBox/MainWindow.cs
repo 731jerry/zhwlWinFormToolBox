@@ -314,7 +314,6 @@ namespace zhwlWinFormToolBox
                 inlineDistenceXTB.Text = "100";
                 inlineDistenceYTB.Text = "45";
                 fontSizeDiffTB.Text = "0";
-                maxCountPerPageTB.Text = "12";
             }
             else
             {
@@ -328,7 +327,6 @@ namespace zhwlWinFormToolBox
                 inlineDistenceXTB.Text = "190";
                 inlineDistenceYTB.Text = "60";
                 fontSizeDiffTB.Text = "0";
-                maxCountPerPageTB.Text = "10";
             }
         }
 
@@ -341,7 +339,7 @@ namespace zhwlWinFormToolBox
         private void printDocument1_BeginPrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             pageCount = 0;
-            maxCountPerPage = int.Parse(maxCountPerPageTB.Text); //每页最大单子数
+            maxCountPerPage = listCount * rowCount; //每页最大单子数
             DestinationTBString = DestinationTB.Text; //到站
             nameTBString = nameTB.Text; //收货人
             countNumTBString = countNumTB.Text; //件数
@@ -351,7 +349,7 @@ namespace zhwlWinFormToolBox
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             int from = int.Parse(fromCount.Text.Trim()) - 1; // 从第几页起
-            int DzCount = int.Parse(dzNumberTB.Text.Trim()) + from; //打印的运单数
+            int DzCount = (from >= 0) ? (int.Parse(dzNumberTB.Text.Trim()) + from) : 0; //打印的运单数
 
             int pageWidth = 0; //每页宽度
             int pageHeight = 0; //每页高度
@@ -377,10 +375,10 @@ namespace zhwlWinFormToolBox
             {
                 if ((i < from) && pageCount < 1)
                 {
-                    DestinationTBString = "";
-                    nameTBString = "";
-                    countNumTBString = "";
-                    numberTBString = "";
+                    DestinationTBString = " ";
+                    nameTBString = " ";
+                    countNumTBString = " ";
+                    numberTBString = " ";
                 }
                 else
                 {
@@ -390,39 +388,33 @@ namespace zhwlWinFormToolBox
                     numberTBString = numberTB.Text;
                 }
 
-                for (int n = 0; n < rowCount; n++)
+                if (PrintOriOption.SelectedIndex == 0)
+                { //横向
+                    e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                       internalX + tableX + (pageWidth / listCount) * (i % listCount), internalY + tableY + (pageHeight / rowCount) * (int)(i / listCount));
+
+                    e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                        internalX + tableX + (pageWidth / listCount) * (i % listCount), internalY + tableY + (pageHeight / rowCount) * (int)(i / listCount) + inlineDistenceY);
+
+                    e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                        internalX + tableX + (pageWidth / listCount) * (i % listCount), internalY + tableY + (pageHeight / rowCount) * (int)(i / listCount) + inlineDistenceY * 2);
+
+                    e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                        internalX + tableX + (pageWidth / listCount) * (i % listCount), internalY + tableY + (pageHeight / rowCount) * (int)(i / listCount) + inlineDistenceY * 3);
+                }
+                else
                 {
-                    for (int m = 0; m < listCount; m++)
-                    {
-                        if (PrintOriOption.SelectedIndex == 0)
-                        { //横向
-                            e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
-                               internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n);
+                    e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                        internalX + tableX + (pageWidth / listCount) * (i % listCount), internalY + tableY + (pageHeight / rowCount) * (int)(i / listCount));
 
-                            e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
-                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
+                    e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                        internalX + tableX + (pageWidth / listCount) * (i % listCount) + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * (int)(i / listCount));
 
-                            e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
-                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY * 2);
+                    e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                        internalX + tableX + (pageWidth / listCount) * (i % listCount), internalY + tableY + (pageHeight / rowCount) * (int)(i / listCount) + inlineDistenceY);
 
-                            e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
-                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY * 3);
-                        }
-                        else
-                        {
-                            e.Graphics.DrawString(DestinationTBString, new Font(DestinationTB.Font.Name, DestinationTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
-                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n);
-
-                            e.Graphics.DrawString(nameTBString, new Font(nameTB.Font.Name, nameTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
-                                internalX + tableX + (pageWidth / listCount) * m + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * n);
-
-                            e.Graphics.DrawString(countNumTBString, new Font(countNumTB.Font.Name, countNumTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
-                                internalX + tableX + (pageWidth / listCount) * m, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
-
-                            e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
-                                internalX + tableX + (pageWidth / listCount) * m + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * n + inlineDistenceY);
-                        }
-                    }
+                    e.Graphics.DrawString(numberTBString, new Font(numberTB.Font.Name, numberTB.Font.Size + fontSizeDiff), new SolidBrush(Color.Black),
+                        internalX + tableX + (pageWidth / listCount) * (i % listCount) + inlineDistenceX, internalY + tableY + (pageHeight / rowCount) * (int)(i / listCount) + inlineDistenceY);
                 }
 
                 /*

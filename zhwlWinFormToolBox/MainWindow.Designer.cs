@@ -48,27 +48,16 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.countNumTB = new System.Windows.Forms.NumericUpDown();
             this.PrintOriOption = new System.Windows.Forms.ComboBox();
-            this.fromCount = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.clearButton = new System.Windows.Forms.Button();
-            this.maxCountPerPageTB = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.inlineDistenceXTB = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.fontSizeDiffTB = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.inlineDistenceYTB = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.internalYTB = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.internalXTB = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.tableYTB = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tableXTB = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.dzNumberTB = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.numberTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -113,7 +102,15 @@
             this.ToolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.fromCount = new System.Windows.Forms.NumericUpDown();
+            this.dzNumberTB = new System.Windows.Forms.NumericUpDown();
+            this.tableXTB = new System.Windows.Forms.NumericUpDown();
+            this.tableYTB = new System.Windows.Forms.NumericUpDown();
+            this.internalXTB = new System.Windows.Forms.NumericUpDown();
+            this.internalYTB = new System.Windows.Forms.NumericUpDown();
+            this.inlineDistenceXTB = new System.Windows.Forms.NumericUpDown();
+            this.inlineDistenceYTB = new System.Windows.Forms.NumericUpDown();
+            this.fontSizeDiffTB = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -127,6 +124,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).BeginInit();
             this.panel1.SuspendLayout();
             this.QueryResultContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fromCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dzNumberTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableXTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableYTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.internalXTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.internalYTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceXTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceYTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeDiffTB)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -310,16 +316,13 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.dzNumberTB);
+            this.tabPage2.Controls.Add(this.fromCount);
             this.tabPage2.Controls.Add(this.countNumTB);
             this.tabPage2.Controls.Add(this.PrintOriOption);
-            this.tabPage2.Controls.Add(this.fromCount);
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.clearButton);
-            this.tabPage2.Controls.Add(this.maxCountPerPageTB);
-            this.tabPage2.Controls.Add(this.label12);
             this.tabPage2.Controls.Add(this.groupBox3);
-            this.tabPage2.Controls.Add(this.dzNumberTB);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.numberTB);
             this.tabPage2.Controls.Add(this.label4);
@@ -341,7 +344,12 @@
             // 
             // countNumTB
             // 
-            this.countNumTB.Location = new System.Drawing.Point(180, 139);
+            this.countNumTB.Location = new System.Drawing.Point(133, 164);
+            this.countNumTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.countNumTB.Name = "countNumTB";
             this.countNumTB.Size = new System.Drawing.Size(266, 33);
             this.countNumTB.TabIndex = 3;
@@ -351,7 +359,6 @@
             0,
             0});
             this.countNumTB.TextChanged += new System.EventHandler(this.countNumTB_TextChanged);
-            this.countNumTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
             // PrintOriOption
             // 
@@ -360,30 +367,18 @@
             this.PrintOriOption.Items.AddRange(new object[] {
             "横向打印",
             "竖向打印"});
-            this.PrintOriOption.Location = new System.Drawing.Point(122, 27);
+            this.PrintOriOption.Location = new System.Drawing.Point(75, 27);
             this.PrintOriOption.Name = "PrintOriOption";
             this.PrintOriOption.Size = new System.Drawing.Size(194, 33);
             this.PrintOriOption.TabIndex = 20;
             this.PrintOriOption.SelectedIndexChanged += new System.EventHandler(this.PrintOriOption_SelectedIndexChanged);
-            // 
-            // fromCount
-            // 
-            this.fromCount.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.fromCount.ForeColor = System.Drawing.Color.Red;
-            this.fromCount.Location = new System.Drawing.Point(482, 503);
-            this.fromCount.Name = "fromCount";
-            this.fromCount.Size = new System.Drawing.Size(31, 27);
-            this.fromCount.TabIndex = 19;
-            this.fromCount.Text = "1";
-            this.fromCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.fromCount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(370, 506);
+            this.label14.Location = new System.Drawing.Point(71, 506);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(110, 20);
             this.label14.TabIndex = 18;
@@ -392,72 +387,39 @@
             // clearButton
             // 
             this.clearButton.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.clearButton.Location = new System.Drawing.Point(845, 28);
+            this.clearButton.Location = new System.Drawing.Point(773, 28);
             this.clearButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(98, 31);
+            this.clearButton.Size = new System.Drawing.Size(124, 31);
             this.clearButton.TabIndex = 17;
             this.clearButton.Text = "清空";
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
-            // maxCountPerPageTB
-            // 
-            this.maxCountPerPageTB.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.maxCountPerPageTB.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.maxCountPerPageTB.Location = new System.Drawing.Point(242, 503);
-            this.maxCountPerPageTB.Name = "maxCountPerPageTB";
-            this.maxCountPerPageTB.Size = new System.Drawing.Size(59, 27);
-            this.maxCountPerPageTB.TabIndex = 16;
-            this.maxCountPerPageTB.Text = "10";
-            this.maxCountPerPageTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.maxCountPerPageTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.label12.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label12.Location = new System.Drawing.Point(105, 506);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(133, 20);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "每张最大单子数量:";
-            // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.inlineDistenceXTB);
-            this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.fontSizeDiffTB);
-            this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Controls.Add(this.inlineDistenceYTB);
-            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.inlineDistenceXTB);
             this.groupBox3.Controls.Add(this.internalYTB);
-            this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.internalXTB);
-            this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.tableYTB);
-            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.tableXTB);
+            this.groupBox3.Controls.Add(this.label13);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox3.Location = new System.Drawing.Point(75, 274);
+            this.groupBox3.Location = new System.Drawing.Point(75, 266);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(822, 168);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "打印位置调整";
-            // 
-            // inlineDistenceXTB
-            // 
-            this.inlineDistenceXTB.Location = new System.Drawing.Point(710, 31);
-            this.inlineDistenceXTB.Name = "inlineDistenceXTB";
-            this.inlineDistenceXTB.Size = new System.Drawing.Size(72, 27);
-            this.inlineDistenceXTB.TabIndex = 28;
-            this.inlineDistenceXTB.Text = "50";
-            this.inlineDistenceXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.inlineDistenceXTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
             // label13
             // 
@@ -468,16 +430,6 @@
             this.label13.TabIndex = 27;
             this.label13.Text = "内部列距:";
             // 
-            // fontSizeDiffTB
-            // 
-            this.fontSizeDiffTB.Location = new System.Drawing.Point(710, 123);
-            this.fontSizeDiffTB.Name = "fontSizeDiffTB";
-            this.fontSizeDiffTB.Size = new System.Drawing.Size(72, 27);
-            this.fontSizeDiffTB.TabIndex = 26;
-            this.fontSizeDiffTB.Text = "0";
-            this.fontSizeDiffTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.fontSizeDiffTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -486,16 +438,6 @@
             this.label10.Size = new System.Drawing.Size(103, 20);
             this.label10.TabIndex = 25;
             this.label10.Text = "字体大小差值:";
-            // 
-            // inlineDistenceYTB
-            // 
-            this.inlineDistenceYTB.Location = new System.Drawing.Point(710, 78);
-            this.inlineDistenceYTB.Name = "inlineDistenceYTB";
-            this.inlineDistenceYTB.Size = new System.Drawing.Size(72, 27);
-            this.inlineDistenceYTB.TabIndex = 24;
-            this.inlineDistenceYTB.Text = "60";
-            this.inlineDistenceYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.inlineDistenceYTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
             // 
             // label11
             // 
@@ -506,16 +448,6 @@
             this.label11.TabIndex = 23;
             this.label11.Text = "内部行距:";
             // 
-            // internalYTB
-            // 
-            this.internalYTB.Location = new System.Drawing.Point(407, 107);
-            this.internalYTB.Name = "internalYTB";
-            this.internalYTB.Size = new System.Drawing.Size(72, 27);
-            this.internalYTB.TabIndex = 22;
-            this.internalYTB.Text = "115";
-            this.internalYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.internalYTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -523,17 +455,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(88, 20);
             this.label8.TabIndex = 21;
-            this.label8.Text = "单个上位移:";
-            // 
-            // internalXTB
-            // 
-            this.internalXTB.Location = new System.Drawing.Point(407, 49);
-            this.internalXTB.Name = "internalXTB";
-            this.internalXTB.Size = new System.Drawing.Size(72, 27);
-            this.internalXTB.TabIndex = 20;
-            this.internalXTB.Text = "5";
-            this.internalXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.internalXTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
+            this.label8.Text = "单个上距离:";
             // 
             // label9
             // 
@@ -542,17 +464,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 20);
             this.label9.TabIndex = 19;
-            this.label9.Text = "单个左位移:";
-            // 
-            // tableYTB
-            // 
-            this.tableYTB.Location = new System.Drawing.Point(116, 107);
-            this.tableYTB.Name = "tableYTB";
-            this.tableYTB.Size = new System.Drawing.Size(72, 27);
-            this.tableYTB.TabIndex = 18;
-            this.tableYTB.Text = "95";
-            this.tableYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.tableYTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
+            this.label9.Text = "单个左距离:";
             // 
             // label7
             // 
@@ -561,17 +473,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(88, 20);
             this.label7.TabIndex = 17;
-            this.label7.Text = "整体上位移:";
-            // 
-            // tableXTB
-            // 
-            this.tableXTB.Location = new System.Drawing.Point(116, 49);
-            this.tableXTB.Name = "tableXTB";
-            this.tableXTB.Size = new System.Drawing.Size(72, 27);
-            this.tableXTB.TabIndex = 16;
-            this.tableXTB.Text = "45";
-            this.tableXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.tableXTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
+            this.label7.Text = "整体上距离:";
             // 
             // label6
             // 
@@ -580,33 +482,22 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 20);
             this.label6.TabIndex = 15;
-            this.label6.Text = "整体左位移:";
-            // 
-            // dzNumberTB
-            // 
-            this.dzNumberTB.ForeColor = System.Drawing.Color.Red;
-            this.dzNumberTB.Location = new System.Drawing.Point(629, 500);
-            this.dzNumberTB.Name = "dzNumberTB";
-            this.dzNumberTB.Size = new System.Drawing.Size(90, 33);
-            this.dzNumberTB.TabIndex = 5;
-            this.dzNumberTB.Text = "1";
-            this.dzNumberTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.dzNumberTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberInputOnly_KeyPress);
+            this.label6.Text = "整体左距离:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(545, 504);
+            this.label5.Location = new System.Drawing.Point(382, 504);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 25);
+            this.label5.Size = new System.Drawing.Size(178, 25);
             this.label5.TabIndex = 12;
-            this.label5.Text = "*运单数:";
+            this.label5.Text = "*需要打印的运单数:";
             // 
             // numberTB
             // 
             this.numberTB.ForeColor = System.Drawing.Color.Red;
-            this.numberTB.Location = new System.Drawing.Point(607, 135);
+            this.numberTB.Location = new System.Drawing.Point(607, 164);
             this.numberTB.Name = "numberTB";
             this.numberTB.Size = new System.Drawing.Size(290, 33);
             this.numberTB.TabIndex = 4;
@@ -615,7 +506,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(541, 139);
+            this.label4.Location = new System.Drawing.Point(541, 168);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 25);
             this.label4.TabIndex = 10;
@@ -625,7 +516,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(116, 139);
+            this.label3.Location = new System.Drawing.Point(69, 168);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 25);
             this.label3.TabIndex = 8;
@@ -634,7 +525,7 @@
             // DestinationTB
             // 
             this.DestinationTB.ForeColor = System.Drawing.Color.Red;
-            this.DestinationTB.Location = new System.Drawing.Point(182, 77);
+            this.DestinationTB.Location = new System.Drawing.Point(135, 102);
             this.DestinationTB.Name = "DestinationTB";
             this.DestinationTB.Size = new System.Drawing.Size(264, 33);
             this.DestinationTB.TabIndex = 1;
@@ -643,7 +534,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(117, 81);
+            this.label2.Location = new System.Drawing.Point(70, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(64, 25);
             this.label2.TabIndex = 6;
@@ -652,7 +543,7 @@
             // nameTB
             // 
             this.nameTB.ForeColor = System.Drawing.Color.Red;
-            this.nameTB.Location = new System.Drawing.Point(607, 77);
+            this.nameTB.Location = new System.Drawing.Point(607, 102);
             this.nameTB.Name = "nameTB";
             this.nameTB.Size = new System.Drawing.Size(290, 33);
             this.nameTB.TabIndex = 2;
@@ -661,7 +552,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(522, 81);
+            this.label1.Location = new System.Drawing.Point(522, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 25);
             this.label1.TabIndex = 4;
@@ -669,7 +560,7 @@
             // 
             // printPreviewBT
             // 
-            this.printPreviewBT.Location = new System.Drawing.Point(819, 495);
+            this.printPreviewBT.Location = new System.Drawing.Point(773, 495);
             this.printPreviewBT.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.printPreviewBT.Name = "printPreviewBT";
             this.printPreviewBT.Size = new System.Drawing.Size(124, 42);
@@ -1067,17 +958,160 @@
             this.ToolStripMenuItemDelete.Text = "删除";
             this.ToolStripMenuItemDelete.Click += new System.EventHandler(this.ToolStripMenuItemDelete_Click);
             // 
-            // button1
+            // fromCount
             // 
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button1.Location = new System.Drawing.Point(710, 448);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 31);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "测试";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.fromCount.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.fromCount.ForeColor = System.Drawing.Color.Red;
+            this.fromCount.Location = new System.Drawing.Point(199, 503);
+            this.fromCount.Name = "fromCount";
+            this.fromCount.Size = new System.Drawing.Size(57, 27);
+            this.fromCount.TabIndex = 22;
+            this.fromCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.fromCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // dzNumberTB
+            // 
+            this.dzNumberTB.ForeColor = System.Drawing.Color.Red;
+            this.dzNumberTB.Location = new System.Drawing.Point(566, 500);
+            this.dzNumberTB.Name = "dzNumberTB";
+            this.dzNumberTB.Size = new System.Drawing.Size(91, 33);
+            this.dzNumberTB.TabIndex = 23;
+            this.dzNumberTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dzNumberTB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // tableXTB
+            // 
+            this.tableXTB.Location = new System.Drawing.Point(116, 50);
+            this.tableXTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.tableXTB.Name = "tableXTB";
+            this.tableXTB.Size = new System.Drawing.Size(72, 27);
+            this.tableXTB.TabIndex = 24;
+            this.tableXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tableXTB.Value = new decimal(new int[] {
+            45,
+            0,
+            0,
+            0});
+            // 
+            // tableYTB
+            // 
+            this.tableYTB.Location = new System.Drawing.Point(116, 108);
+            this.tableYTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.tableYTB.Name = "tableYTB";
+            this.tableYTB.Size = new System.Drawing.Size(72, 27);
+            this.tableYTB.TabIndex = 29;
+            this.tableYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tableYTB.Value = new decimal(new int[] {
+            95,
+            0,
+            0,
+            0});
+            // 
+            // internalXTB
+            // 
+            this.internalXTB.Location = new System.Drawing.Point(407, 50);
+            this.internalXTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.internalXTB.Name = "internalXTB";
+            this.internalXTB.Size = new System.Drawing.Size(72, 27);
+            this.internalXTB.TabIndex = 30;
+            this.internalXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.internalXTB.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // internalYTB
+            // 
+            this.internalYTB.Location = new System.Drawing.Point(407, 108);
+            this.internalYTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.internalYTB.Name = "internalYTB";
+            this.internalYTB.Size = new System.Drawing.Size(72, 27);
+            this.internalYTB.TabIndex = 31;
+            this.internalYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.internalYTB.Value = new decimal(new int[] {
+            115,
+            0,
+            0,
+            0});
+            // 
+            // inlineDistenceXTB
+            // 
+            this.inlineDistenceXTB.Location = new System.Drawing.Point(710, 32);
+            this.inlineDistenceXTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.inlineDistenceXTB.Name = "inlineDistenceXTB";
+            this.inlineDistenceXTB.Size = new System.Drawing.Size(72, 27);
+            this.inlineDistenceXTB.TabIndex = 32;
+            this.inlineDistenceXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inlineDistenceXTB.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // inlineDistenceYTB
+            // 
+            this.inlineDistenceYTB.Location = new System.Drawing.Point(710, 79);
+            this.inlineDistenceYTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.inlineDistenceYTB.Name = "inlineDistenceYTB";
+            this.inlineDistenceYTB.Size = new System.Drawing.Size(72, 27);
+            this.inlineDistenceYTB.TabIndex = 33;
+            this.inlineDistenceYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inlineDistenceYTB.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            // 
+            // fontSizeDiffTB
+            // 
+            this.fontSizeDiffTB.Location = new System.Drawing.Point(710, 124);
+            this.fontSizeDiffTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.fontSizeDiffTB.Name = "fontSizeDiffTB";
+            this.fontSizeDiffTB.Size = new System.Drawing.Size(72, 27);
+            this.fontSizeDiffTB.TabIndex = 34;
+            this.fontSizeDiffTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.fontSizeDiffTB.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
             // 
             // MainWindow
             // 
@@ -1112,6 +1146,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).EndInit();
             this.panel1.ResumeLayout(false);
             this.QueryResultContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fromCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dzNumberTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableXTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableYTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.internalXTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.internalYTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceXTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceYTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeDiffTB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1144,27 +1187,16 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox nameTB;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox dzNumberTB;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox tableXTB;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox fontSizeDiffTB;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox inlineDistenceYTB;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox internalYTB;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox internalXTB;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox tableYTB;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox maxCountPerPageTB;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox inlineDistenceXTB;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button clearButton;
-        private System.Windows.Forms.TextBox fromCount;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button sendMsgButton;
@@ -1201,7 +1233,15 @@
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemCopy;
         private System.Windows.Forms.ComboBox PrintOriOption;
         private System.Windows.Forms.NumericUpDown countNumTB;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown fromCount;
+        private System.Windows.Forms.NumericUpDown dzNumberTB;
+        private System.Windows.Forms.NumericUpDown tableXTB;
+        private System.Windows.Forms.NumericUpDown tableYTB;
+        private System.Windows.Forms.NumericUpDown internalXTB;
+        private System.Windows.Forms.NumericUpDown internalYTB;
+        private System.Windows.Forms.NumericUpDown inlineDistenceXTB;
+        private System.Windows.Forms.NumericUpDown inlineDistenceYTB;
+        private System.Windows.Forms.NumericUpDown fontSizeDiffTB;
 
     }
 }
