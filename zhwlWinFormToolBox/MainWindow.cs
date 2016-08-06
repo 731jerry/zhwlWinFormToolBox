@@ -307,12 +307,12 @@ namespace zhwlWinFormToolBox
                 //横向
                 listCount = 4;
                 rowCount = 3;
-                tableXTB.Text = "45";
-                tableYTB.Text = "55";
-                internalXTB.Text = "5";
-                internalYTB.Text = "15";
-                inlineDistenceXTB.Text = "100";
-                inlineDistenceYTB.Text = "45";
+                tableXTB.Text = "50";
+                tableYTB.Text = "38";
+                internalXTB.Text = "7";
+                internalYTB.Text = "0";
+                inlineDistenceXTB.Text = "58";
+                inlineDistenceYTB.Text = "35";
                 fontSizeDiffTB.Text = "0";
             }
             else
