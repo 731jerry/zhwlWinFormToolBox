@@ -46,11 +46,20 @@
             this.accountInfo = new System.Windows.Forms.Label();
             this.sendMsgButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dzNumberTB = new System.Windows.Forms.NumericUpDown();
+            this.fromCount = new System.Windows.Forms.NumericUpDown();
             this.countNumTB = new System.Windows.Forms.NumericUpDown();
             this.PrintOriOption = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
             this.clearButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.fontSizeDiffTB = new System.Windows.Forms.NumericUpDown();
+            this.inlineDistenceYTB = new System.Windows.Forms.NumericUpDown();
+            this.inlineDistenceXTB = new System.Windows.Forms.NumericUpDown();
+            this.internalYTB = new System.Windows.Forms.NumericUpDown();
+            this.internalXTB = new System.Windows.Forms.NumericUpDown();
+            this.tableYTB = new System.Windows.Forms.NumericUpDown();
+            this.tableXTB = new System.Windows.Forms.NumericUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -102,20 +111,21 @@
             this.ToolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.fromCount = new System.Windows.Forms.NumericUpDown();
-            this.dzNumberTB = new System.Windows.Forms.NumericUpDown();
-            this.tableXTB = new System.Windows.Forms.NumericUpDown();
-            this.tableYTB = new System.Windows.Forms.NumericUpDown();
-            this.internalXTB = new System.Windows.Forms.NumericUpDown();
-            this.internalYTB = new System.Windows.Forms.NumericUpDown();
-            this.inlineDistenceXTB = new System.Windows.Forms.NumericUpDown();
-            this.inlineDistenceYTB = new System.Windows.Forms.NumericUpDown();
-            this.fontSizeDiffTB = new System.Windows.Forms.NumericUpDown();
+            this.DriverNumberTB = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dzNumberTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fromCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countNumTB)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeDiffTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceYTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceXTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.internalYTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.internalXTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableYTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableXTB)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.groupbox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -124,15 +134,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).BeginInit();
             this.panel1.SuspendLayout();
             this.QueryResultContextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fromCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dzNumberTB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tableXTB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tableYTB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.internalXTB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.internalYTB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceXTB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceYTB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fontSizeDiffTB)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -152,6 +153,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.DriverNumberTB);
             this.tabPage3.Controls.Add(this.contactTextbox);
             this.tabPage3.Controls.Add(this.checkSentLinkLabel);
             this.tabPage3.Controls.Add(this.driverTextBox);
@@ -178,7 +180,7 @@
             // 
             this.contactTextbox.Location = new System.Drawing.Point(394, 161);
             this.contactTextbox.Name = "contactTextbox";
-            this.contactTextbox.Size = new System.Drawing.Size(478, 33);
+            this.contactTextbox.Size = new System.Drawing.Size(230, 33);
             this.contactTextbox.TabIndex = 22;
             this.contactTextbox.TextChanged += new System.EventHandler(this.contactTextbox_TextChanged);
             // 
@@ -266,7 +268,8 @@
             this.sendSMSComboBox.FormattingEnabled = true;
             this.sendSMSComboBox.Items.AddRange(new object[] {
             "催客户来提货",
-            "货物已到派货点"});
+            "货物已到派货点",
+            "爆仓通知"});
             this.sendSMSComboBox.Location = new System.Drawing.Point(162, 64);
             this.sendSMSComboBox.Name = "sendSMSComboBox";
             this.sendSMSComboBox.Size = new System.Drawing.Size(158, 32);
@@ -275,12 +278,12 @@
             // 
             // ContentTextBox
             // 
-            this.ContentTextBox.Location = new System.Drawing.Point(394, 229);
+            this.ContentTextBox.Location = new System.Drawing.Point(394, 214);
             this.ContentTextBox.Multiline = true;
             this.ContentTextBox.Name = "ContentTextBox";
             this.ContentTextBox.ReadOnly = true;
             this.ContentTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ContentTextBox.Size = new System.Drawing.Size(478, 207);
+            this.ContentTextBox.Size = new System.Drawing.Size(478, 222);
             this.ContentTextBox.TabIndex = 12;
             // 
             // ReciptTextBox
@@ -341,6 +344,35 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "运单打印";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dzNumberTB
+            // 
+            this.dzNumberTB.ForeColor = System.Drawing.Color.Red;
+            this.dzNumberTB.Location = new System.Drawing.Point(566, 500);
+            this.dzNumberTB.Name = "dzNumberTB";
+            this.dzNumberTB.Size = new System.Drawing.Size(91, 33);
+            this.dzNumberTB.TabIndex = 23;
+            this.dzNumberTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dzNumberTB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // fromCount
+            // 
+            this.fromCount.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.fromCount.ForeColor = System.Drawing.Color.Red;
+            this.fromCount.Location = new System.Drawing.Point(199, 503);
+            this.fromCount.Name = "fromCount";
+            this.fromCount.Size = new System.Drawing.Size(57, 27);
+            this.fromCount.TabIndex = 22;
+            this.fromCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.fromCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // countNumTB
             // 
@@ -420,6 +452,132 @@
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "打印位置调整";
+            // 
+            // fontSizeDiffTB
+            // 
+            this.fontSizeDiffTB.Location = new System.Drawing.Point(710, 124);
+            this.fontSizeDiffTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.fontSizeDiffTB.Name = "fontSizeDiffTB";
+            this.fontSizeDiffTB.Size = new System.Drawing.Size(72, 27);
+            this.fontSizeDiffTB.TabIndex = 34;
+            this.fontSizeDiffTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.fontSizeDiffTB.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            // 
+            // inlineDistenceYTB
+            // 
+            this.inlineDistenceYTB.Location = new System.Drawing.Point(710, 79);
+            this.inlineDistenceYTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.inlineDistenceYTB.Name = "inlineDistenceYTB";
+            this.inlineDistenceYTB.Size = new System.Drawing.Size(72, 27);
+            this.inlineDistenceYTB.TabIndex = 33;
+            this.inlineDistenceYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inlineDistenceYTB.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            // 
+            // inlineDistenceXTB
+            // 
+            this.inlineDistenceXTB.Location = new System.Drawing.Point(710, 32);
+            this.inlineDistenceXTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.inlineDistenceXTB.Name = "inlineDistenceXTB";
+            this.inlineDistenceXTB.Size = new System.Drawing.Size(72, 27);
+            this.inlineDistenceXTB.TabIndex = 32;
+            this.inlineDistenceXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inlineDistenceXTB.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // internalYTB
+            // 
+            this.internalYTB.Location = new System.Drawing.Point(407, 108);
+            this.internalYTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.internalYTB.Name = "internalYTB";
+            this.internalYTB.Size = new System.Drawing.Size(72, 27);
+            this.internalYTB.TabIndex = 31;
+            this.internalYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.internalYTB.Value = new decimal(new int[] {
+            115,
+            0,
+            0,
+            0});
+            // 
+            // internalXTB
+            // 
+            this.internalXTB.Location = new System.Drawing.Point(407, 50);
+            this.internalXTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.internalXTB.Name = "internalXTB";
+            this.internalXTB.Size = new System.Drawing.Size(72, 27);
+            this.internalXTB.TabIndex = 30;
+            this.internalXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.internalXTB.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // tableYTB
+            // 
+            this.tableYTB.Location = new System.Drawing.Point(116, 108);
+            this.tableYTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.tableYTB.Name = "tableYTB";
+            this.tableYTB.Size = new System.Drawing.Size(72, 27);
+            this.tableYTB.TabIndex = 29;
+            this.tableYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tableYTB.Value = new decimal(new int[] {
+            95,
+            0,
+            0,
+            0});
+            // 
+            // tableXTB
+            // 
+            this.tableXTB.Location = new System.Drawing.Point(116, 50);
+            this.tableXTB.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.tableXTB.Name = "tableXTB";
+            this.tableXTB.Size = new System.Drawing.Size(72, 27);
+            this.tableXTB.TabIndex = 24;
+            this.tableXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tableXTB.Value = new decimal(new int[] {
+            45,
+            0,
+            0,
+            0});
             // 
             // label13
             // 
@@ -958,160 +1116,12 @@
             this.ToolStripMenuItemDelete.Text = "删除";
             this.ToolStripMenuItemDelete.Click += new System.EventHandler(this.ToolStripMenuItemDelete_Click);
             // 
-            // fromCount
+            // DriverNumberTB
             // 
-            this.fromCount.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.fromCount.ForeColor = System.Drawing.Color.Red;
-            this.fromCount.Location = new System.Drawing.Point(199, 503);
-            this.fromCount.Name = "fromCount";
-            this.fromCount.Size = new System.Drawing.Size(57, 27);
-            this.fromCount.TabIndex = 22;
-            this.fromCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.fromCount.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // dzNumberTB
-            // 
-            this.dzNumberTB.ForeColor = System.Drawing.Color.Red;
-            this.dzNumberTB.Location = new System.Drawing.Point(566, 500);
-            this.dzNumberTB.Name = "dzNumberTB";
-            this.dzNumberTB.Size = new System.Drawing.Size(91, 33);
-            this.dzNumberTB.TabIndex = 23;
-            this.dzNumberTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.dzNumberTB.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // tableXTB
-            // 
-            this.tableXTB.Location = new System.Drawing.Point(116, 50);
-            this.tableXTB.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.tableXTB.Name = "tableXTB";
-            this.tableXTB.Size = new System.Drawing.Size(72, 27);
-            this.tableXTB.TabIndex = 24;
-            this.tableXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tableXTB.Value = new decimal(new int[] {
-            45,
-            0,
-            0,
-            0});
-            // 
-            // tableYTB
-            // 
-            this.tableYTB.Location = new System.Drawing.Point(116, 108);
-            this.tableYTB.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.tableYTB.Name = "tableYTB";
-            this.tableYTB.Size = new System.Drawing.Size(72, 27);
-            this.tableYTB.TabIndex = 29;
-            this.tableYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tableYTB.Value = new decimal(new int[] {
-            95,
-            0,
-            0,
-            0});
-            // 
-            // internalXTB
-            // 
-            this.internalXTB.Location = new System.Drawing.Point(407, 50);
-            this.internalXTB.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.internalXTB.Name = "internalXTB";
-            this.internalXTB.Size = new System.Drawing.Size(72, 27);
-            this.internalXTB.TabIndex = 30;
-            this.internalXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.internalXTB.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            // 
-            // internalYTB
-            // 
-            this.internalYTB.Location = new System.Drawing.Point(407, 108);
-            this.internalYTB.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.internalYTB.Name = "internalYTB";
-            this.internalYTB.Size = new System.Drawing.Size(72, 27);
-            this.internalYTB.TabIndex = 31;
-            this.internalYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.internalYTB.Value = new decimal(new int[] {
-            115,
-            0,
-            0,
-            0});
-            // 
-            // inlineDistenceXTB
-            // 
-            this.inlineDistenceXTB.Location = new System.Drawing.Point(710, 32);
-            this.inlineDistenceXTB.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.inlineDistenceXTB.Name = "inlineDistenceXTB";
-            this.inlineDistenceXTB.Size = new System.Drawing.Size(72, 27);
-            this.inlineDistenceXTB.TabIndex = 32;
-            this.inlineDistenceXTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.inlineDistenceXTB.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
-            // inlineDistenceYTB
-            // 
-            this.inlineDistenceYTB.Location = new System.Drawing.Point(710, 79);
-            this.inlineDistenceYTB.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.inlineDistenceYTB.Name = "inlineDistenceYTB";
-            this.inlineDistenceYTB.Size = new System.Drawing.Size(72, 27);
-            this.inlineDistenceYTB.TabIndex = 33;
-            this.inlineDistenceYTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.inlineDistenceYTB.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            // 
-            // fontSizeDiffTB
-            // 
-            this.fontSizeDiffTB.Location = new System.Drawing.Point(710, 124);
-            this.fontSizeDiffTB.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.fontSizeDiffTB.Name = "fontSizeDiffTB";
-            this.fontSizeDiffTB.Size = new System.Drawing.Size(72, 27);
-            this.fontSizeDiffTB.TabIndex = 34;
-            this.fontSizeDiffTB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.fontSizeDiffTB.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
+            this.DriverNumberTB.Location = new System.Drawing.Point(662, 161);
+            this.DriverNumberTB.Name = "DriverNumberTB";
+            this.DriverNumberTB.Size = new System.Drawing.Size(210, 33);
+            this.DriverNumberTB.TabIndex = 24;
             // 
             // MainWindow
             // 
@@ -1132,9 +1142,18 @@
             this.tabPage3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dzNumberTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fromCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.countNumTB)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeDiffTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceYTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceXTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.internalYTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.internalXTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableYTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableXTB)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.groupbox1.ResumeLayout(false);
             this.groupbox1.PerformLayout();
@@ -1146,15 +1165,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).EndInit();
             this.panel1.ResumeLayout(false);
             this.QueryResultContextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.fromCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dzNumberTB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tableXTB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tableYTB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.internalXTB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.internalYTB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceXTB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.inlineDistenceYTB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fontSizeDiffTB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1242,6 +1252,7 @@
         private System.Windows.Forms.NumericUpDown inlineDistenceXTB;
         private System.Windows.Forms.NumericUpDown inlineDistenceYTB;
         private System.Windows.Forms.NumericUpDown fontSizeDiffTB;
+        private System.Windows.Forms.TextBox DriverNumberTB;
 
     }
 }

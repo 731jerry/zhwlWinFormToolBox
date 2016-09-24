@@ -467,8 +467,9 @@ namespace zhwlWinFormToolBox
 
         #region 发送短信
 
-        String uid = "GxDPNEIGtn9C";
+        String uid = "d6c5f4070cbed695e70d42bb075644f9"; // 微米 weimi.cc "GxDPNEIGtn9C";
         String pas = "5pggh3c5";
+        String tpl_value = "";
 
         private String getStringBySMSAPI(String url, String byteString)
         {
@@ -494,7 +495,7 @@ namespace zhwlWinFormToolBox
 
         private void getSMSAccountInfoThreading(Object obj)
         {
-            setSMSAccountInfo();
+           // setSMSAccountInfo();
         }
 
         delegate void setAccountInfoThreadDelegate();
@@ -569,7 +570,8 @@ namespace zhwlWinFormToolBox
                 }
                 else
                 {
-                    String addtionInfo = "";
+                    /* 微米 weimi.cc
+                     String addtionInfo = "";
                     String apiString = "mob=" + mobileNumbers + "&cid=" + cidNumber + "&uid=" + uid + "&pas=" + pas + "&type=json";
                     if (setTimeCheckBox.Checked)
                     {
@@ -593,6 +595,34 @@ namespace zhwlWinFormToolBox
                     else
                     {
                         MessageBox.Show("短信" + mobileNumbers + "发送失败:(code:" + (json["code"]).ToString() + ")" + (json["msg"]).ToString(), "提示");
+                    }
+                     */
+
+                    // 聚合数据 juhe.cn
+                    String addtionInfo = "";
+                    String apiString = "&mobile=" + mobileNumbers + "&tpl_id=" + cidNumber + "&tpl_value=" + tpl_value + "&dtype=" + "&key=" + uid;
+                    if (setTimeCheckBox.Checked)
+                    {
+                        //yyyy-MM-dd HH:mm:ss
+                        apiString += "&timing=" + setTimeDateTimePicker.Value.ToString(setTimeDateTimePicker.CustomFormat);
+                        addtionInfo = "定时(将于" + setTimeDateTimePicker.Value.ToString(setTimeDateTimePicker.CustomFormat) + "发送)";
+                    }
+                    if (isEnabledDrivers)
+                    {
+                        apiString += "&p1=" + ContactNumber;
+                    }
+                    JSONObject json = JSONConvert.DeserializeObject(getStringBySMSAPI(
+                        "http://v.juhe.cn/sms/send",
+                        apiString));
+
+                    if (int.Parse((json["error_code"]).ToString()) == 0)
+                    {
+                        clearReciptNumer();
+                        MessageBox.Show(addtionInfo + "短信" + mobileNumbers + "发送成功!", "提示");
+                    }
+                    else
+                    {
+                        MessageBox.Show("短信" + mobileNumbers + "发送失败:(code:" + (json["error_code"]).ToString() + ")" + (json["reason"]).ToString(), "提示");
                     }
                 }
             }
@@ -631,6 +661,7 @@ namespace zhwlWinFormToolBox
 
         private void sendSMSComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            /* 微米 weimi.cc
             switch (sendSMSComboBox.SelectedIndex)
             {
                 default:
@@ -654,6 +685,34 @@ namespace zhwlWinFormToolBox
                     SetContentTextOptionB();
                     break;
             }
+             */
+
+            // 聚合数据 juhe.cn
+            switch (sendSMSComboBox.SelectedIndex)
+            {
+                default:
+                    break;
+                case 0: // 提货
+                    cidNumber = "2975";
+                    contactTextbox.Enabled = true;
+                    contactTextbox.Text = "13586404085";
+                    contactTextbox.Text = "";
+                    SetContentTextOptionA();
+                    break;
+                case 1: // 派送
+                    cidNumber = "2974";
+                    contactTextbox.Enabled = true;
+                    //tpl_value = "urlencode\(\"#code#=\"\)"; // urlencode("#code#=1234&#company#=urlencode('聚#合#数#据')")
+                    contactTextbox.Text = "0573-88131799";
+                    SetContentTextOptionB();
+                    break;
+                case 2://爆仓通知
+                    cidNumber = "20846";
+                    contactTextbox.Enabled = true;
+                    contactTextbox.Text = "0573-88131599";
+                    SetContentTextOptionC();
+                    break;
+            }
         }
 
         private void SetContentTextOptionA()
@@ -666,6 +725,11 @@ namespace zhwlWinFormToolBox
         {
             // ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话:" + contactTextbox.Text + "。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
             ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话:" + contactTextbox.Text + "。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
+        }
+
+        private void SetContentTextOptionC()
+        {
+            ContentTextBox.Text = "【桐乡振华物流】百世快运-桐乡三部爆仓通知！您的货物由于站点爆仓，将会延误一天，给您造成的困扰，我们深感抱歉，有疑问请电话咨询：" + contactTextbox.Text + "。谢谢您的支持与信任！";
         }
         private void driverTextBox_TextChanged(object sender, EventArgs e)
         {
