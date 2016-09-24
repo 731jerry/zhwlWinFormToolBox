@@ -111,7 +111,6 @@
             this.ToolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.DriverNumberTB = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -153,7 +152,6 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.DriverNumberTB);
             this.tabPage3.Controls.Add(this.contactTextbox);
             this.tabPage3.Controls.Add(this.checkSentLinkLabel);
             this.tabPage3.Controls.Add(this.driverTextBox);
@@ -180,7 +178,7 @@
             // 
             this.contactTextbox.Location = new System.Drawing.Point(394, 161);
             this.contactTextbox.Name = "contactTextbox";
-            this.contactTextbox.Size = new System.Drawing.Size(230, 33);
+            this.contactTextbox.Size = new System.Drawing.Size(478, 33);
             this.contactTextbox.TabIndex = 22;
             this.contactTextbox.TextChanged += new System.EventHandler(this.contactTextbox_TextChanged);
             // 
@@ -193,6 +191,7 @@
             this.checkSentLinkLabel.TabIndex = 21;
             this.checkSentLinkLabel.TabStop = true;
             this.checkSentLinkLabel.Text = "已发送";
+            this.checkSentLinkLabel.Visible = false;
             this.checkSentLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.checkSentLinkLabel_LinkClicked);
             // 
             // driverTextBox
@@ -236,6 +235,7 @@
             this.fillAccountLinkLabel.TabIndex = 17;
             this.fillAccountLinkLabel.TabStop = true;
             this.fillAccountLinkLabel.Text = "充值";
+            this.fillAccountLinkLabel.Visible = false;
             this.fillAccountLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.fillAccountLinkLabel_LinkClicked);
             // 
             // setTimeDateTimePicker
@@ -304,6 +304,7 @@
             this.accountInfo.Size = new System.Drawing.Size(166, 24);
             this.accountInfo.TabIndex = 8;
             this.accountInfo.Text = "正在获取账户余额...";
+            this.accountInfo.Visible = false;
             // 
             // sendMsgButton
             // 
@@ -1116,13 +1117,6 @@
             this.ToolStripMenuItemDelete.Text = "删除";
             this.ToolStripMenuItemDelete.Click += new System.EventHandler(this.ToolStripMenuItemDelete_Click);
             // 
-            // DriverNumberTB
-            // 
-            this.DriverNumberTB.Location = new System.Drawing.Point(662, 161);
-            this.DriverNumberTB.Name = "DriverNumberTB";
-            this.DriverNumberTB.Size = new System.Drawing.Size(210, 33);
-            this.DriverNumberTB.TabIndex = 24;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1252,7 +1246,6 @@
         private System.Windows.Forms.NumericUpDown inlineDistenceXTB;
         private System.Windows.Forms.NumericUpDown inlineDistenceYTB;
         private System.Windows.Forms.NumericUpDown fontSizeDiffTB;
-        private System.Windows.Forms.TextBox DriverNumberTB;
 
     }
 }

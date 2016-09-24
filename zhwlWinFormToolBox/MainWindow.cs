@@ -694,7 +694,7 @@ namespace zhwlWinFormToolBox
                     break;
                 case 0: // 提货
                     cidNumber = "2975";
-                    contactTextbox.Enabled = true;
+                    contactTextbox.Enabled = false;
                     contactTextbox.Text = "13586404085";
                     contactTextbox.Text = "";
                     SetContentTextOptionA();
@@ -702,8 +702,10 @@ namespace zhwlWinFormToolBox
                 case 1: // 派送
                     cidNumber = "2974";
                     contactTextbox.Enabled = true;
-                    //tpl_value = "urlencode\(\"#code#=\"\)"; // urlencode("#code#=1234&#company#=urlencode('聚#合#数#据')")
-                    contactTextbox.Text = "0573-88131799";
+                    contactTextbox.Text = "13758316189";
+                    //DriverNumberTB.Text = "13758316189";
+                    tpl_value = "urlencode(\"#number#=" + contactTextbox.Text + "\")"; 
+                    // urlencode("#code#=1234&#company#=urlencode('聚#合#数#据')")
                     SetContentTextOptionB();
                     break;
                 case 2://爆仓通知
@@ -723,6 +725,8 @@ namespace zhwlWinFormToolBox
 
         private void SetContentTextOptionB()
         {
+            //tpl_value = "urlencode('#number#=" + contactTextbox.Text + "')";
+            tpl_value = "%23number%23=" + contactTextbox.Text; 
             // ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话:" + contactTextbox.Text + "。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
             ContentTextBox.Text = "【桐乡振华物流】您好，我们是浙江省桐乡市振华物流，您从我司派出的货今日已到当地派货点，当地派货点电话:" + contactTextbox.Text + "。请保持您的手机通话顺畅，方便工作人员联系。详情请电话:13586404085。网址:http://www.zhhwl.com/。谢谢您的支持！";
         }
