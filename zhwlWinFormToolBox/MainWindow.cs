@@ -1096,5 +1096,21 @@ namespace zhwlWinFormToolBox
             countNumTB.Text = "13";
             numberTB.Text = "123456";
         }
+
+        private void wbRefresh_Click(object sender, EventArgs e)
+        {
+            mapWB.Navigate(Application.StartupPath+"/map.html");
+        }
+
+        private void mapWB_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            mapWB.Document.InvokeScript("eval", new object[] { "alert('FFFFFFFFFFFUUUUUUUUUUCCCCCCCCCCCCCC');" });
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            mapWB.Document.InvokeScript("eval", new object[] { 
+                "AMap.service([\"AMap.PlaceSearch\"], function() {var placeSearch = new AMap.PlaceSearch({  pageSize: 5,pageIndex: 1,city: \"010\",  map: map,panel: \"panel\"});placeSearch.search('方恒');});"});
+        }
     }
 }

@@ -111,6 +111,10 @@
             this.ToolStripMenuItemCopy = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.mapWB = new System.Windows.Forms.WebBrowser();
+            this.wbRefresh = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -133,6 +137,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).BeginInit();
             this.panel1.SuspendLayout();
             this.QueryResultContextMenuStrip.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -141,6 +146,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(5, 15);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1117,6 +1123,49 @@
             this.ToolStripMenuItemDelete.Text = "删除";
             this.ToolStripMenuItemDelete.Click += new System.EventHandler(this.ToolStripMenuItemDelete_Click);
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.button1);
+            this.tabPage5.Controls.Add(this.wbRefresh);
+            this.tabPage5.Controls.Add(this.mapWB);
+            this.tabPage5.Location = new System.Drawing.Point(4, 32);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(983, 557);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "地图标记";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // mapWB
+            // 
+            this.mapWB.Dock = System.Windows.Forms.DockStyle.Right;
+            this.mapWB.Location = new System.Drawing.Point(173, 3);
+            this.mapWB.MinimumSize = new System.Drawing.Size(20, 20);
+            this.mapWB.Name = "mapWB";
+            this.mapWB.Size = new System.Drawing.Size(807, 551);
+            this.mapWB.TabIndex = 0;
+            this.mapWB.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.mapWB_DocumentCompleted);
+            // 
+            // wbRefresh
+            // 
+            this.wbRefresh.Location = new System.Drawing.Point(31, 196);
+            this.wbRefresh.Name = "wbRefresh";
+            this.wbRefresh.Size = new System.Drawing.Size(75, 23);
+            this.wbRefresh.TabIndex = 1;
+            this.wbRefresh.Text = "button1";
+            this.wbRefresh.UseVisualStyleBackColor = true;
+            this.wbRefresh.Click += new System.EventHandler(this.wbRefresh_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(40, 281);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1159,6 +1208,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.QRcodeImage)).EndInit();
             this.panel1.ResumeLayout(false);
             this.QueryResultContextMenuStrip.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1246,6 +1296,10 @@
         private System.Windows.Forms.NumericUpDown inlineDistenceXTB;
         private System.Windows.Forms.NumericUpDown inlineDistenceYTB;
         private System.Windows.Forms.NumericUpDown fontSizeDiffTB;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.WebBrowser mapWB;
+        private System.Windows.Forms.Button wbRefresh;
+        private System.Windows.Forms.Button button1;
 
     }
 }
